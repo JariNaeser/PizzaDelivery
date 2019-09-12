@@ -15,11 +15,17 @@ INSERT INTO TipoUtente VALUES ("amministratore");
 INSERT INTO TipoUtente VALUES ("impiegato vendita");
 INSERT INTO TipoUtente VALUES ("fattorino");
 
-/* UTENTE */
+/* CREAZIONE UTENTE */
 INSERT INTO Utente VALUES (
-"jari.naeser", "jari", "naeser", 
-"Via Mer Zarei 12", 6965, "Svizzera",
-"jari.naeser@samtrevano.ch", "test", "amministratore"
+	"jari.naeser",
+	"jari", 
+	"naeser", 
+	"Via Mer Zarei 12", 
+	6965, 
+	"Svizzera",
+	"jari.naeser@samtrevano.ch", 
+	"test", 
+	"amministratore"
 );
 
 INSERT INTO Utente VALUES (
