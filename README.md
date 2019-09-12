@@ -1,5 +1,5 @@
 # Pizza delivery
----
+
 The scope of this project is to create an online pizza delivery system.<br>
 It's mainly made of two parts:
 
