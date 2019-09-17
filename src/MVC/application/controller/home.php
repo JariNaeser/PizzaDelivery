@@ -10,7 +10,7 @@ class Home
             require_once 'application/models/pizzadeliverymodel.php';
             $pdModel = new PizzaDeliveryModel();
             session_start();
-            $_SESSION['DATA'] = $pdModel->execQuery("SELECT * FROM Utente");
+            $_SESSION['DATA'] = $pdModel->execQuery("SELECT * FROM utente;");
         }else{
             $_SESSION['DATA'] = "ERRORE nella classe home dei controller.";
         }
