@@ -72,17 +72,3 @@ CREATE TABLE OrdineArticolo (
     FOREIGN KEY (articolo) REFERENCES Articolo(nome),
     PRIMARY KEY(ordinazione, articolo)
 );
-
-/*  UTENTI  */
-DROP USER 'PD_Admin'@'localhost';
-
-CREATE USER 'PD_Admin'@'localhost' IDENTIFIED BY 'm4Ng14UnAP1774';
-GRANT ALL PRIVILEGES ON PizzaDelivery.* TO 'PD_Admin'@'localhost';
-FLUSH PRIVILEGES;
-
-DROP USER 'PD_dataRetriever'@'localhost';
-
-CREATE USER 'PD_dataRetriever'@'localhost' IDENTIFIED BY 'E$eGu1L4Qu3rY';
-GRANT SELECT ON PizzaDelivery.* TO 'PD_dataRetriever'@'localhost';
-FLUSH PRIVILEGES;
-
