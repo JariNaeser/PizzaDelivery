@@ -1,4 +1,3 @@
 *.DS_Store*
 *.idea*
 src/MVC/application/models/database.php
-src/DB/PizzaDeliveryDB.sql
