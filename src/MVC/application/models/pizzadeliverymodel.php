@@ -14,6 +14,8 @@ class PizzaDeliveryModel
     }
 
     public function execQuery(string $query){
-        return mysqli_fetch_all($this->connection->query($query));
+        $tmp = $this->connection->prepare($query);
+        $tmp->execute();
+        return $tmp->fetchAll(PDO::FETCH_ASSOC);
     }
 }
