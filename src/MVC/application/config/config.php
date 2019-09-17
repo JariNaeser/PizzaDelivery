@@ -17,7 +17,5 @@ ini_set("display_errors", 1);
 /**
  * Configurazione di : URL del progetto
  */
-define('URL', 'http://localhost:8888/php/133/Esercizi/Serie6/');
-
-define('STRUMENTI', 'application/data/libri.csv');
+define('URL', 'http://localhost:8888/php/Progetti/PizzaDelivery/src/MVC/');
 
