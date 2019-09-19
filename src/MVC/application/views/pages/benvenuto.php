@@ -1,5 +1,11 @@
-<h1>Utenti</h1>
-<pre>
-    <?php print_r($_SESSION['DATA']); ?>
-</pre>
+<form action="<?php echo URL?>home/ordina" method="post">
+    <div class="col-md-12 text-center centerVerticallyDiv">
+        <h1>Benvenuto da <br> <span class="text-danger">PizzaDelivery</span></h1>
+        <p>Hai fame? Ecco la soluzione per te, ordina e ricevi in <br> breve tempo la tua pizza preferita.</p>
+        <button type="submit" class="btn btn-danger btn-lg">Ordina ora</button>
+    </div>
+</form>
+
+
+
 
