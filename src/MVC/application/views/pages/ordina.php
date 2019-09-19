@@ -9,6 +9,7 @@
             </div>
             <div class="col-md-8 bg-secondary">
                 <!-- Google maps map selector -->
+                <input type="text" placeholder="Via" name="via" required>
             </div>
         </div>
     </div>
