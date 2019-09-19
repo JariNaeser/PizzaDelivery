@@ -21,5 +21,11 @@ class Home
         require 'application/views/_templates/footer.php';
     }
 
+    public function ordina(){
+        require 'application/views/_templates/header.php';
+        require 'application/views/pages/ordina.php';
+        require 'application/views/_templates/footer.php';
+    }
+
 
 }
