@@ -17,12 +17,37 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/8d7154f948.js" crossorigin="anonymous"></script>
+
     <style>
+
+        body{
+            width: 100%;
+        }
+
+        .padding-footer{
+            padding-bottom: 44px;
+        }
+
         .centerVerticallyDiv{
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
         }
+
+        input{
+            margin: 1em;
+        }
+
+        .items-table{
+            display: block;
+            max-height: 300px;
+            overflow-y: scroll;
+            width: 100%;
+        }
+
+
     </style>
 
 </head>
