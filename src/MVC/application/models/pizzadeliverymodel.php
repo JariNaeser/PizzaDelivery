@@ -14,6 +14,8 @@ class PizzaDeliveryModel
     }
 
     public function execQuery(string $query){
+        $query = htmlspecialchars($query);
+        $query = stripslashes($query);
         $tmp = $this->connection->prepare($query);
         $tmp->execute();
         return $tmp->fetchAll(PDO::FETCH_ASSOC);
