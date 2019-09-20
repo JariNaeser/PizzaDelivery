@@ -15,35 +15,37 @@
         </div>
         <div class="row">
             <h3 style="margin-top: 1em">Seleziona Prodotti</h3>
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">Immagine</th>
-                    <th scope="col">Articolo</th>
-                    <th scope="col">Descrizione</th>
-                    <th scope="col">Prezzo</th>
-                    <th scope="col">Aggiungi</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php $articoli = $_SESSION['articoli']; ?>
-                <?php $varMemorizzaCount = 0; ?>
+            <div class="row table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Immagine</th>
+                        <th scope="col">Articolo</th>
+                        <th scope="col">Descrizione</th>
+                        <th scope="col">Prezzo</th>
+                        <th scope="col">Aggiungi</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php $articoli = $_SESSION['articoli']; ?>
+                    <?php $varMemorizzaCount = 0; ?>
 
-                <?php foreach ($articoli as $articolo): ?>
-                    <?php echo "<tr>" ?>
+                    <?php foreach ($articoli as $articolo): ?>
+                        <?php echo "<tr>" ?>
 
-                    <?php echo "<td><img style='height: 50px; width: 50px;' src='"
-                        . URL . $articolo['urlFoto'] . "'><td>" . $articolo['nome']
-                        . "<td>" . $articolo['descrizione'] . "<td>"
-                        . $articolo['prezzo'] . "</td><td>" .
-                        "<i class=\"fas fa-plus\"></i> " .
-                        "<i class=\"fas fa-minus\"></i> " .
-                        $varMemorizzaCount . "</td>"?>
+                        <?php echo "<td><img style='height: 50px; width: 50px;' src='"
+                            . URL . $articolo['urlFoto'] . "'><td>" . $articolo['nome']
+                            . "<td>" . $articolo['descrizione'] . "<td>"
+                            . $articolo['prezzo'] . "</td><td>" .
+                            "<i class=\"fas fa-plus\"></i> " .
+                            "<i class=\"fas fa-minus\"></i> " .
+                            $varMemorizzaCount . "</td>"?>
 
-                    <?php echo "</tr>" ?>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
+                        <?php echo "</tr>" ?>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="row">
             <ul class="list-group text-center">
