@@ -45,9 +45,13 @@ INSERT INTO Consegna(data, tipoConsegna, fattorino) VALUES (
 );
 
 /* ARTICOLO */
-INSERT INTO Articolo VALUES (
-	"Pizza Margherita", "Con sale", 12, "./img/pm.png"
-);
+INSERT INTO Articolo VALUES ("Pizza margherita", "Molto Buona e grande", 12, "application/img/pizzaMargherita.jpg");
+INSERT INTO Articolo VALUES ("Pizza ai funghi", "Buona", 13.50, "application/img/pizzaFunghi.jpg");
+INSERT INTO Articolo VALUES ("Pizza prosciutto", "Molto Buona", 14, "application/img/pizzaProsciutto.jpg");
+INSERT INTO Articolo VALUES ("Calzone", "Molto Buona", 15, "application/img/calzone.jpg");
+INSERT INTO Articolo VALUES ("Pizza alla marinara", "Molto Buona", 10, "application/img/pizzaMarinara.jpg");
+INSERT INTO Articolo VALUES ("Pizza quattro formaggi", "Molto Buona", 14, "application/img/pizzaFormaggi.jpg");
+INSERT INTO Articolo VALUES ("Focaccia", "Molto Buona",6, "application/img/focaccia.jpg");
 
 INSERT INTO Articolo(nome, descrizione, prezzo) VALUES (
 	"Pizza ai funghi", "Con sale", 12
