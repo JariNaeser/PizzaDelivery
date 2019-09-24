@@ -56,7 +56,7 @@
                             . URL . $articolo['urlFoto'] . "'><td>" . $articolo['nome']
                             . "<td>" . $articolo['descrizione'] . "<td>"
                             . $articolo['prezzo'] . "</td><td>" .
-                            "<a href='" . URL . "home/addToCart/" . $articolo . "'><i class='fas fa-shopping-cart'></i></a></td>"?>
+                            "<a href='" . URL . "home/addToCart/" . $articolo['nome'] . "/" . $articolo['descrizione'] . "/" . $articolo['prezzo'] . "/" . $articolo['urlFoto'] . "/". "'><i class='fas fa-shopping-cart'></i></a></td>"?>
                         <?php echo "</tr>" ?>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -82,6 +82,8 @@
 
             <?php $cart = $_SESSION['cart']; ?>
             <?php var_dump($cart); ?>
+
+            <h1 class="text-danger">FARE DISPLAY PRODOTTI DEL CART E METTERE LE LORO FUNZIONALITÀ</h1>
 
             <!--
             <tr>
