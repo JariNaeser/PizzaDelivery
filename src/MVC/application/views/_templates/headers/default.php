@@ -36,9 +36,7 @@
             transform: translateY(-50%);
         }
 
-        input{
-            margin: 1em;
-        }
+
 
         .items-table{
             display: block;
@@ -46,6 +44,7 @@
             overflow-y: scroll;
             width: 100%;
         }
+
 
 
     </style>
