@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -20,35 +19,8 @@
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/8d7154f948.js" crossorigin="anonymous"></script>
 
-    <style>
-
-        body{
-            width: 100%;
-        }
-
-        .padding-footer{
-            padding-bottom: 44px;
-        }
-
-        .centerVerticallyDiv{
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        input{
-            margin: 1em;
-        }
-
-        .items-table{
-            display: block;
-            max-height: 300px;
-            overflow-y: scroll;
-            width: 100%;
-        }
-
-
-    </style>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="<?php URL ?>application/views/_templates/headers/style.css">
 
 </head>
 <body>
