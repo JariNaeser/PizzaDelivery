@@ -134,7 +134,8 @@ class Home
         }
     }
 
-    public function addToCart($element){
+    public function addToCart($nome, $descrizione, $prezzo, $urlFoto){
+        $element = [$nome, $descrizione, $prezzo, $urlFoto];
         array_push($this->cart, $element);
         $_SESSION['cart'] = $this->cart;
         $this->ordina();
