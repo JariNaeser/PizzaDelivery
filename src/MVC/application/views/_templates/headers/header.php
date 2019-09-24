@@ -19,8 +19,7 @@
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/8d7154f948.js" crossorigin="anonymous"></script>
 
-    <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="<?php URL ?>application/views/_templates/headers/style.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo URL ?>views/_templates/headers/style.css">
 
 </head>
 <body>
@@ -32,13 +31,13 @@
     <div class="justify-content-end collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="">Page1</a>
+                <a class="nav-link" href="<?php echo URL?>home/index">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Page2</a>
+                <a class="nav-link" href="<?php echo URL ?>home/ordina">Ordina</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Page3</a>
+                <a class="nav-link" href="<?php echo URL ?>home/loginForm">Login</a>
             </li>
         </ul>
     </div>
