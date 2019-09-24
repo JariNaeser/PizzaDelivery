@@ -37,6 +37,14 @@ class Home
         require 'application/views/_templates/footer.php';
     }
 
+    /**
+     * Metodo che si occupa di gestire una connessione inesistente oppure non corretta,
+     * usando questo metodo abbastanza complesso è così possibile evitare blocchi ripetitivi nel codice
+     * rendendolo così molto più pulito.
+     *
+     * @param string $query Query da eseguire sul DB.
+     * @return array|string Array contenente l'output della query oppure il messaggio di errore.
+     */
     private function execQuery(string $query){
         //Controllo se è stata istanziata la connessione.
         if(isset($this->pdModel)){
@@ -46,12 +54,16 @@ class Home
             if(is_string($tmp)){
                 //Se si
                 if(strcmp($tmp, ERROR_MESSAGE) == 0){
+                    //Richiama pagina errore
                     $this->requireError();
+                    //Esci dal programma per non ritornare nessun dato
                     exit;
                 }
             }
+            //Se query va a buon fine ritorna l'output
             return $tmp;
         }else{
+            //Richiama pagina errore se oggetto $pdModel non è istanziato
             $this->requireError();
         }
     }
