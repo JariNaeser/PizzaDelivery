@@ -9,15 +9,23 @@ class PizzaDeliveryModel
 
     public function __construct(){
         if(!isset($this->connection)){
-            $this->connection = Database::getConnection();
+            try{
+                $this->connection = Database::getConnection();
+            }catch(PDOException $e){
+                die("ERROR: Impossibile creare una connessione con il Database. \n");
+            }
         }
     }
 
     public function execQuery(string $query){
-        $query = htmlspecialchars($query);
-        $query = stripslashes($query);
-        $tmp = $this->connection->prepare($query);
-        $tmp->execute();
-        return $tmp->fetchAll(PDO::FETCH_ASSOC);
+        if(isset($this->connection)){
+            $query = htmlspecialchars($query);
+            $query = stripslashes($query);
+            $tmp = $this->connection->prepare($query);
+            $tmp->execute();
+            return $tmp->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            return ERROR_MESSAGE;
+        }
     }
 }
