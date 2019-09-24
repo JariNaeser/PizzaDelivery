@@ -19,3 +19,5 @@ ini_set("display_errors", 1);
  */
 define('URL', 'http://localhost:8888/php/Progetti/PizzaDelivery/src/MVC/');
 
+define('ERROR_MESSAGE', "ERROR");
+
