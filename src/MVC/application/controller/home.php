@@ -16,33 +16,44 @@ class Home
     }
 
     public function index(){
-        if(isset($this->pdModel)){
-            $_SESSION['utenti'] = $this->pdModel->execQuery("SELECT * FROM utente;");
-            // Carico Views
-            require 'application/views/_templates/header.php';
-            require 'application/views/pages/benvenuto.php';
-            require 'application/views/_templates/footer.php';
-        }else{
-            $this->requireError();
-        }
+        $_SESSION['utenti'] = $this->execQuery("SELECT * FROM utente;");
+        // Carico Views
+        require 'application/views/_templates/headers/header.php';
+        require 'application/views/pages/benvenuto.php';
+        require 'application/views/_templates/footer.php';
     }
 
     public function ordina(){
-        if(isset($this->pdModel)){
-            $_SESSION['articoli'] = $this->pdModel->execQuery("SELECT * FROM articolo;");
-            require 'application/views/_templates/header.php';
-            require 'application/views/pages/ordina.php';
-            require 'application/views/_templates/footer.php';
-        }else{
-            $this->requireError();
-        }
+        $_SESSION['articoli'] = $this->execQuery("SELECT * FROM articolo;");
+        // Carico Views
+        require 'application/views/_templates/headers/header.php';
+        require 'application/views/pages/ordina.php';
+        require 'application/views/_templates/footer.php';
     }
 
     public function requireError(){
-        require 'application/views/_templates/header.php';
+        require 'application/views/_templates/headers/default.php';
         require 'application/views/error/errorDBConnection.php';
         require 'application/views/_templates/footer.php';
     }
 
+    private function execQuery(string $query){
+        //Controllo se è stata istanziata la connessione.
+        if(isset($this->pdModel)){
+            //Eseguo la query.
+            $tmp = $this->pdModel->execQuery($query);
+            //È stringa?
+            if(is_string($tmp)){
+                //Se si
+                if(strcmp($tmp, ERROR_MESSAGE) == 0){
+                    $this->requireError();
+                    exit;
+                }
+            }
+            return $tmp;
+        }else{
+            $this->requireError();
+        }
+    }
 
 }
