@@ -4,15 +4,23 @@ class Home
 {
 
     private $pdModel;
-    private $cart;
 
     public function __construct()
     {
         if(file_exists('application/models/pizzadeliverymodel.php')){
             require_once 'application/models/pizzadeliverymodel.php';
             $this->pdModel = new PizzaDeliveryModel();
-                $this->cart = array();
+            $this->cart = array();
             session_start();
+            if(!isset($_SESSION['cart'])){
+                $_SESSION['cart'] = [];
+            }
+
+            //Per svuotare le sessioni
+            if(false){
+                $_SESSION['cart'] = [];
+            }
+
         }else{
             exit("ERRORE nel costruttore della classe home dei controller.");
         }
@@ -28,10 +36,18 @@ class Home
     }
 
     public function ordina(){
-        $_SESSION['articoli'] = $this->execQuery("SELECT * FROM articolo;");
+        $_SESSION['articoli'] = $this->execQuery("SELECT * FROM articolo ORDER BY nome;");
         // Carico Views
         $this->getRightHeader();
         require 'application/views/pages/ordina.php';
+        require 'application/views/_templates/footer.php';
+
+    }
+
+    public function confermaordine(){
+        // Carico Views
+        $this->getRightHeader();
+        require 'application/views/pages/confermaOrdine.php';
         require 'application/views/_templates/footer.php';
     }
 
@@ -134,21 +150,23 @@ class Home
         }
     }
 
-    public function addToCart($nome){
-        if(isset($_SESSION['articoli'])){
-            foreach ($_SESSION['articoli'] as $articolo){
-                if(strcmp($articolo['nome'], $nome) == 0){
-                    array_push($this->cart, $articolo);
-                    break;
-                }
-            }
+    public function addToCart($id){
+
+        // FIX METHOD, MOVE execQuery method and make getItem, getItems, getUsers, getUser etc... in model.
+
+
+
+
+        $id = (int)$id;
+        if(isset($_SESSION['articoli']) && is_int($id)){
+
+            //Check with getItem if item exists in items array, if yes don't add.
+            //if not add item to $_SESSION['cart']
+
         }
-        $_SESSION['cart'] = $this->cart;
+        header("Location: " . PAGES . "ordina");
         $this->ordina();
     }
-
-
-
 
 
 
