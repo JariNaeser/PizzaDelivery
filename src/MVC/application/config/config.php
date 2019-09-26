@@ -19,5 +19,7 @@ ini_set("display_errors", 1);
  */
 define('URL', 'http://localhost:8888/php/Progetti/PizzaDelivery/src/MVC/');
 
+define('PAGES', 'http://localhost:8888/php/Progetti/PizzaDelivery/src/MVC/home/');
+
 define('ERROR_MESSAGE', "ERROR");
 
