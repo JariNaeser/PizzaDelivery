@@ -11,7 +11,7 @@ class Home
         if(file_exists('application/models/pizzadeliverymodel.php')){
             require_once 'application/models/pizzadeliverymodel.php';
             $this->pdModel = new PizzaDeliveryModel();
-            $this->cart = array();
+                $this->cart = array();
             session_start();
         }else{
             exit("ERRORE nel costruttore della classe home dei controller.");
@@ -134,9 +134,15 @@ class Home
         }
     }
 
-    public function addToCart($nome, $descrizione, $prezzo, $urlFoto){
-        $element = [$nome, $descrizione, $prezzo, $urlFoto];
-        array_push($this->cart, $element);
+    public function addToCart($nome){
+        if(isset($_SESSION['articoli'])){
+            foreach ($_SESSION['articoli'] as $articolo){
+                if(strcmp($articolo['nome'], $nome) == 0){
+                    array_push($this->cart, $articolo);
+                    break;
+                }
+            }
+        }
         $_SESSION['cart'] = $this->cart;
         $this->ordina();
     }

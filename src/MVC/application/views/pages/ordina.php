@@ -4,6 +4,8 @@
  - fix initial forms and maybe add google maps map
 
  -->
+<?php $cart = $_SESSION['cart']; ?>
+<?php var_dump($cart); ?>
 
 <form class="container col-md-12" style="padding-bottom: 70px; margin: 1em">
     <h1 class="text-center">ORDINA</h1>
@@ -56,7 +58,7 @@
                             . URL . $articolo['urlFoto'] . "'><td>" . $articolo['nome']
                             . "<td>" . $articolo['descrizione'] . "<td>"
                             . $articolo['prezzo'] . "</td><td>" .
-                            "<a href='" . URL . "home/addToCart/" . $articolo['nome'] . "/" . $articolo['descrizione'] . "/" . $articolo['prezzo'] . "/" . $articolo['urlFoto'] . "/". "'><i class='fas fa-shopping-cart'></i></a></td>"?>
+                            "<a href='" . URL . "home/addToCart/" . $articolo['nome'] . "'><i class='fas fa-shopping-cart'></i></a></td>"?>
                         <?php echo "</tr>" ?>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -80,19 +82,33 @@
             </thead>
             <tbody>
 
-            <?php $cart = $_SESSION['cart']; ?>
-            <?php var_dump($cart); ?>
 
-            <h1 class="text-danger">FARE DISPLAY PRODOTTI DEL CART E METTERE LE LORO FUNZIONALITÀ</h1>
 
-            <!--
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            -->
+
+            <?php if(count($cart) == 0): ?>
+                <?php echo "<tr><td colspan='5' class='text-center'>Nessun elemento selezionato.</td></tr>"; ?>
+            <?php else: ?>
+                <?php if(count($cart) > 0): ?>
+                    <?php foreach ($cart as $element): ?>
+
+                        <?php $select = "<select class='form-control form-control-sm' name='select" . $element['nome'] . "'>";
+                                for($i = 0; $i < 31; $i++){
+                                    if($i == 1){
+                                        $select .= "<option selected='selected'>$i</option>";
+                                    }else{
+                                        $select .= "<option>$i</option>";
+                                    }
+                                }
+                                $select .= "</select>"; ?>
+
+
+                        <?php echo "<tr><td><img style='height: 50px; width: 50px;' src='" . URL . $element['urlFoto']
+                            . "'></td><td>" . $element['nome'] . "</td>"
+                            . "<td>$select</td><td>" . $element['prezzo'] . "</td><td>xy</td></tr>"; ?>
+
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            <?php endif; ?>
             </tbody>
         </table>
     </div>
