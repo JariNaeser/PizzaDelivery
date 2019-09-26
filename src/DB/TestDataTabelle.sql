@@ -45,17 +45,13 @@ INSERT INTO Consegna(data, tipoConsegna, fattorino) VALUES (
 );
 
 /* ARTICOLO */
-INSERT INTO Articolo VALUES ("Pizza margherita", "Molto Buona e grande", 12, "application/img/pizzaMargherita.jpg");
-INSERT INTO Articolo VALUES ("Pizza ai funghi", "Buona", 13.50, "application/img/pizzaFunghi.jpg");
-INSERT INTO Articolo VALUES ("Pizza prosciutto", "Molto Buona", 14, "application/img/pizzaProsciutto.jpg");
-INSERT INTO Articolo VALUES ("Calzone", "Molto Buona", 15, "application/img/calzone.jpg");
-INSERT INTO Articolo VALUES ("Pizza alla marinara", "Molto Buona", 10, "application/img/pizzaMarinara.jpg");
-INSERT INTO Articolo VALUES ("Pizza quattro formaggi", "Molto Buona", 14, "application/img/pizzaFormaggi.jpg");
-INSERT INTO Articolo VALUES ("Focaccia", "Molto Buona",6, "application/img/focaccia.jpg");
-
-INSERT INTO Articolo(nome, descrizione, prezzo) VALUES (
-	"Pizza ai funghi", "Con sale", 12
-);
+INSERT INTO Articolo(nome, descrizione, prezzo, urlFoto) VALUES ("Pizza margherita", "Molto Buona e grande", 12, "application/img/pizzaMargherita.jpg");
+INSERT INTO Articolo(nome, descrizione, prezzo, urlFoto) VALUES ("Pizza ai funghi", "Buona", 13.50, "application/img/pizzaFunghi.jpg");
+INSERT INTO Articolo(nome, descrizione, prezzo, urlFoto) VALUES ("Pizza prosciutto", "Molto Buona", 14, "application/img/pizzaProsciutto.jpg");
+INSERT INTO Articolo(nome, descrizione, prezzo, urlFoto) VALUES ("Calzone", "Molto Buona", 15, "application/img/calzone.jpg");
+INSERT INTO Articolo(nome, descrizione, prezzo, urlFoto) VALUES ("Pizza alla marinara", "Molto Buona", 10, "application/img/pizzaMarinara.jpg");
+INSERT INTO Articolo(nome, descrizione, prezzo, urlFoto) VALUES ("Pizza quattro formaggi", "Molto Buona", 14, "application/img/pizzaFormaggi.jpg");
+INSERT INTO Articolo(nome, descrizione, prezzo, urlFoto) VALUES ("Focaccia", "Molto Buona",6, "application/img/focaccia.jpg");
 
 /* ORDINAZIONE */
 INSERT INTO Ordinazione(nomeCliente, cognomeCliente, numeroTelefonoCliente, via, cap, paese, data) VALUES (
@@ -64,5 +60,5 @@ INSERT INTO Ordinazione(nomeCliente, cognomeCliente, numeroTelefonoCliente, via,
 
 /* ORDINE ARTICOLO */
 INSERT INTO OrdineArticolo VALUES (
-	1, "Pizza ai funghi", 3
+	1, 2, 3
 );
