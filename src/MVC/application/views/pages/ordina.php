@@ -3,7 +3,6 @@
  - remove space on the right of eleziona prodotti
 
  -->
-
 <form class="container col-md-12" style="padding-bottom: 70px; margin: 1em">
     <h1 class="text-center">ORDINA</h1>
     <div class="row col-md-12">
@@ -48,6 +47,7 @@
                 <th scope="col">Immagine</th>
                 <th scope="col">Articolo</th>
                 <th scope="col">Prezzo</th>
+                <th scope="col">Rimuovi</th>
             </tr>
             </thead>
             <tbody>
@@ -59,14 +59,24 @@
                     <?php foreach ($cart as $element): ?>
                         <?php echo "<tr><td><img style='height: 50px; width: 50px;' src='" . URL . $element[0]['urlFoto']
                             . "'></td><td>" . $element[0]['nome'] . "</td><td>"
-                            . $element[0]['prezzo'] . "</td></tr>"; ?>
+                            . $element[0]['prezzo'] . "</td><td>"
+                            . "<a href='" . URL . "home/removeFromCart/" . $element[0]['id'] . "'><i class='fas fa-times' alt='X'></i></a></td></tr>"; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             <?php endif; ?>
             </tbody>
         </table>
     </div>
+    <h1 class="text-danger">FAR FUNZIONARE CHE FA IL SEND SOLO SE C'È UN PRODOTTO NEL CARRELLO</h1>
     <div class="col-md-12 text-center">
-        <a href='<?php echo URL . "home/confermaordine"; ?>' class="btn btn-danger btn-lg">Prosegui all'ordinazione</a>
+        <a href='<?php echo URL . "home/confermaordine"?>' class="btn btn-danger btn-lg" id="buttonOrdina">Prosegui all'ordinazione</a>
+        <script>
+            var elemNum = <?php echo count($_SESSION['cart']); ?>;
+            if(elemNum > 0){
+                $('#buttonOrdina').removeAttr('href');
+            }else{
+                $('#buttonOrdina').on('click');
+            }
+        </script>
     </div>
 </form>
