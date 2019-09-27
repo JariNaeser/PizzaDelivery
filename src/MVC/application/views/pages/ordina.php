@@ -57,14 +57,13 @@
             <?php else: ?>
                 <?php if(count($cart) > 0): ?>
                     <?php foreach ($cart as $element): ?>
-                        <?php echo "<tr><td><img style='height: 50px; width: 50px;' src='" . URL . $element['urlFoto']
-                            . "'></td><td>" . $element['nome'] . "</td><td>"
-                            . $element['prezzo'] . "</td></tr>"; ?>
+                        <?php echo "<tr><td><img style='height: 50px; width: 50px;' src='" . URL . $element[0]['urlFoto']
+                            . "'></td><td>" . $element[0]['nome'] . "</td><td>"
+                            . $element[0]['prezzo'] . "</td></tr>"; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             <?php endif; ?>
             </tbody>
-            <h1 class="text-danger">Mettere a posto parte php di questa classe</h1>
         </table>
     </div>
     <div class="col-md-12 text-center">
