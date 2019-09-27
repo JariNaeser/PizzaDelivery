@@ -124,7 +124,7 @@ class Home
             if(isset($_POST['username']) && isset($_POST['password'])){
                 $username = htmlspecialchars(stripslashes($_POST['username']));
                 $password = htmlspecialchars(stripslashes($_POST['password']));
-                $utenti = $this->pdModel->getUsers();
+                $utenti = $this->pdModel->getUtenti();
                 $user = null;
 
                 foreach ($utenti as $utente){
@@ -154,10 +154,23 @@ class Home
         $id = (int)$id;
         if(isset($_SESSION['cart']) && is_int($id)){
             $item = $this->pdModel->getArticolo($id);
-            var_dump($item);
             if(!in_array($item, $_SESSION['cart'])){
                 array_push($_SESSION['cart'], $item);
             }
+        }
+        header("Location: " . PAGES . "ordina");
+        $this->ordina();
+    }
+
+    public function removeFromCart($id){
+        $arr = array();
+        if(isset($_SESSION['cart'])){
+            foreach($_SESSION['cart'] as $element){
+                if($element[0]['id'] != $id){
+                    array_push($arr, $element);
+                }
+            }
+            $_SESSION['cart'] = $arr;
         }
         header("Location: " . PAGES . "ordina");
         $this->ordina();
