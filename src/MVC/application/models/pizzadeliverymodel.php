@@ -19,13 +19,39 @@ class PizzaDeliveryModel
 
     public function execQuery(string $query){
         if(isset($this->connection)){
-            $query = htmlspecialchars($query);
-            $query = stripslashes($query);
+            $query = $this->sanitizeInput($query);
             $tmp = $this->connection->prepare($query);
             $tmp->execute();
             return $tmp->fetchAll(PDO::FETCH_ASSOC);
         }else{
-            return ERROR_MESSAGE;
+            header("Location: " . PAGES . "requireError");
         }
     }
+
+    public function getUtenti(){
+        return $this->execQuery("SELECT * FROM utente;");
+    }
+
+    public function getUser(string $username){
+        return $this->execQuery("SELECT * FROM utente WHERE username = $username;");
+    }
+
+    public function getArticoli(){
+        return $this->execQuery("SELECT * FROM articolo;");
+    }
+
+    public function getArticoliOrdinati(){
+        return $this->execQuery("SELECT * FROM articolo ORDER BY nome;");
+    }
+
+    public function getArticolo($id){
+        return $this->execQuery("SELECT * FROM articolo WHERE id = $id;");
+    }
+
+    private function sanitizeInput(string $query){
+        $query = htmlspecialchars($query);
+        $query = stripslashes($query);
+        return $query;
+    }
+
 }
