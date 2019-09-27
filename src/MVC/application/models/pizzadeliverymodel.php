@@ -12,7 +12,7 @@ class PizzaDeliveryModel
             try{
                 $this->connection = Database::getConnection();
             }catch(PDOException $e){
-                die("ERROR: Impossibile creare una connessione con il Database. \n");
+                header("Location: " . PAGES . "requireError");
             }
         }
     }
