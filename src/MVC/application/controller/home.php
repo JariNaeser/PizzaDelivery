@@ -36,7 +36,7 @@ class Home
     }
 
     public function ordina(){
-        $_SESSION['articoli'] = $this->execQuery("SELECT * FROM articolo ORDER BY nome;");
+        $_SESSION['articoli'] = $this->pdModel->getArticoliOrdinati();
         // Carico Views
         $this->getRightHeader();
         require 'application/views/pages/ordina.php';
@@ -124,7 +124,7 @@ class Home
             if(isset($_POST['username']) && isset($_POST['password'])){
                 $username = htmlspecialchars(stripslashes($_POST['username']));
                 $password = htmlspecialchars(stripslashes($_POST['password']));
-                $utenti = $this->execQuery("SELECT * FROM utente;");
+                $utenti = $this->pdModel->getUsers();
                 $user = null;
 
                 foreach ($utenti as $utente){
@@ -151,54 +151,16 @@ class Home
     }
 
     public function addToCart($id){
-
-        // FIX METHOD, MOVE execQuery method and make getItem, getItems, getUsers, getUser etc... in model.
-
-
-
-
         $id = (int)$id;
-        if(isset($_SESSION['articoli']) && is_int($id)){
-
-            //Check with getItem if item exists in items array, if yes don't add.
-            //if not add item to $_SESSION['cart']
-
+        if(isset($_SESSION['cart']) && is_int($id)){
+            $item = $this->pdModel->getArticolo($id);
+            var_dump($item);
+            if(!in_array($item, $_SESSION['cart'])){
+                array_push($_SESSION['cart'], $item);
+            }
         }
         header("Location: " . PAGES . "ordina");
         $this->ordina();
-    }
-
-
-
-    /**
-     * Metodo che si occupa di gestire una connessione inesistente oppure non corretta,
-     * usando questo metodo abbastanza complesso è così possibile evitare blocchi ripetitivi nel codice
-     * rendendolo così molto più pulito.
-     *
-     * @param string $query Query da eseguire sul DB.
-     * @return array|string Array contenente l'output della query oppure il messaggio di errore.
-     */
-    private function execQuery(string $query){
-        //Controllo se è stata istanziata la connessione.
-        if(isset($this->pdModel)){
-            //Eseguo la query.
-            $tmp = $this->pdModel->execQuery($query);
-            //È stringa?
-            if(is_string($tmp)){
-                //Se si
-                if(strcmp($tmp, ERROR_MESSAGE) == 0){
-                    //Richiama pagina errore
-                    $this->requireError();
-                    //Esci dal programma per non ritornare nessun dato
-                    exit;
-                }
-            }
-            //Se query va a buon fine ritorna l'output
-            return $tmp;
-        }else{
-            //Richiama pagina errore se oggetto $pdModel non è istanziato
-            $this->requireError();
-        }
     }
 
 }
