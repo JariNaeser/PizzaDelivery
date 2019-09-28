@@ -25,7 +25,6 @@
             </div>
         </div>
     </div>
-    <h1 class="text-danger">Aggiornare totale e allineare a destra.</h1>
     <h4>Prodotti selezionati</h4>
     <div class="row col-md-12 table-responsive">
         <table class="table table-striped">
@@ -59,6 +58,17 @@
 
                             <script>
 
+                                function countTotal() {
+                                    var total = 0;
+                                    for(var i = 0; i < prezzoFinale.length; i++){
+                                        console.log(prezzoFinale[i]);
+                                        if(prezzoFinale[i] !== undefined){
+                                            total += prezzoFinale[i];
+                                        }
+                                    }
+                                    $('#totalPrice').text(total);
+                                }
+
                                 var select = $('#select<?php echo $element[0]['id']; ?>');
                                 calculatePrice<?php echo $element[0]['id']; ?>();
 
@@ -68,6 +78,7 @@
                                     var price = <?php echo $element[0]['prezzo']; ?>;
                                     $('#total<?php echo $element[0]['id']; ?>').text(num * price);
                                     prezzoFinale[(<?php echo $element[0]['id']; ?> - 1)] = (num * price);
+                                    countTotal();
                                 }
 
                                 select.change(function(){
@@ -81,18 +92,15 @@
                 <?php endif; ?>
             <?php endif; ?>
 
-            <tr><td colspan="5" id="totalPrice"></td></tr>
-            <script>
-                var total = 0;
-                for(var i = 0; i < prezzoFinale.length; i++){
-                    total += prezzoFinale[i];
-                }
-                $('#totalPrice').text("Totale: " + total + ".-");
-            </script>
+
 
             </tbody>
         </table>
     </div>
+    <h3 class="text-danger">Costo Totale: <span id="totalPrice"></span>.-</h3>
+    <script>
+        countTotal();
+    </script>
     <div class="col-md-12 text-center">
         <button type="submit" class="btn btn-danger btn-lg">Ordina</button>
     </div>
