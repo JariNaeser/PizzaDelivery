@@ -73,9 +73,10 @@
         <script>
             var elemNum = <?php echo count($_SESSION['cart']); ?>;
             if(elemNum > 0){
-                $('#buttonOrdina').removeAttr('href');
+
             }else{
-                $('#buttonOrdina').on('click');
+
+
             }
         </script>
     </div>
