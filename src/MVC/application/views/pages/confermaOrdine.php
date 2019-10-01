@@ -1,7 +1,35 @@
 <script>const prezzoFinale = new Array(<?php echo count($_SESSION['cart']); ?>);</script>
-<div class="col-md-12" style="padding-bottom: 70px; margin: 1em">
+
+<form action="" method="post" class="container" style="padding: 0px; padding: 1em; padding-bottom: 70px;">
     <h4>Informazioni personali</h4>
-    <div class="row">
+
+    <div class="form-row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="First name">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Last name">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="First name">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Last name">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="First name">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Last name">
+        </div>
+    </div>
+
+
+    <!-- <div class="row" style="padding: 1em">
         <div class="form-row">
             <div class="col">
                 <input type="text" class="form-control" placeholder="Nome" name="nome" required>
@@ -23,20 +51,21 @@
             <div class="col-5">
                 <input type="number" class="form-control" placeholder="Nr. Telefono" name="numeroTelefono" required>
             </div>
-        </div>
+        </div> -->
     </div>
+    <br>
     <h4>Prodotti selezionati</h4>
     <div class="row col-md-12 table-responsive">
         <table class="table table-striped">
             <thead>
-            <tr>
-                <th scope="col">Immagine</th>
-                <th scope="col">Articolo</th>
-                <th scope="col">Descrizione</th>
-                <th scope="col">Quantità</th>
-                <th scope="col">Prezzo</th>
-                <th scope="col">Prezzo finale</th>
-            </tr>
+                <tr>
+                    <th scope="col">Immagine</th>
+                    <th scope="col">Articolo</th>
+                    <th scope="col">Descrizione</th>
+                    <th scope="col">Quantità</th>
+                    <th scope="col">Prezzo</th>
+                    <th scope="col">Prezzo finale</th>
+                </tr>
             </thead>
             <tbody>
             <?php $cart = $_SESSION['cart']; ?>
@@ -104,4 +133,4 @@
     <div class="col-md-12 text-center">
         <button type="submit" class="btn btn-danger btn-lg">Ordina</button>
     </div>
-</div>
+</form>
