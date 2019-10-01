@@ -29,7 +29,7 @@
                             . URL . $articolo['urlFoto'] . "'><td>" . $articolo['nome']
                             . "<td>" . $articolo['descrizione'] . "<td>"
                             . $articolo['prezzo'] . "</td><td>" .
-                            "<a href='" . URL . "home/addToCart/" . $articolo['id'] . "'><i class='fas fa-shopping-cart' alt='X'>X</i></a></td>"?>
+                            "<a class='text-dark' href='" . URL . "home/addToCart/" . $articolo['id'] . "'><i class='fas fa-shopping-cart' alt='X'></i></a></td>"?>
                         <?php echo "</tr>" ?>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -60,7 +60,7 @@
                         <?php echo "<tr><td><img style='height: 50px; width: 50px;' src='" . URL . $element[0]['urlFoto']
                             . "'></td><td>" . $element[0]['nome'] . "</td><td>"
                             . $element[0]['prezzo'] . "</td><td>"
-                            . "<a href='" . URL . "home/removeFromCart/" . $element[0]['id'] . "'><i class='fas fa-times' alt='X'>X</i></a></td></tr>"; ?>
+                            . "<a class='text-danger' href='" . URL . "home/removeFromCart/" . $element[0]['id'] . "'><i class='fas fa-times' alt='X'></i></a></td></tr>"; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             <?php endif; ?>
