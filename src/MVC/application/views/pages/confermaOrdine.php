@@ -1,5 +1,5 @@
 <script>const prezzoFinale = new Array(<?php echo count($_SESSION['cart']); ?>);</script>
-
+<h1 class="text-center">CONFERMA ORDINE</h1>
 <form action="<?php echo URL . "home/creaOrdine"?>" method="post" class="container" style="padding: 0px; padding: 1em; padding-bottom: 70px;">
     <h4>Informazioni personali</h4>
     <div class="form-row">
