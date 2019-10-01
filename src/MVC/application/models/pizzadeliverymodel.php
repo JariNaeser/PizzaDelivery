@@ -12,19 +12,23 @@ class PizzaDeliveryModel
             try{
                 $this->connection = Database::getConnection();
             }catch(PDOException $e){
-                header("Location: " . PAGES . "requireError");
+                header("Location: " . PAGES . "requireConnectionError");
             }
         }
     }
 
     public function execQuery(string $query){
-        if(isset($this->connection)){
-            $query = $this->sanitizeInput($query);
-            $tmp = $this->connection->prepare($query);
-            $tmp->execute();
-            return $tmp->fetchAll(PDO::FETCH_ASSOC);
-        }else{
-            header("Location: " . PAGES . "requireError");
+        try{
+            if(isset($this->connection)){
+                $query = $this->sanitizeInput($query);
+                $tmp = $this->connection->prepare($query);
+                $tmp->execute();
+                return $tmp->fetchAll(PDO::FETCH_ASSOC);
+            }else{
+                header("Location: " . PAGES . "requireQueryError");
+            }
+        }catch(PDOException $e){
+            header("Location: " . PAGES . "requireQueryError");
         }
     }
 
