@@ -68,7 +68,6 @@
                                 function countTotal() {
                                     var total = 0;
                                     for(var i = 0; i < prezzoFinale.length; i++){
-                                        console.log(prezzoFinale[i]);
                                         if(prezzoFinale[i] !== undefined){
                                             total += prezzoFinale[i];
                                         }
@@ -115,7 +114,7 @@
             const LUNGHEZZA_MASSIMA_NOME = 50;
             const LUNGHEZZA_MASSIMA_COGNOME = 50;
             const LUNGHEZZA_MASSIMA_TELEFONO = 20;
-            const LUNGHEZZA_MASSIMA_VIA = 45;       //Con aggiunta di cap, 50 - 5 = 45
+            const LUNGHEZZA_MASSIMA_VIA = 44;       //Con aggiunta di cap, 50 - 5 - 1(spazio) = 44
             const LUNGHEZZA_MASSIMA_PAESE = 50;
             const LUNGHEZZA_MASSIMA_CAP = 6;
             const LUNGHEZZA_MASSIMA_NUMERO = 5;
@@ -235,7 +234,6 @@
             }
 
             function areAllOk(){
-                console.log(status);
                 for(var i = 0; i < status.length; i++){
                     if(!status[i]){
                         return false;
