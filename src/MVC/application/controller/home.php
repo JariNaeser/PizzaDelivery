@@ -92,9 +92,15 @@ class Home
         $this->index();
     }
 
-    public function requireError(){
+    public function requireConnectionError(){
         require 'application/views/_templates/headers/error.php';
         require 'application/views/error/errorDBConnection.php';
+        require 'application/views/_templates/footer.php';
+    }
+
+    public function requireQueryError(){
+        require 'application/views/_templates/headers/error.php';
+        require 'application/views/error/queryError.php';
         require 'application/views/_templates/footer.php';
     }
 
@@ -115,12 +121,6 @@ class Home
         }else{
             require 'application/views/_templates/headers/header.php';
         }
-    }
-
-    public function ringraziamentoOrdine(){
-        $this->getRightHeader();
-        require 'application/views/pages/ringraziamentoOrdine.php';
-        require 'application/views/_templates/footer.php';
     }
 
     /* BACKEND METHODS */
@@ -185,7 +185,23 @@ class Home
     public function creaOrdine(){
         //Crea ordine.
         if(isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['numeroTelefono']) && isset($_POST['paese']) && isset($_POST['cap']) && isset($_POST['via']) && isset($_POST['numero'])){
-            $this->ringraziamentoOrdine();
+
+            $nome = $_POST['nome'];
+            $cognome = $_POST['cognome'];
+            $telefono = $_POST['numeroTelefono'];
+            $paese = $_POST['paese'];
+            $cap = $_POST['cap'];
+            $via = $_POST['via'] . " " . $_POST['numero'];
+
+            $this->pdModel->execQuery("INSERT INTO Ordinazione(nomeCliente, cognomeCliente, numeroTelefonoCliente, via, cap, paese, data) VALUES ($nome, $cognome, $telefono, $via, $cap, $paese);");
+
+            //Mettere a posto query
+            //Fare anche le query degli articoli ordinati prendendo l'id dell'ordine.
+
+            //Se andato a buon fine
+            $this->getRightHeader();
+            require 'application/views/pages/ringraziamentoOrdine.php';
+            require 'application/views/_templates/footer.php';
         }
     }
 
