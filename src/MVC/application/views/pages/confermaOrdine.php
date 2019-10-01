@@ -1,62 +1,40 @@
 <script>const prezzoFinale = new Array(<?php echo count($_SESSION['cart']); ?>);</script>
 
-<form action="" method="post" class="container" style="padding: 0px; padding: 1em; padding-bottom: 70px;">
+<form action="<?php echo URL . "home/creaOrdine"?>" method="post" class="container" style="padding: 0px; padding: 1em; padding-bottom: 70px;">
     <h4>Informazioni personali</h4>
-
     <div class="form-row">
         <div class="col">
-            <input type="text" class="form-control" placeholder="First name">
+            <input type="text" class="form-control" placeholder="Nome" name="nome" required>
         </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Last name">
+        <div class="col inner-addon right-addon">
+            <input type="text" class="form-control" placeholder="Cognome" name="cognome" required>
         </div>
     </div>
+    <br>
     <div class="form-row">
         <div class="col">
-            <input type="text" class="form-control" placeholder="First name">
+            <input type="text" class="form-control" placeholder="Paese" name="paese" required>
         </div>
         <div class="col">
-            <input type="text" class="form-control" placeholder="Last name">
+            <input type="number" class="form-control" placeholder="Nr. Telefono" name="numeroTelefono" required>
         </div>
     </div>
+    <br>
     <div class="form-row">
         <div class="col">
-            <input type="text" class="form-control" placeholder="First name">
+            <input type="text" class="form-control" placeholder="Via" name="via" required>
         </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Last name">
+        <div class="col-3">
+            <input type="number" class="form-control" placeholder="Cap" name="cap" required>
         </div>
-    </div>
-
-
-    <!-- <div class="row" style="padding: 1em">
-        <div class="form-row">
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Nome" name="nome" required>
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Cognome" name="cognome" required>
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Paese" name="paese" required>
-            </div>
+        <div class="col-3">
+            <input type="number" class="form-control" placeholder="Nr." name="numero" required>
         </div>
-        <div class="form-row">
-            <div class="col-5">
-                <input type="text" class="form-control" placeholder="Via" name="via" required>
-            </div>
-            <div class="col">
-                <input type="number" class="form-control" placeholder="Nr." name="numero" required>
-            </div>
-            <div class="col-5">
-                <input type="number" class="form-control" placeholder="Nr. Telefono" name="numeroTelefono" required>
-            </div>
-        </div> -->
     </div>
     <br>
     <h4>Prodotti selezionati</h4>
     <div class="row col-md-12 table-responsive">
-        <table class="table table-striped">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Immagine</th>
@@ -116,12 +94,9 @@
 
                             </script>
 
-
                     <?php endforeach; ?>
                 <?php endif; ?>
             <?php endif; ?>
-
-
 
             </tbody>
         </table>
@@ -131,6 +106,158 @@
         countTotal();
     </script>
     <div class="col-md-12 text-center">
-        <button type="submit" class="btn btn-danger btn-lg">Ordina</button>
+        <button type="button" class="btn btn-danger btn-lg" id="ordina">Ordina</button>
+        <script>
+
+            const status = [false, false, false, false, false, false, false];
+
+            //Si riferisce alla lunghezza massima della tabella del DB.
+            const LUNGHEZZA_MASSIMA_NOME = 50;
+            const LUNGHEZZA_MASSIMA_COGNOME = 50;
+            const LUNGHEZZA_MASSIMA_TELEFONO = 20;
+            const LUNGHEZZA_MASSIMA_VIA = 45;       //Con aggiunta di cap, 50 - 5 = 45
+            const LUNGHEZZA_MASSIMA_PAESE = 50;
+            const LUNGHEZZA_MASSIMA_CAP = 6;
+            const LUNGHEZZA_MASSIMA_NUMERO = 5;
+
+            function validate(string, maxLen, regex){
+                try{
+                    string = string.trim();
+                    if(string.length > 0 && string.length <= maxLen){
+                        if(!regex.test(string)){
+                            return true;
+                        }
+                    }
+                    return false;
+                }catch(error){
+                    console.log("Error: " + error);
+                    return false;
+                }
+            }
+
+            // nome field
+            var nameSelector = $('input[name=nome]');
+            nameSelector.blur(function(event){
+                if(validate(nameSelector.val(), LUNGHEZZA_MASSIMA_NOME, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
+                    isOk(nameSelector);
+                    status[0] = true;
+                }else{
+                    isNotOk(nameSelector);
+                    status[0] = false;
+                }
+                checkIfOk();
+            });
+
+            // cognome field
+            var surnameSelector = $('input[name=cognome]');
+            surnameSelector.blur(function(event){
+                if(validate(surnameSelector.val(), LUNGHEZZA_MASSIMA_COGNOME, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
+                    isOk(surnameSelector);
+                    status[1] = true;
+                }else{
+                    isNotOk(surnameSelector);
+                    status[1] = false;
+                }
+                checkIfOk();
+            });
+
+            // paese field
+            var paeseSelector = $('input[name=paese]');
+            paeseSelector.blur(function(event){
+                if(validate(paeseSelector.val(), LUNGHEZZA_MASSIMA_PAESE, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -])/)){
+                    isOk(paeseSelector);
+                    status[2] = true;
+                }else{
+                    isNotOk(paeseSelector);
+                    status[2] = false;
+                }
+                checkIfOk();
+            });
+
+            // telefono field
+            var telefonoSelector = $('input[name=numeroTelefono]', );
+            telefonoSelector.blur(function(event){
+                if(validate(telefonoSelector.val(), LUNGHEZZA_MASSIMA_TELEFONO, /([^0-9+ ])/)){
+                    isOk(telefonoSelector);
+                    status[3] = true;
+                }else{
+                    isNotOk(telefonoSelector);
+                    status[3] = false;
+                }
+                checkIfOk();
+            });
+
+            // via field
+            var viaSelector = $('input[name=via]');
+            viaSelector.blur(function(event){
+                if(validate(viaSelector.val(), LUNGHEZZA_MASSIMA_VIA, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
+                    isOk(viaSelector);
+                    status[4] = true;
+                }else{
+                    isNotOk(viaSelector);
+                    status[4] = false;
+                }
+                checkIfOk();
+            });
+
+            // cap field
+            var capSelector = $('input[name=cap]');
+            capSelector.blur(function(event){
+                if(validate(capSelector.val(), LUNGHEZZA_MASSIMA_CAP, /([^0-9])/)){
+                    isOk(capSelector);
+                    status[5] = true;
+                }else{
+                    isNotOk(capSelector);
+                    status[5] = false;
+                }
+                checkIfOk();
+            });
+
+            // numero field
+            var numeroSelector = $('input[name=numero]');
+            numeroSelector.blur(function(event){
+                if(validate(numeroSelector.val(), LUNGHEZZA_MASSIMA_NUMERO, /([^0-9A-za-z])/)){
+                    isOk(numeroSelector);
+                    status[6] = true;
+                }else{
+                    isNotOk(numeroSelector);
+                    status[6] = false;
+                }
+                checkIfOk();
+            });
+
+            function isOk(selector){
+                selector.css('border-color', '#abdd92');
+            }
+
+            function isNotOk(selector){
+                selector.css('border-color', '#f76a6a');
+            }
+
+            function areAllOk(){
+                console.log(status);
+                for(var i = 0; i < status.length; i++){
+                    if(!status[i]){
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            function checkIfOk(){
+                if(areAllOk()){
+                    $('#ordina').removeAttr('type').attr('type', 'submit');
+                }else{
+                    $('#ordina').removeAttr('type').attr('type', 'button');
+                }
+            }
+
+            $('#ordina').click(function(){
+               if($('#ordina').attr('type') === 'button'){
+                   alert("Devi immettere correttamente tutte le tue informazioni personali.");
+               }
+            });
+
+        </script>
     </div>
 </form>
