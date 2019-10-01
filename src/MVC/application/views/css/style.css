@@ -1,0 +1,31 @@
+body{
+    width: 100%;
+    background-color: red;
+}
+
+.padding-footer{
+    padding-bottom: 44px;
+}
+
+.centerVerticallyDiv{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+input{
+    margin: 1em 0em 1em 0em;
+}
+
+.items-table{
+    display: block;
+    max-height: 300px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
