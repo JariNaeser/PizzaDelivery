@@ -19,7 +19,7 @@
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/8d7154f948.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" type="text/css" href="<?php echo URL ?>views/_templates/headers/style.css">
+    <style> a.disabled {  pointer-events: none;  cursor: default;  } </style>
 
 </head>
 <body>
