@@ -117,6 +117,12 @@ class Home
         }
     }
 
+    public function ringraziamentoOrdine(){
+        $this->getRightHeader();
+        require 'application/views/pages/ringraziamentoOrdine.php';
+        require 'application/views/_templates/footer.php';
+    }
+
     /* BACKEND METHODS */
 
     public function login(){
@@ -174,6 +180,13 @@ class Home
         }
         header("Location: " . PAGES . "ordina");
         $this->ordina();
+    }
+
+    public function creaOrdine(){
+        //Crea ordine.
+        if(isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['numeroTelefono']) && isset($_POST['paese']) && isset($_POST['cap']) && isset($_POST['via']) && isset($_POST['numero'])){
+            $this->ringraziamentoOrdine();
+        }
     }
 
 }
