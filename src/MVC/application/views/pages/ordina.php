@@ -3,11 +3,11 @@
  - remove space on the right of eleziona prodotti
 
  -->
-<form class="container col-md-12" style="padding-bottom: 70px; margin: 1em">
+<form class="container" style="padding: 0px; padding: 1em; padding-bottom: 70px;">
     <h1 class="text-center">ORDINA</h1>
-    <div class="row col-md-12">
-        <h4 style="margin-top: 1em">Seleziona Prodotti</h4>
-        <div class="row table-responsive col-md-12">
+    <div class="row" style="padding: 1em">
+        <h4>Seleziona Prodotti</h4>
+        <div class="row table-responsive text-center">
             <table class="table">
                 <thead>
                 <tr>
@@ -29,7 +29,7 @@
                             . URL . $articolo['urlFoto'] . "'><td>" . $articolo['nome']
                             . "<td>" . $articolo['descrizione'] . "<td>"
                             . $articolo['prezzo'] . "</td><td>" .
-                            "<a href='" . URL . "home/addToCart/" . $articolo['id'] . "'><i class='fas fa-shopping-cart' alt='X'></i></a></td>"?>
+                            "<a href='" . URL . "home/addToCart/" . $articolo['id'] . "'><i class='fas fa-shopping-cart' alt='X'>X</i></a></td>"?>
                         <?php echo "</tr>" ?>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -41,7 +41,7 @@
     </div>
     <h4>Prodotti selezionati</h4>
     <div class="row col-md-12 table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped text-center">
             <thead>
             <tr>
                 <th scope="col">Immagine</th>
@@ -60,23 +60,21 @@
                         <?php echo "<tr><td><img style='height: 50px; width: 50px;' src='" . URL . $element[0]['urlFoto']
                             . "'></td><td>" . $element[0]['nome'] . "</td><td>"
                             . $element[0]['prezzo'] . "</td><td>"
-                            . "<a href='" . URL . "home/removeFromCart/" . $element[0]['id'] . "'><i class='fas fa-times' alt='X'></i></a></td></tr>"; ?>
+                            . "<a href='" . URL . "home/removeFromCart/" . $element[0]['id'] . "'><i class='fas fa-times' alt='X'>X</i></a></td></tr>"; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             <?php endif; ?>
             </tbody>
         </table>
     </div>
-    <h1 class="text-danger">FAR FUNZIONARE CHE FA IL SEND SOLO SE C'È UN PRODOTTO NEL CARRELLO</h1>
     <div class="col-md-12 text-center">
-        <a href='<?php echo URL . "home/confermaordine"?>' class="btn btn-danger btn-lg" id="buttonOrdina">Prosegui all'ordinazione</a>
+        <a href='<?php echo URL . "home/confermaordine"?>' class="btn btn-danger btn-lg disabled" id="buttonOrdina">Prosegui all'ordinazione</a>
         <script>
             var elemNum = <?php echo count($_SESSION['cart']); ?>;
             if(elemNum > 0){
-
+                $('#buttonOrdina').removeClass('disabled');
             }else{
-
-
+                $('#buttonOrdina').addClass('disabled');
             }
         </script>
     </div>
