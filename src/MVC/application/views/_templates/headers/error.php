@@ -19,7 +19,8 @@
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/8d7154f948.js" crossorigin="anonymous"></script>
 
-    <style> a.disabled {  pointer-events: none;  cursor: default;  } </style>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="./../css/style.css">
 
 </head>
 <body>
