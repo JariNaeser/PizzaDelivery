@@ -59,6 +59,9 @@ class Home
     }
 
     public function ordinazioni(){
+
+        //$_SESSION['ordinazioni'] = $this->pdModel->getPreparedOrdinazioni();
+
         // Carico Views
         $this->getRightHeader();
         require 'application/views/pages/ordinazioni.php';
@@ -188,20 +191,26 @@ class Home
 
             $nome = $_POST['nome'];
             $cognome = $_POST['cognome'];
-            $telefono = $_POST['numeroTelefono'];
+            (int)$telefono = $_POST['numeroTelefono'];
             $paese = $_POST['paese'];
             $cap = $_POST['cap'];
             $via = $_POST['via'] . " " . $_POST['numero'];
 
-            $this->pdModel->execQuery("INSERT INTO Ordinazione(nomeCliente, cognomeCliente, numeroTelefonoCliente, via, cap, paese, data) VALUES ($nome, $cognome, $telefono, $via, $cap, $paese);");
+            //Insert into ordine
+            $id = $this->pdModel->insertQuery("INSERT INTO Ordinazione(nomeCliente, cognomeCliente, numeroTelefonoCliente, via, cap, paese) VALUES ('$nome', '$cognome', $telefono, '$via', $cap, '$paese');");
 
-            //Mettere a posto query
-            //Fare anche le query degli articoli ordinati prendendo l'id dell'ordine.
+            //Insert into OrdineArticolo
+            foreach ($_SESSION['cart'] as $element){
+                $this->pdModel->insertQuery("INSERT INTO OrdineArticolo VALUES ($id, '" . $element[0]['id'] . "', " . $_POST['select' . $element[0]['id']] . ");");
+            }
 
             //Se andato a buon fine
             $this->getRightHeader();
             require 'application/views/pages/ringraziamentoOrdine.php';
             require 'application/views/_templates/footer.php';
+
+            //Azzera contenuto carrello
+            $_SESSION['cart'] = null;
         }
     }
 
