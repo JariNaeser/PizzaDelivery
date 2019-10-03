@@ -60,12 +60,23 @@ class Home
 
     public function ordinazioni(){
 
-        //$_SESSION['ordinazioni'] = $this->pdModel->getPreparedOrdinazioni();
+        $_SESSION['ordinazioni'] = $this->pdModel->getPreparedOrdinazioni();
 
         // Carico Views
         $this->getRightHeader();
         require 'application/views/pages/ordinazioni.php';
         require 'application/views/_templates/footer.php';
+    }
+
+    public function ordinazione(int $id){
+
+        $_SESSION['ordine'] = $this->pdModel->getOrdine($id);
+
+        // Carico Views
+        $this->getRightHeader();
+        require 'application/views/pages/ordinazione.php';
+        require 'application/views/_templates/footer.php';
+        //header("Location: " . PAGES . "ordinazione");
     }
 
     public function consegne(){
