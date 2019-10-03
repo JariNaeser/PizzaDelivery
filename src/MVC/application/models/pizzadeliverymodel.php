@@ -18,7 +18,7 @@ class PizzaDeliveryModel
     }
 
     public function execQuery(string $query){
-        try{
+        //try{
             if(isset($this->connection)){
                 $query = $this->sanitizeInput($query);
                 $tmp = $this->connection->prepare($query);
@@ -27,9 +27,24 @@ class PizzaDeliveryModel
             }else{
                 header("Location: " . PAGES . "requireQueryError");
             }
-        }catch(PDOException $e){
+        /*}catch(PDOException $e){
             header("Location: " . PAGES . "requireQueryError");
-        }
+        }*/
+    }
+
+    public function insertQuery(string $query){
+        //try{
+            if(isset($this->connection)){
+                $query = $this->sanitizeInput($query);
+                $tmp = $this->connection->prepare($query);
+                $tmp->execute();
+                return $this->connection->lastInsertId();
+            }else{
+                header("Location: " . PAGES . "requireQueryError");
+            }
+        /*}catch(PDOException $e){
+            header("Location: " . PAGES . "requireQueryError");
+        }*/
     }
 
     public function getUtenti(){
@@ -56,6 +71,19 @@ class PizzaDeliveryModel
         $query = htmlspecialchars($query);
         $query = stripslashes($query);
         return $query;
+    }
+
+    public function getPreparedOrdinazioni(){
+        $arr = array();
+        $ordinazioni = $this->execQuery("SELECT * FROM Ordinazioni;");
+        foreach ($ordinazioni as $ordine){
+            $tmp = array();
+            array_push($tmp, $ordine);
+            $elementiOrdinati = $this->execQuery("SELECT * from ArticoliOrdinati WHERE id = " . $ordine['id'] . ";");
+            foreach ($elementiOrdinati as $elemOrdinato){
+                array_push($tmp, $elemOrdinato);
+            }
+        }
     }
 
 }
