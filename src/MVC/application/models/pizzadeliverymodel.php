@@ -75,15 +75,26 @@ class PizzaDeliveryModel
 
     public function getPreparedOrdinazioni(){
         $arr = array();
-        $ordinazioni = $this->execQuery("SELECT * FROM Ordinazioni;");
+        $ordinazioni = $this->execQuery("SELECT * FROM Ordinazione;");
         foreach ($ordinazioni as $ordine){
             $tmp = array();
             array_push($tmp, $ordine);
-            $elementiOrdinati = $this->execQuery("SELECT * from ArticoliOrdinati WHERE id = " . $ordine['id'] . ";");
+            $elementiOrdinati = $this->execQuery("SELECT * from OrdineArticolo WHERE ordinazione = " . $ordine['id'] . ";");
             foreach ($elementiOrdinati as $elemOrdinato){
                 array_push($tmp, $elemOrdinato);
             }
+            array_push($arr, $tmp);
         }
+        return $arr;
+    }
+
+    public function getOrdine($id){
+        $arr = array();
+        $ordinazione = $this->execQuery("SELECT * FROM Ordinazione WHERE id = $id;");
+        $elementi = $this->execQuery("SELECT * from OrdineArticolo WHERE ordinazione = $id;");
+        array_push($arr, $ordinazione);
+        array_push($arr, $elementi);
+        return $arr;
     }
 
 }
