@@ -3,7 +3,7 @@
  - remove space on the right of eleziona prodotti
 
  -->
-<form class="container" style="padding: 0px; padding: 1em; padding-bottom: 70px;">
+<form class="container padding-footer">
     <h1 class="text-center">ORDINA</h1>
     <div class="row" style="padding: 1em">
         <h4>Seleziona Prodotti</h4>
