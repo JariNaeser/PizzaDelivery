@@ -20,7 +20,7 @@
     <script src="https://kit.fontawesome.com/8d7154f948.js" crossorigin="anonymous"></script>
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="./../css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo URL . "css/style.css"?>">
 
 </head>
 <body>
