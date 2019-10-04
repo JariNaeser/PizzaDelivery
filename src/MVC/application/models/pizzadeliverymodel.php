@@ -59,6 +59,10 @@ class PizzaDeliveryModel
         return $this->execQuery("SELECT * FROM articolo;");
     }
 
+    public function getArticoliKey(){
+        return $this->execQueryKey("SELECT * FROM articolo;");
+    }
+
     public function getArticoliOrdinati(){
         return $this->execQuery("SELECT * FROM articolo ORDER BY nome;");
     }
