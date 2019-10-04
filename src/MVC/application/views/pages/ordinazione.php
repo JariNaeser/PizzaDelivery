@@ -40,20 +40,15 @@
         </thead>
         <tbody>
         <?php if(isset($_SESSION['ordine']) && count($_SESSION['ordine']) > 0): ?>
-            <?php for($i = 0; $i < count($ordine[1]); $i++): ?>
-                <?php echo "<tr><td>" . $ordine[$i][0]['quantita'] . "x " . $articoli[$ordine[$i][0]['articolo']]['nome'] . "</td><td>" . $articoli[$ordine[$i][0]['articolo']]['prezzo'] . ".-</td><td>" . $ordine[$i][0]['quantita']*$articoli[$ordine[$i][0]['articolo']]['prezzo'] . "</td></tr>"?>
-            <?php endfor; ?>
+            <?php foreach ($ordine[1] as $elemento): ?>
+                <?php echo "<tr><td>" . $elemento['quantita'] . "x " . $articoli[$elemento['articolo']-1]['nome'] . "</td><td>" . $articoli[$elemento['articolo']-1]['prezzo'] . ".-</td><td>" . $elemento['quantita']*$articoli[$elemento['articolo']-1]['prezzo'] . "</td></tr>"?>
+            <?php endforeach; ?>
         <?php else: ?>
             <?php echo "<tr><td colspan='3'>Nessuna elemento trovato.</td></tr>"?>
         <?php endif; ?>
         </tbody>
     </table>
     </div>
-
-    <?php echo count($ordine); ?>
-    <pre><?php print_r($ordine); ?></pre>
-    <pre><?php print_r($articoli); ?></pre>
-
     <div class="text-center">
         <a href="<?php echo URL?>home/ordinazioni" class="btn btn-danger btn-lg">Torna agli ordini</a>
     </div>
