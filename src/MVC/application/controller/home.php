@@ -71,6 +71,7 @@ class Home
     public function ordinazione(int $id){
 
         $_SESSION['ordine'] = $this->pdModel->getOrdine($id);
+        $_SESSION['articoli'] = $this->pdModel->getArticoli();
 
         // Carico Views
         $this->getRightHeader();
@@ -198,7 +199,7 @@ class Home
 
     public function creaOrdine(){
         //Crea ordine.
-        if(isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['numeroTelefono']) && isset($_POST['paese']) && isset($_POST['cap']) && isset($_POST['via']) && isset($_POST['numero'])){
+        if(isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['numeroTelefono']) && isset($_POST['paese']) && isset($_POST['cap']) && isset($_POST['via']) && isset($_POST['numero']) && isset($_SESSION['cart'])){
 
             $nome = $_POST['nome'];
             $cognome = $_POST['cognome'];
