@@ -15,7 +15,7 @@
                 <div class="col-sm-6">
                     <div class="row">
                         <div class="col-sm-12">
-                            <a href="<?php echo URL?>home/creaUtente" class="btn btn-danger btn-md col-sm-12"><i class="fas fa-plus"></i> Crea Utente</a>
+                            <a href="<?php echo URL?>gestionePizzeria/creaUtente" class="btn btn-danger btn-md col-sm-12"><i class="fas fa-plus"></i> Crea Utente</a>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 <?php if(isset($_SESSION['utenti']) && count($_SESSION['utenti']) > 0): ?>
                     <?php $utenti = $_SESSION['utenti']; ?>
                     <?php foreach ($utenti as $utente): ?>
-                        <?php echo "<tr><td>" . $utente['username'] . "</td><td>" . $utente['tipoUtente'] . "</td><td><a href='" . URL . "home/modifyUser/" . $utente['username'] . "' class='text-dark'><i class=\"fas fa-user-edit\"></i></a></td></tr>" ?>
+                        <?php echo "<tr><td>" . $utente['username'] . "</td><td>" . $utente['tipoUtente'] . "</td><td><a href='" . URL . "gestionePizzeria/modifyUser/" . $utente['username'] . "' class='text-dark'><i class=\"fas fa-user-edit\"></i></a></td></tr>" ?>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <?php echo "<tr><td colspan='3'>Nessun utente trovato nel DB.</td>"; ?>

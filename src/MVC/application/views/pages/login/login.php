@@ -6,7 +6,7 @@
     <br>
     <div class="row">
         <div class="col-md-4"></div>
-        <form class="text-center col-md-4" action="<?php echo URL ?>home/login" method="post">
+        <form class="text-center col-md-4" action="<?php echo URL ?>login/login" method="post">
             <div class="form-group col-md-12">
                 <input type="text" class="form-control" placeholder="Username" name="username" required>
             </div>

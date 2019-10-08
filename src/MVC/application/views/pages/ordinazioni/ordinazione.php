@@ -49,6 +49,6 @@
     </table>
     </div>
     <div class="text-center">
-        <a href="<?php echo URL?>home/ordinazioni" class="btn btn-danger btn-lg">Torna agli ordini</a>
+        <a href="<?php echo URL?>ordinazioni/ordinazioni" class="btn btn-danger btn-lg">Torna agli ordini</a>
     </div>
 </div>

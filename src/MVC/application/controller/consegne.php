@@ -1,6 +1,6 @@
 <?php
 
-class Home
+class Consegne
 {
 
     private $pdModel;
@@ -12,16 +12,14 @@ class Home
             $this->pdModel = new PizzaDeliveryModel();
             session_start();
         }else{
-            exit("ERRORE nel costruttore della classe home dei controller.");
+            exit("ERRORE nel costruttore della classe consegne dei controller.");
         }
     }
 
-    /* FRONTEND METHODS */
-
-    public function index(){
+    public function consegne(){
         // Carico Views
         $this->getRightHeader();
-        require 'application/views/pages/index/benvenuto.php';
+        require 'application/views/pages/consegne/consegne.php';
         require 'application/views/_templates/footer.php';
     }
 
@@ -43,8 +41,5 @@ class Home
             require 'application/views/_templates/headers/header.php';
         }
     }
-
-
-
 
 }

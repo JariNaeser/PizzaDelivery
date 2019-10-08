@@ -1,6 +1,6 @@
 <script>const prezzoFinale = new Array(<?php echo count($_SESSION['cart']); ?>);</script>
 <div class="container padding-footer">
-    <form action="<?php echo URL . "home/creaOrdine"?>" method="post" style="padding: 0px;">
+    <form action="<?php echo URL . "ordina/creaOrdine"?>" method="post" style="padding: 0px;">
         <h1 class="text-center">CONFERMA ORDINE</h1>
         <h4>Informazioni personali</h4>
         <div class="form-row">

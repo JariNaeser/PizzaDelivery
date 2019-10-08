@@ -29,7 +29,7 @@
                             . URL . $articolo['urlFoto'] . "'><td>" . $articolo['nome']
                             . "<td>" . $articolo['descrizione'] . "<td>"
                             . $articolo['prezzo'] . "</td><td>" .
-                            "<a class='text-dark' href='" . URL . "home/addToCart/" . $articolo['id'] . "'><i class='fas fa-shopping-cart' alt='X'></i></a></td>"?>
+                            "<a class='text-dark' href='" . URL . "ordina/addToCart/" . $articolo['id'] . "'><i class='fas fa-shopping-cart' alt='X'></i></a></td>"?>
                         <?php echo "</tr>" ?>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -60,7 +60,7 @@
                         <?php echo "<tr><td><img style='height: 50px; width: 50px;' src='" . URL . $element[0]['urlFoto']
                             . "'></td><td>" . $element[0]['nome'] . "</td><td>"
                             . $element[0]['prezzo'] . "</td><td>"
-                            . "<a class='text-danger' href='" . URL . "home/removeFromCart/" . $element[0]['id'] . "'><i class='fas fa-times' alt='X'></i></a></td></tr>"; ?>
+                            . "<a class='text-danger' href='" . URL . "ordina/removeFromCart/" . $element[0]['id'] . "'><i class='fas fa-times' alt='X'></i></a></td></tr>"; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             <?php endif; ?>
@@ -68,7 +68,7 @@
         </table>
     </div>
     <div class="col-md-12 text-center">
-        <a href='<?php echo URL . "home/confermaordine"?>' class="btn btn-danger btn-lg disabled" id="buttonOrdina">Prosegui all'ordinazione</a>
+        <a href='<?php echo URL . "ordina/confermaordine"?>' class="btn btn-danger btn-lg disabled" id="buttonOrdina">Prosegui all'ordinazione</a>
         <script>
             var elemNum = <?php echo count($_SESSION['cart']); ?>;
             if(elemNum > 0){

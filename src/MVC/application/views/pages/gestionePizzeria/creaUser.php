@@ -1,7 +1,7 @@
  <div class="col-md-12 container text-center padding-footer">
      <h1>Crea Utente</h1>
      <br>
-     <form action="<?php echo URL . "home/createUser" ?>" method="post">
+     <form action="<?php echo URL . "gestionePizzeria/createUser" ?>" method="post">
          <div class="table-responsive col-md-6 mx-auto">
              <table class="table table-striped">
                  <tbody>
@@ -49,7 +49,7 @@
              </table>
          </div>
          <button type="submit" class="btn btn-danger btn-lg">Crea</button>
-         <a href="<?php echo URL . "home/gestionePizzeria";?>" class="btn btn-danger btn-lg">Esci</a>
+         <a href="<?php echo URL . "gestionePizzeria/gestionePizzeria";?>" class="btn btn-danger btn-lg">Esci</a>
      </form>
  </div>
 

@@ -3,7 +3,7 @@
     <div class="col-md-12 container text-center padding-footer">
         <h1>Utente <?php echo $userToModify['username']; ?></h1>
         <br>
-        <form action="<?php echo URL . "home/modifyUserContent"?>" method="post">
+        <form action="<?php echo URL . "gestionePizzeria/modifyUserContent"?>" method="post">
             <div class="table-responsive col-md-6 mx-auto">
                 <table class="table table-striped">
                     <tbody>
@@ -54,9 +54,9 @@
                     </tbody>
                 </table>
             </div>
-            <a href="<?php echo URL . "home/eliminaUtente/" . $userToModify['username'];?>" class="btn btn-danger btn-lg">Elimina</a>
+            <a href="<?php echo URL . "gestionePizzeria/eliminaUtente/" . $userToModify['username'];?>" class="btn btn-danger btn-lg">Elimina</a>
             <button type="submit" class="btn btn-primary btn-lg">Aggiorna</button>
-            <a href="<?php echo URL . "home/gestionePizzeria";?>" class="btn btn-danger btn-lg">Esci</a>
+            <a href="<?php echo URL . "gestionePizzeria/gestionePizzeria";?>" class="btn btn-danger btn-lg">Esci</a>
         </form>
 
 

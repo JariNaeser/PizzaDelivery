@@ -1,6 +1,6 @@
 <?php
 
-class Home
+class Ordinazioni
 {
 
     private $pdModel;
@@ -12,17 +12,30 @@ class Home
             $this->pdModel = new PizzaDeliveryModel();
             session_start();
         }else{
-            exit("ERRORE nel costruttore della classe home dei controller.");
+            exit("ERRORE nel costruttore della classe consegne dei controller.");
         }
     }
 
-    /* FRONTEND METHODS */
+    public function ordinazioni(){
 
-    public function index(){
+        $_SESSION['ordinazioni'] = $this->pdModel->getPreparedOrdinazioni();
+
         // Carico Views
         $this->getRightHeader();
-        require 'application/views/pages/index/benvenuto.php';
+        require 'application/views/pages/ordinazioni/ordinazioni.php';
         require 'application/views/_templates/footer.php';
+    }
+
+    public function ordinazione(int $id){
+
+        $_SESSION['ordine'] = $this->pdModel->getOrdine($id);
+        $_SESSION['articoli'] = $this->pdModel->getArticoli();
+
+        // Carico Views
+        $this->getRightHeader();
+        require 'application/views/pages/ordinazioni/ordinazione.php';
+        require 'application/views/_templates/footer.php';
+        //header("Location: " . PAGES . "ordinazione");
     }
 
     private function getRightHeader(){
@@ -43,8 +56,5 @@ class Home
             require 'application/views/_templates/headers/header.php';
         }
     }
-
-
-
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Home
+class ErrorController
 {
 
     private $pdModel;
@@ -12,16 +12,25 @@ class Home
             $this->pdModel = new PizzaDeliveryModel();
             session_start();
         }else{
-            exit("ERRORE nel costruttore della classe home dei controller.");
+            exit("ERRORE nel costruttore della classe consegne dei controller.");
         }
     }
 
-    /* FRONTEND METHODS */
+    public function requireConnectionError(){
+        require 'application/views/_templates/headers/error.php';
+        require 'application/views/error/errorDBConnection.php';
+        require 'application/views/_templates/footer.php';
+    }
 
-    public function index(){
-        // Carico Views
-        $this->getRightHeader();
-        require 'application/views/pages/index/benvenuto.php';
+    public function requireQueryError(){
+        require 'application/views/_templates/headers/error.php';
+        require 'application/views/error/queryError.php';
+        require 'application/views/_templates/footer.php';
+    }
+
+    public function emptyCart(){
+        require 'application/views/_templates/headers/error.php';
+        require 'application/views/error/emptyCartError.php';
         require 'application/views/_templates/footer.php';
     }
 
@@ -43,8 +52,5 @@ class Home
             require 'application/views/_templates/headers/header.php';
         }
     }
-
-
-
 
 }

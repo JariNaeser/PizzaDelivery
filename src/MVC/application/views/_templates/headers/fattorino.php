@@ -35,13 +35,13 @@
                 <a class="nav-link" href="<?php echo URL?>home/index">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo URL ?>home/ordina">Ordina</a>
+                <a class="nav-link" href="<?php echo URL ?>ordina/ordina">Ordina</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo URL ?>home/fattorini">Fattorini</a>
+                <a class="nav-link" href="<?php echo URL ?>fattorini/fattorini">Fattorini</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo URL ?>home/logout">Logout</a>
+                <a class="nav-link" href="<?php echo URL ?>login/logout">Logout</a>
             </li>
         </ul>
     </div>
