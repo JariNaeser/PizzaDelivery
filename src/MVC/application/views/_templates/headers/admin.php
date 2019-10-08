@@ -35,19 +35,19 @@
                 <a class="nav-link" href="<?php echo URL?>home/index">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo URL ?>ordina/ordina">Ordina</a>
+                <a class="nav-link" href="<?php echo URL ?>ordina/home">Ordina</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo URL ?>ordinazioni/ordinazioni">Ordinazioni</a>
+                <a class="nav-link" href="<?php echo URL ?>ordinazioni/home">Ordinazioni</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo URL ?>consegne/consegne">Consegne</a>
+                <a class="nav-link" href="<?php echo URL ?>consegne/home">Consegne</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo URL ?>fattorini/fattorini">Fattorini</a>
+                <a class="nav-link" href="<?php echo URL ?>fattorini/home">Fattorini</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo URL ?>gestionePizzeria/gestionePizzeria">Gestione Pizzeria</a>
+                <a class="nav-link" href="<?php echo URL ?>gestionePizzeria/home">Gestione Pizzeria</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="<?php echo URL ?>login/logout">Logout</a>

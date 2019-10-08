@@ -27,7 +27,7 @@ class Ordina
         }
     }
 
-    public function ordina(){
+    public function home(){
         $_SESSION['articoli'] = $this->pdModel->getArticoliOrdinati();
         // Carico Views
         $this->getRightHeader();
@@ -51,8 +51,8 @@ class Ordina
                 array_push($_SESSION['cart'], $item);
             }
         }
-        header("Location: " . URL . "ordina/ordina");
-        $this->ordina();
+        header("Location: " . URL . "ordina/home");
+        $this->home();
     }
 
     public function removeFromCart($id){
@@ -65,8 +65,8 @@ class Ordina
             }
             $_SESSION['cart'] = $arr;
         }
-        header("Location: " . URL . "ordina/ordina");
-        $this->ordina();
+        header("Location: " . URL . "ordina/home");
+        $this->home();
     }
 
     public function creaOrdine(){

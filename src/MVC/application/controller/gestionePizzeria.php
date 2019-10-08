@@ -16,7 +16,7 @@ class GestionePizzeria
         }
     }
 
-    public function gestionePizzeria(){
+    public function home(){
 
         $_SESSION['utenti'] = $this->pdModel->getUtenti();
 
@@ -64,21 +64,21 @@ class GestionePizzeria
                 $tipologia = $_POST['tipologiaMU'];
 
                 $this->pdModel->insertQuery(  "UPDATE utente SET nome='$nome', cognome='$cognome', via='$via', cap='$cap', paese='$paese', email='$email', password='$password', tipoUtente='$tipologia' WHERE username = '$nome.$cognome'");
-                $this->gestionePizzeria();
+                $this->home();
             }
         }
     }
 
     public function eliminaUtente(string $username){
         $this->pdModel->dropUser($username);
-        $this->gestionePizzeria();
+        $this->home();
     }
 
     public function createUser(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if(isset($_POST['nomeNU'])&&isset($_POST['cognomeNU'])&&isset($_POST['viaNU'])&&isset($_POST['capNU'])&&isset($_POST['paeseNU'])&&isset($_POST['emailNU'])&&isset($_POST['passwordNU'])&&isset($_POST['tipologiaNU'])){
                 $this->pdModel->insertQuery("INSERT INTO utente VALUES ('" . strtolower($_POST['nomeNU']) . "." . strtolower($_POST['cognomeNU']) . "', '" . $_POST['nomeNU'] ."', '" . $_POST['cognomeNU'] . "', '" . $_POST['viaNU'] . "', '" . $_POST['capNU'] . "', '" . $_POST['paeseNU'] . "', '" . $_POST['emailNU'] . "', '" . $_POST['passwordNU'] . "', '" . $_POST['tipologiaNU'] . "');");
-                $this->gestionePizzeria();
+                $this->home();
             }
         }
     }

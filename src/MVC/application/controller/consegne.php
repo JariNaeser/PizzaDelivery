@@ -16,7 +16,7 @@ class Consegne
         }
     }
 
-    public function consegne(){
+    public function home(){
         // Carico Views
         $this->getRightHeader();
         require 'application/views/pages/consegne/consegne.php';

@@ -16,7 +16,7 @@ class Fattorini
         }
     }
 
-    public function fattorini(){
+    public function home(){
         // Carico Views
         $this->getRightHeader();
         require 'application/views/pages/fattorini/fattorini.php';

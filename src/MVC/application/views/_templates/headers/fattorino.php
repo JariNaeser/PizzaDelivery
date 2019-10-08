@@ -35,10 +35,10 @@
                 <a class="nav-link" href="<?php echo URL?>home/index">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo URL ?>ordina/ordina">Ordina</a>
+                <a class="nav-link" href="<?php echo URL ?>ordina/home">Ordina</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo URL ?>fattorini/fattorini">Fattorini</a>
+                <a class="nav-link" href="<?php echo URL ?>fattorini/home">Fattorini</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="<?php echo URL ?>login/logout">Logout</a>

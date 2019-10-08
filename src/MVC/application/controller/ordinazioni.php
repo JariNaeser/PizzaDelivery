@@ -16,7 +16,7 @@ class Ordinazioni
         }
     }
 
-    public function ordinazioni(){
+    public function home(){
 
         $_SESSION['ordinazioni'] = $this->pdModel->getPreparedOrdinazioni();
 

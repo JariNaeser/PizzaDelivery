@@ -12,7 +12,7 @@ class PizzaDeliveryModel
             try{
                 $this->connection = Database::getConnection();
             }catch(PDOException $e){
-                header("Location: " . PAGES . "requireConnectionError");
+                header("Location: " . URL . "errorController/requireConnectionError");
             }
         }
     }
@@ -25,11 +25,11 @@ class PizzaDeliveryModel
                 $tmp->execute();
                 return $tmp->fetchAll(PDO::FETCH_ASSOC);
             }else{
-                header("Location: " . PAGES . "requireQueryError");
+                header("Location: " . URL . "errorController/requireQueryError");
             }
         }catch(PDOException $e){
             $_SESSION['queryError'] = $e->getMessage();
-            header("Location: " . PAGES . "requireQueryError");
+            header("Location: " . URL . "errorController/requireQueryError");
         }
     }
 
@@ -41,11 +41,11 @@ class PizzaDeliveryModel
                 $tmp->execute();
                 return $this->connection->lastInsertId();
             }else{
-                header("Location: " . PAGES . "requireQueryError");
+                header("Location: " . URL . "errorController/requireQueryError");
             }
         }catch(PDOException $e){
             $_SESSION['queryError'] = $e->getMessage();
-            header("Location: " . PAGES . "requireQueryError");
+            header("Location: " . URL . "errorController/requireQueryError");
         }
     }
 

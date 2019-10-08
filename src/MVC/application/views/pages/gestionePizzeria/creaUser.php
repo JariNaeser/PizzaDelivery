@@ -49,7 +49,7 @@
              </table>
          </div>
          <button type="submit" class="btn btn-danger btn-lg">Crea</button>
-         <a href="<?php echo URL . "gestionePizzeria/gestionePizzeria";?>" class="btn btn-danger btn-lg">Esci</a>
+         <a href="<?php echo URL . "gestionePizzeria/home";?>" class="btn btn-danger btn-lg">Esci</a>
      </form>
  </div>
 
