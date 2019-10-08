@@ -95,9 +95,22 @@ class Home
     }
 
     public function gestionePizzeria(){
+
+        $_SESSION['utenti'] = $this->pdModel->getUtenti();
+
         // Carico Views
         $this->getRightHeader();
         require 'application/views/pages/gestionePizzeria.php';
+        require 'application/views/_templates/footer.php';
+    }
+
+    public function modifyUser(string $username){
+
+        $_SESSION['userToModify'] = $this->pdModel->getUser($username);
+
+        // Carico Views
+        $this->getRightHeader();
+        require 'application/views/pages/editUser.php';
         require 'application/views/_templates/footer.php';
     }
 
