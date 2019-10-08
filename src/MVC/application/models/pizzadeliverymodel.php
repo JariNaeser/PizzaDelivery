@@ -18,7 +18,7 @@ class PizzaDeliveryModel
     }
 
     public function execQuery(string $query){
-        //try{
+        try{
             if(isset($this->connection)){
                 $query = $this->sanitizeInput($query);
                 $tmp = $this->connection->prepare($query);
@@ -27,13 +27,14 @@ class PizzaDeliveryModel
             }else{
                 header("Location: " . PAGES . "requireQueryError");
             }
-        /*}catch(PDOException $e){
+        }catch(PDOException $e){
+            $_SESSION['queryError'] = $e->getMessage();
             header("Location: " . PAGES . "requireQueryError");
-        }*/
+        }
     }
 
     public function insertQuery(string $query){
-        //try{
+        try{
             if(isset($this->connection)){
                 $query = $this->sanitizeInput($query);
                 $tmp = $this->connection->prepare($query);
@@ -42,9 +43,10 @@ class PizzaDeliveryModel
             }else{
                 header("Location: " . PAGES . "requireQueryError");
             }
-        /*}catch(PDOException $e){
+        }catch(PDOException $e){
+            $_SESSION['queryError'] = $e->getMessage();
             header("Location: " . PAGES . "requireQueryError");
-        }*/
+        }
     }
 
     public function getUtenti(){
@@ -53,6 +55,10 @@ class PizzaDeliveryModel
 
     public function getUser(string $username){
         return $this->execQuery("SELECT * FROM utente WHERE username = '$username';");
+    }
+
+    public function dropUser(string $username){
+        return $this->insertQuery("DELETE FROM utente WHERE username = '$username';");
     }
 
     public function getArticoli(){
@@ -75,6 +81,10 @@ class PizzaDeliveryModel
         $query = htmlspecialchars($query);
         $query = stripslashes($query);
         return $query;
+    }
+
+    public function getUserTypes(){
+        return $this->execQuery("SELECT DISTINCT nome FROM TipoUtente;");
     }
 
     public function getPreparedOrdinazioni(){
