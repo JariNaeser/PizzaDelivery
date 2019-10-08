@@ -33,7 +33,7 @@
                         </tr>
                         <tr class="text-inline">
                             <td scope="col">Password</td>
-                            <td><input type="email" class="form-control" placeholder="Password non mostrata." name="emailMU" required></td>
+                            <td><input type="password" class="form-control" placeholder="Password non mostrata." name="passwordMU"></td>
                         </tr>
                         <tr class="text-inline">
                             <td scope="col">Tipologia</td>
