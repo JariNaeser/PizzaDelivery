@@ -114,6 +114,39 @@ class Home
         require 'application/views/_templates/footer.php';
     }
 
+    public function creaUtente(){
+
+        $_SESSION['userTypes'] = $this->pdModel->getUserTypes();
+
+        // Carico Views
+        $this->getRightHeader();
+        require 'application/views/pages/creaUser.php';
+        require 'application/views/_templates/footer.php';
+    }
+
+    public function modifyUserContent(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if(isset($_POST['nomeNU'])&&isset($_POST['cognomeNU'])&&isset($_POST['viaNU'])&&isset($_POST['capNU'])&&isset($_POST['paeseNU'])&&isset($_POST['emailNU'])&&isset($_POST['passwordNU'])&&isset($_POST['tipologiaNU'])){
+                $this->pdModel->insertQuery("INSERT INTO UTENTE VALUES ('" . strtolower($_POST['nomeNU']) . "." . strtolower($_POST['cognomeNU']) . "', '" . $_POST['nomeNU'] ."', '" . $_POST['cognomeNU'] . "', '" . $_POST['viaNU'] . "', '" . $_POST['capNU'] . "', '" . $_POST['paeseNU'] . "', '" . $_POST['emailNU'] . "', '" . $_POST['passwordNU'] . "', '" . $_POST['tipologiaNU'] . "');");
+                $this->gestionePizzeria();
+            }
+        }
+    }
+
+    public function eliminaUtente(string $username){
+        $this->pdModel->dropUser($username);
+        $this->gestionePizzeria();
+    }
+
+    public function createUser(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if(isset($_POST['nomeNU'])&&isset($_POST['cognomeNU'])&&isset($_POST['viaNU'])&&isset($_POST['capNU'])&&isset($_POST['paeseNU'])&&isset($_POST['emailNU'])&&isset($_POST['passwordNU'])&&isset($_POST['tipologiaNU'])){
+                $this->pdModel->insertQuery("INSERT INTO UTENTE VALUES ('" . strtolower($_POST['nomeNU']) . "." . strtolower($_POST['cognomeNU']) . "', '" . $_POST['nomeNU'] ."', '" . $_POST['cognomeNU'] . "', '" . $_POST['viaNU'] . "', '" . $_POST['capNU'] . "', '" . $_POST['paeseNU'] . "', '" . $_POST['emailNU'] . "', '" . $_POST['passwordNU'] . "', '" . $_POST['tipologiaNU'] . "');");
+                $this->gestionePizzeria();
+            }
+        }
+    }
+
     public function logout(){
         // Carico Views
         $_SESSION['user'] = null;
