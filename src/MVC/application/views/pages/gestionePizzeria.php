@@ -15,7 +15,7 @@
                 <div class="col-sm-6">
                     <div class="row">
                         <div class="col-sm-12">
-                            <button class="btn btn-danger col-sm-12"><i class="fas fa-plus"></i> Nuovo Utente</button>
+                            <a href="<?php echo URL?>home/creaUtente" class="btn btn-danger btn-md col-sm-12"><i class="fas fa-plus"></i> Crea Utente</a>
                         </div>
                     </div>
                 </div>
