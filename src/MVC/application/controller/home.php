@@ -31,7 +31,7 @@ class Home
     public function index(){
         // Carico Views
         $this->getRightHeader();
-        require 'application/views/pages/benvenuto.php';
+        require 'application/views/pages/index/benvenuto.php';
         require 'application/views/_templates/footer.php';
     }
 
@@ -39,7 +39,7 @@ class Home
         $_SESSION['articoli'] = $this->pdModel->getArticoliOrdinati();
         // Carico Views
         $this->getRightHeader();
-        require 'application/views/pages/ordina.php';
+        require 'application/views/pages/ordina/ordina.php';
         require 'application/views/_templates/footer.php';
 
     }
@@ -47,14 +47,14 @@ class Home
     public function confermaordine(){
         // Carico Views
         $this->getRightHeader();
-        require 'application/views/pages/confermaOrdine.php';
+        require 'application/views/pages/ordina/confermaOrdine.php';
         require 'application/views/_templates/footer.php';
     }
 
     public function loginForm(){
         // Carico Views
         $this->getRightHeader();
-        require 'application/views/pages/login.php';
+        require 'application/views/pages/login/login.php';
         require 'application/views/_templates/footer.php';
     }
 
@@ -64,7 +64,7 @@ class Home
 
         // Carico Views
         $this->getRightHeader();
-        require 'application/views/pages/ordinazioni.php';
+        require 'application/views/pages/ordinazioni/ordinazioni.php';
         require 'application/views/_templates/footer.php';
     }
 
@@ -75,7 +75,7 @@ class Home
 
         // Carico Views
         $this->getRightHeader();
-        require 'application/views/pages/ordinazione.php';
+        require 'application/views/pages/ordinazioni/ordinazione.php';
         require 'application/views/_templates/footer.php';
         //header("Location: " . PAGES . "ordinazione");
     }
@@ -83,14 +83,14 @@ class Home
     public function consegne(){
         // Carico Views
         $this->getRightHeader();
-        require 'application/views/pages/consegne.php';
+        require 'application/views/pages/consegne/consegne.php';
         require 'application/views/_templates/footer.php';
     }
 
     public function fattorini(){
         // Carico Views
         $this->getRightHeader();
-        require 'application/views/pages/fattorini.php';
+        require 'application/views/pages/fattorini/fattorini.php';
         require 'application/views/_templates/footer.php';
     }
 
@@ -100,7 +100,7 @@ class Home
 
         // Carico Views
         $this->getRightHeader();
-        require 'application/views/pages/gestionePizzeria.php';
+        require 'application/views/pages/gestionePizzeria/gestionePizzeria.php';
         require 'application/views/_templates/footer.php';
     }
 
@@ -110,7 +110,7 @@ class Home
 
         // Carico Views
         $this->getRightHeader();
-        require 'application/views/pages/editUser.php';
+        require 'application/views/pages/gestionePizzeria/editUser.php';
         require 'application/views/_templates/footer.php';
     }
 
@@ -120,7 +120,7 @@ class Home
 
         // Carico Views
         $this->getRightHeader();
-        require 'application/views/pages/creaUser.php';
+        require 'application/views/pages/gestionePizzeria/creaUser.php';
         require 'application/views/_templates/footer.php';
     }
 
@@ -132,7 +132,7 @@ class Home
                 }else{
                     $password = $_SESSION['userToModify'][0]['password'];
                 }
-                
+
                 $nome = strtolower($_POST['nomeMU']);
                 $cognome = strtolower($_POST['cognomeMU']);
                 $via = $_POST['viaMU'];
@@ -220,7 +220,7 @@ class Home
                     $_SESSION['user'] = $user;
 
                     $this->getRightHeader();
-                    require 'application/views/pages/benvenuto.php';
+                    require 'application/views/pages/index/benvenuto.php';
                     require 'application/views/_templates/footer.php';
 
                 }else{
@@ -278,7 +278,7 @@ class Home
 
             //Se andato a buon fine
             $this->getRightHeader();
-            require 'application/views/pages/ringraziamentoOrdine.php';
+            require 'application/views/pages/ordina/ringraziamentoOrdine.php';
             require 'application/views/_templates/footer.php';
 
             //Azzera contenuto carrello

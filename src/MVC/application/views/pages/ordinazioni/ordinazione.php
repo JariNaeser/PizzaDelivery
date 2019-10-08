@@ -27,7 +27,6 @@
     </div>
     <br>
     <br>
-    <h1 class="text-danger">Fix table, show all elements</h1>
     <h3>Prodotti ordinati</h3>
     <div class="table-responsive">
     <table class="table table-bordered">
