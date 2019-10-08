@@ -52,7 +52,7 @@ class PizzaDeliveryModel
     }
 
     public function getUser(string $username){
-        return $this->execQuery("SELECT * FROM utente WHERE username = $username;");
+        return $this->execQuery("SELECT * FROM utente WHERE username = '$username';");
     }
 
     public function getArticoli(){
