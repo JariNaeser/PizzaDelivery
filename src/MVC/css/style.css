@@ -17,3 +17,9 @@
 .clickable-row:hover{
     background-color: #ededed;
 }
+
+.wrapper{
+    margin: 1em;
+    border: solid 1px lightgrey;
+    border-radius: 10px;
+}
