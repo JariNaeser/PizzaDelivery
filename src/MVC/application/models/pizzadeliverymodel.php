@@ -1,15 +1,20 @@
 <?php
 
 require_once 'database.php';
+require_once 'validator.php';
 
 class PizzaDeliveryModel
 {
     //Lavora con il DB.
     private $connection;
 
+    //Oggetto Validator per le validazioni dei campi di input.
+    private $validator;
+
     public function __construct(){
         if(!isset($this->connection)){
             try{
+                $this->validator = new Validator();
                 $this->connection = Database::getConnection();
             }catch(PDOException $e){
                 header("Location: " . URL . "errorController/requireConnectionError");
@@ -20,7 +25,7 @@ class PizzaDeliveryModel
     public function execQuery(string $query){
         try{
             if(isset($this->connection)){
-                $query = $this->sanitizeInput($query);
+                $query = $this->validator->validateString($query);
                 $tmp = $this->connection->prepare($query);
                 $tmp->execute();
                 return $tmp->fetchAll(PDO::FETCH_ASSOC);
@@ -36,7 +41,7 @@ class PizzaDeliveryModel
     public function insertQuery(string $query){
         try{
             if(isset($this->connection)){
-                $query = $this->sanitizeInput($query);
+                $query = $this->validator->validateString($query);
                 $tmp = $this->connection->prepare($query);
                 $tmp->execute();
                 return $this->connection->lastInsertId();
@@ -79,12 +84,6 @@ class PizzaDeliveryModel
 
     public function dropArticolo(int $id){
         return $this->insertQuery("DELETE FROM articolo WHERE id = $id;");
-    }
-
-    private function sanitizeInput(string $query){
-        $query = htmlspecialchars($query);
-        $query = stripslashes($query);
-        return $query;
     }
 
     public function getUserTypes(){
