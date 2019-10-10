@@ -12,7 +12,7 @@ class Login
             $this->pdModel = new PizzaDeliveryModel();
             session_start();
         }else{
-            exit("ERRORE nel costruttore della classe consegne dei controller.");
+            exit("ERRORE nel costruttore della classe login dei controller.");
         }
     }
 
@@ -46,7 +46,12 @@ class Login
                     require 'application/views/_templates/footer.php';
                 }else{
                     $this->loginForm();
-                    echo "Errore: Utente o password errati.";
+                    echo "<div class=\"alert alert-warning alert-danger fade show padding-footer\" style='margin: 1em;' role=\"alert\">
+                            <strong>Errore:</strong> Il nome utente oppure la password sono errati.
+                            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                                <span aria-hidden=\"true\">&times;</span>
+                            </button>
+                          </div>";
                 }
             }
         }
