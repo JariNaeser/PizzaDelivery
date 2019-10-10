@@ -92,6 +92,7 @@
 <script>
 
     //Script che si occupa della ricerca nelle due tabelle.
+    //Idea presa da https://www.w3schools.com/bootstrap4/bootstrap_filters.asp
 
     $(document).ready(function(){
         //Tabella Utente
