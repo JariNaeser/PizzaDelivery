@@ -11,8 +11,9 @@ class GestionePizzeria
             require_once 'application/models/pizzadeliverymodel.php';
             $this->pdModel = new PizzaDeliveryModel();
             session_start();
+            $_SESSION['userTypes'] = $this->pdModel->getUserTypes();
         }else{
-            exit("ERRORE nel costruttore della classe consegne dei controller.");
+            exit("ERRORE nel costruttore della classe gestionePizzeria dei controller.");
         }
     }
 
@@ -37,9 +38,6 @@ class GestionePizzeria
     }
 
     public function creaUtente(){
-
-        $_SESSION['userTypes'] = $this->pdModel->getUserTypes();
-
         // Carico Views
         $this->getRightHeader();
         require 'application/views/pages/gestionePizzeria/creaUser.php';
