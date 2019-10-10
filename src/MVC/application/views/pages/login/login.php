@@ -1,12 +1,11 @@
-<div class="col-md-12">
+<div class="wrapper col-md-4 mx-auto">
     <br>
     <h1 class="text-center">Login</h1>
     <br>
     <br>
-    <br>
     <div class="row">
-        <div class="col-md-4"></div>
-        <form class="text-center col-md-4" action="<?php echo URL ?>login/login" method="post">
+        <div class="col-md-12"></div>
+        <form class="text-center col-md-12" action="<?php echo URL ?>login/login" method="post">
             <div class="form-group col-md-12">
                 <input type="text" class="form-control" placeholder="Username" name="username" required>
             </div>
