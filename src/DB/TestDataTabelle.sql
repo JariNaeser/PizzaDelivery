@@ -62,3 +62,11 @@ INSERT INTO Ordinazione(nomeCliente, cognomeCliente, numeroTelefonoCliente, via,
 INSERT INTO OrdineArticolo VALUES (
 	1, 2, 3
 );
+
+
+
+
+
+
+
+/* ALTER TABLE Articolo ALTER urlFoto SET DEFAULT "application/img/defaultPizza.png"; */
