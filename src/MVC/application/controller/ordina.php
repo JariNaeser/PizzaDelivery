@@ -74,7 +74,7 @@ class Ordina
         if(isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['numeroTelefono']) && isset($_POST['paese']) && isset($_POST['cap']) && isset($_POST['via']) && isset($_POST['numero']) && isset($_SESSION['cart']) && count($_SESSION['cart']) > 0){
             $nome = $_POST['nome'];
             $cognome = $_POST['cognome'];
-            (int)$telefono = $_POST['numeroTelefono'];
+            $telefono = intval($_POST['numeroTelefono']);
             $paese = $_POST['paese'];
             $cap = $_POST['cap'];
             $via = $_POST['via'] . " " . $_POST['numero'];
