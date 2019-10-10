@@ -20,12 +20,15 @@ class GestionePizzeria
     public function home(){
 
         $_SESSION['utenti'] = $this->pdModel->getUtenti();
+        $_SESSION['prodotti'] = $this->pdModel->getArticoliOrdinati();
 
         // Carico Views
         $this->getRightHeader();
         require 'application/views/pages/gestionePizzeria/gestionePizzeria.php';
         require 'application/views/_templates/footer.php';
     }
+
+    /* UTENTI */
 
     public function modifyUser(string $username){
 
@@ -79,6 +82,23 @@ class GestionePizzeria
                 $this->home();
             }
         }
+    }
+
+    /* ARTICOLI */
+
+    public function creaArticolo(){
+        // Carico Views
+        $this->getRightHeader();
+        require 'application/views/pages/gestionePizzeria/creaArticolo.php';
+        require 'application/views/_templates/footer.php';
+    }
+
+    public function modifyArticolo(int $id){
+
+    }
+
+    public function createArticolo(){
+
     }
 
     private function getRightHeader(){
