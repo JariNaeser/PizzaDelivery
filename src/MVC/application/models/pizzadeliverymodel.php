@@ -77,6 +77,10 @@ class PizzaDeliveryModel
         return $this->execQuery("SELECT * FROM articolo WHERE id = $id;");
     }
 
+    public function dropArticolo(int $id){
+        return $this->insertQuery("DELETE FROM articolo WHERE id = $id;");
+    }
+
     private function sanitizeInput(string $query){
         $query = htmlspecialchars($query);
         $query = stripslashes($query);
