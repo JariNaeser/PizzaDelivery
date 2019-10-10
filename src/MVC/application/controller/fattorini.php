@@ -12,7 +12,7 @@ class Fattorini
             $this->pdModel = new PizzaDeliveryModel();
             session_start();
         }else{
-            exit("ERRORE nel costruttore della classe consegne dei controller.");
+            exit("ERRORE nel costruttore della classe fattorini dei controller.");
         }
     }
 

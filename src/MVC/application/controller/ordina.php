@@ -23,7 +23,7 @@ class Ordina
             }
 
         }else{
-            exit("ERRORE nel costruttore della classe consegne dei controller.");
+            exit("ERRORE nel costruttore della classe ordina dei controller.");
         }
     }
 
