@@ -47,6 +47,8 @@
                                                 <?php echo "<option>" . $type['nome'] . "</option>"; ?>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <?php echo "<option>Nessun elemento trovato</option>"; ?>
                                     <?php endif; ?>
                                 </select>
                             </td>
