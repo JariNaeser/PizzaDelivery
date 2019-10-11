@@ -1,15 +1,19 @@
 <?php
 
+require_once 'rightHeader.php';
+
 class Home
 {
 
     private $pdModel;
+    private $header;
 
     public function __construct()
     {
         if(file_exists('application/models/pizzadeliverymodel.php')){
             require_once 'application/models/pizzadeliverymodel.php';
             $this->pdModel = new PizzaDeliveryModel();
+            $this->header = new RightHeader();
             session_start();
         }else{
             exit("ERRORE nel costruttore della classe home dei controller.");
@@ -20,31 +24,9 @@ class Home
 
     public function index(){
         // Carico Views
-        $this->getRightHeader();
+        $this->header->getRightHeader();
         require 'application/views/pages/index/benvenuto.php';
         require 'application/views/_templates/footer.php';
     }
-
-    private function getRightHeader(){
-        if(isset($_SESSION['user'])){
-            $user = $_SESSION['user'];
-            switch($user['tipoUtente']){
-                case "impiegato vendita":
-                    require 'application/views/_templates/headers/impiegato.php';
-                    break;
-                case "fattorino":
-                    require 'application/views/_templates/headers/fattorino.php';
-                    break;
-                case "amministratore":
-                    require 'application/views/_templates/headers/admin.php';
-                    break;
-            }
-        }else{
-            require 'application/views/_templates/headers/header.php';
-        }
-    }
-
-
-
 
 }

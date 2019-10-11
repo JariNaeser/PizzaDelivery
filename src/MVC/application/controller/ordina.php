@@ -1,15 +1,19 @@
 <?php
 
+require_once 'rightHeader.php';
+
 class Ordina
 {
 
     private $pdModel;
+    private $header;
 
     public function __construct()
     {
         if(file_exists('application/models/pizzadeliverymodel.php')){
             require_once 'application/models/pizzadeliverymodel.php';
             $this->pdModel = new PizzaDeliveryModel();
+            $this->header = new RightHeader();
 
             $this->cart = array();
             session_start();
@@ -30,7 +34,7 @@ class Ordina
     public function home(){
         $_SESSION['articoli'] = $this->pdModel->getArticoliOrdinati();
         // Carico Views
-        $this->getRightHeader();
+        $this->header->getRightHeader();
         require 'application/views/pages/ordina/ordina.php';
         require 'application/views/_templates/footer.php';
 
@@ -38,7 +42,7 @@ class Ordina
 
     public function confermaordine(){
         // Carico Views
-        $this->getRightHeader();
+        $this->header->getRightHeader();
         require 'application/views/pages/ordina/confermaOrdine.php';
         require 'application/views/_templates/footer.php';
     }
@@ -88,7 +92,7 @@ class Ordina
             }
 
             //Se andato a buon fine
-            $this->getRightHeader();
+            $this->header->getRightHeader();
             require 'application/views/pages/ordina/ringraziamentoOrdine.php';
             require 'application/views/_templates/footer.php';
 
@@ -96,26 +100,6 @@ class Ordina
             $_SESSION['cart'] = null;
         }else{
             header("Location: " . URL . "errorController/emptyCart");
-        }
-    }
-
-
-    private function getRightHeader(){
-        if(isset($_SESSION['user'])){
-            $user = $_SESSION['user'];
-            switch($user['tipoUtente']){
-                case "impiegato vendita":
-                    require 'application/views/_templates/headers/impiegato.php';
-                    break;
-                case "fattorino":
-                    require 'application/views/_templates/headers/fattorino.php';
-                    break;
-                case "amministratore":
-                    require 'application/views/_templates/headers/admin.php';
-                    break;
-            }
-        }else{
-            require 'application/views/_templates/headers/header.php';
         }
     }
 

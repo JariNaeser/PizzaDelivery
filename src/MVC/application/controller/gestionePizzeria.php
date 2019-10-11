@@ -1,15 +1,19 @@
 <?php
 
+require_once 'rightHeader.php';
+
 class GestionePizzeria
 {
 
     private $pdModel;
+    private $header;
 
     public function __construct()
     {
         if(file_exists('application/models/pizzadeliverymodel.php')){
             require_once 'application/models/pizzadeliverymodel.php';
             $this->pdModel = new PizzaDeliveryModel();
+            $this->header = new RightHeader();
             session_start();
             $_SESSION['userTypes'] = $this->pdModel->getUserTypes();
         }else{
@@ -23,7 +27,7 @@ class GestionePizzeria
         $_SESSION['prodotti'] = $this->pdModel->getArticoliOrdinati();
 
         // Carico Views
-        $this->getRightHeader();
+        $this->header->getRightHeader();
         require 'application/views/pages/gestionePizzeria/gestionePizzeria.php';
         require 'application/views/_templates/footer.php';
     }
@@ -35,7 +39,7 @@ class GestionePizzeria
         $_SESSION['userToModify'] = $this->pdModel->getUser($username);
 
         // Carico Views
-        $this->getRightHeader();
+        $this->header->getRightHeader();
         require 'application/views/pages/gestionePizzeria/editUser.php';
         require 'application/views/_templates/footer.php';
     }
@@ -70,7 +74,7 @@ class GestionePizzeria
 
     public function creaUtente(){
         // Carico Views
-        $this->getRightHeader();
+        $this->header->getRightHeader();
         require 'application/views/pages/gestionePizzeria/creaUser.php';
         require 'application/views/_templates/footer.php';
     }
@@ -92,7 +96,7 @@ class GestionePizzeria
         $_SESSION['articoloToModify'] = $this->pdModel->getArticolo($id);
 
         // Carico Views
-        $this->getRightHeader();
+        $this->header->getRightHeader();
         require 'application/views/pages/gestionePizzeria/editArticolo.php';
         require 'application/views/_templates/footer.php';
     }
@@ -123,7 +127,7 @@ class GestionePizzeria
 
     public function creaArticolo(){
         // Carico Views
-        $this->getRightHeader();
+        $this->header->getRightHeader();
         require 'application/views/pages/gestionePizzeria/creaArticolo.php';
         require 'application/views/_templates/footer.php';
     }
@@ -139,25 +143,6 @@ class GestionePizzeria
                 header("Location: " . URL . "gestionePizzeria/home");
                 $this->home();
             }
-        }
-    }
-
-    private function getRightHeader(){
-        if(isset($_SESSION['user'])){
-            $user = $_SESSION['user'];
-            switch($user['tipoUtente']){
-                case "impiegato vendita":
-                    require 'application/views/_templates/headers/impiegato.php';
-                    break;
-                case "fattorino":
-                    require 'application/views/_templates/headers/fattorino.php';
-                    break;
-                case "amministratore":
-                    require 'application/views/_templates/headers/admin.php';
-                    break;
-            }
-        }else{
-            require 'application/views/_templates/headers/header.php';
         }
     }
 
