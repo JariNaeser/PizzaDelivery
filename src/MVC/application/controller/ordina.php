@@ -47,28 +47,14 @@ class Ordina
         require 'application/views/_templates/footer.php';
     }
 
-    public function addToCart($id){
-        $id = (int)$id;
-        if(isset($_SESSION['cart']) && is_int($id)){
-            $item = $this->pdModel->getArticolo($id);
-            if(!in_array($item, $_SESSION['cart'])){
-                array_push($_SESSION['cart'], $item);
-            }
-        }
+    public function addToCart(int $id){
+        $this->pdModel->addToCart($id);
         header("Location: " . URL . "ordina/home");
         $this->home();
     }
 
-    public function removeFromCart($id){
-        $arr = array();
-        if(isset($_SESSION['cart'])){
-            foreach($_SESSION['cart'] as $element){
-                if($element[0]['id'] != $id){
-                    array_push($arr, $element);
-                }
-            }
-            $_SESSION['cart'] = $arr;
-        }
+    public function removeFromCart(int $id){
+        $this->pdModel->removeFromCart($id);
         header("Location: " . URL . "ordina/home");
         $this->home();
     }

@@ -62,10 +62,6 @@ class PizzaDeliveryModel
         return $this->execQuery("SELECT * FROM utente WHERE username = '$username';");
     }
 
-    public function dropUser(string $username){
-        return $this->insertQuery("DELETE FROM utente WHERE username = '$username';");
-    }
-
     public function getArticoli(){
         return $this->execQuery("SELECT * FROM articolo;");
     }
@@ -80,10 +76,6 @@ class PizzaDeliveryModel
 
     public function getArticolo($id){
         return $this->execQuery("SELECT * FROM articolo WHERE id = $id;");
-    }
-
-    public function dropArticolo(int $id){
-        return $this->insertQuery("DELETE FROM articolo WHERE id = $id;");
     }
 
     public function getUserTypes(){
@@ -112,6 +104,69 @@ class PizzaDeliveryModel
         array_push($arr, $ordinazione);
         array_push($arr, $elementi);
         return $arr;
+    }
+
+    public function dropArticolo(int $id){
+        return $this->insertQuery("DELETE FROM articolo WHERE id = $id;");
+    }
+
+    public function dropUser(string $username){
+        return $this->insertQuery("DELETE FROM utente WHERE username = '$username';");
+    }
+
+    public function login(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if(isset($_POST['username']) && isset($_POST['password'])){
+                $username = htmlspecialchars(stripslashes($_POST['username']));
+                $password = htmlspecialchars(stripslashes($_POST['password']));
+                $utenti = $this->pdModel->getUtenti();
+                $user = null;
+
+                foreach ($utenti as $utente){
+                    if(strcmp($utente['username'], $username) == 0){
+                        $user = $utente;
+                        break;
+                    }
+                }
+
+                if(isset($user) && strcmp($user['password'], $password) == 0){
+                    $_SESSION['user'] = $user;
+
+                    $this->header->getRightHeader();
+                    require 'application/views/pages/index/benvenuto.php';
+                    require 'application/views/_templates/footer.php';
+                }else{
+                    $this->loginForm();
+                    echo "<div class=\"alert alert-warning alert-danger fade show padding-footer\" style='margin: 1em;' role=\"alert\">".
+                            "<strong>Errore:</strong> Il nome utente oppure la password sono errati.".
+                            "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">".
+                                "<span aria-hidden=\"true\">&times;</span>".
+                            "</button>".
+                          "</div>";
+                }
+            }
+        }
+    }
+
+    public function addToCart(int $id){
+        if(isset($_SESSION['cart']) && is_int($id)){
+            $item = $this->pdModel->getArticolo($id);
+            if(!in_array($item, $_SESSION['cart'])){
+                array_push($_SESSION['cart'], $item);
+            }
+        }
+    }
+
+    public function removeFromcart(int $id){
+        if(isset($_SESSION['cart'])){
+            $arr = array();
+            foreach($_SESSION['cart'] as $element){
+                if($element[0]['id'] != $id){
+                    array_push($arr, $element);
+                }
+            }
+            $_SESSION['cart'] = $arr;
+        }
     }
 
 }

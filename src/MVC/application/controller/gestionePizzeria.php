@@ -53,6 +53,7 @@ class GestionePizzeria
                     $password = $_SESSION['userToModify'][0]['password'];
                 }
 
+                //Prepare variables for query
                 $nome = strtolower($_POST['nomeMU']);
                 $cognome = strtolower($_POST['cognomeMU']);
                 $via = $_POST['viaMU'];
