@@ -32,7 +32,7 @@ class Login
             if(isset($_POST['username']) && isset($_POST['password'])){
                 $username = htmlspecialchars(stripslashes($_POST['username']));
                 $password = htmlspecialchars(stripslashes($_POST['password']));
-                $utenti = $this->getUtenti();
+                $utenti = $this->pdModel->getUtenti();
                 $user = null;
 
                 foreach ($utenti as $utente){

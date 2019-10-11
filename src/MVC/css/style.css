@@ -15,7 +15,8 @@
 }
 
 .clickable-row:hover{
-    background-color: #ededed;
+    background-color: gray;
+    border: solid;
 }
 
 .wrapper{

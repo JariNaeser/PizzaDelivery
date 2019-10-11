@@ -106,6 +106,10 @@ class PizzaDeliveryModel
         return $arr;
     }
 
+    public function getFattorini(){
+        return $this->execQuery("SELECT * FROM Fattorino;");
+    }
+
     public function dropArticolo(int $id){
         return $this->insertQuery("DELETE FROM articolo WHERE id = $id;");
     }

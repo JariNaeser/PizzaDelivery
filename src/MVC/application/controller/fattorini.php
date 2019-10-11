@@ -21,6 +21,9 @@ class Fattorini
     }
 
     public function home(){
+
+        $_SESSION['fattorini'] = $this->pdModel->getFattorini();
+
         // Carico Views
         $this->header->getRightHeader();
         require 'application/views/pages/fattorini/fattorini.php';

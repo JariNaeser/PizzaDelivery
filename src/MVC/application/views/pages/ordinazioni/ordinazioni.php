@@ -1,7 +1,7 @@
 <div class="container padding-footer text-center">
     <h1>ORDINAZIONI</h1>
     <div class="row col-md-12 table-responsive">
-        <table class="table table-bordered">
+        <table class="table">
             <thead>
             <tr>
                 <th scope="col">ID</th>

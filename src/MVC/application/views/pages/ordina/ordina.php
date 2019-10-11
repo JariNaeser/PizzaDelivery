@@ -8,7 +8,7 @@
     <div class="row" style="padding: 1em">
         <h4>Seleziona Prodotti</h4>
         <div class="row table-responsive text-center">
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
                 <tr>
                     <th scope="col">Immagine</th>
