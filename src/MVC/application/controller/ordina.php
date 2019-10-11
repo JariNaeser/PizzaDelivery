@@ -85,7 +85,7 @@ class Ordina
             //Azzera contenuto carrello
             $_SESSION['cart'] = null;
         }else{
-            header("Location: " . URL . "errorController/emptyCart");
+            header("Location: " . URL . "errorController/emptyCartError");
         }
     }
 
