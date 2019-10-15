@@ -118,6 +118,23 @@ class PizzaDeliveryModel
         return $this->execQuery("SELECT COUNT(*) FROM Consegna WHERE fattorino LIKE '$username' AND CURRENT_DATE() LIKE CONCAT(YEAR(data), '-', MONTH(data), '-', DAY(data));");
     }
 
+    public function getFattorino(string $username){
+        $fattorino = $this->execQuery("SELECT * FROM Fattorino WHERE username LIKE '$username';");
+        $fattorino['consegneOggi'] = $this->getConsegneOggi($username)[0]['COUNT(*)'];
+        return $fattorino;
+    }
+
+    public function getConsegne(string $username){
+        $consegne = $this->execQuery("SELECT * FROM Consegna WHERE fattorino LIKE '$username'");
+        for($i = 0; $i < count($consegne); $i++){
+            //Get via
+            $consegne[$i]['via'] = $this->execQuery("SELECT via FROM Ordinazione INNER JOIN Consegna ON Ordinazione.id=Consegna.ordinazione;");
+            //Get totalCost
+            $consegne[$i]['costoTotale'] = //Fare query con 4 join per trovare il prezzo.
+        }
+        return $consegne;
+    }
+
     public function dropArticolo(int $id){
         return $this->insertQuery("DELETE FROM articolo WHERE id = $id;");
     }
