@@ -5,7 +5,7 @@
     <br>
     <h3>Cliente</h3>
     <div class="row">
-        <table class="table table-borderless col-md-6">
+        <table class="table table-borderless col-md-6 text-left">
             <tbody>
                 <tr>
                     <td><b>Nome</b>: <?php echo $ordine[0][0]['nomeCliente']; ?></td>
