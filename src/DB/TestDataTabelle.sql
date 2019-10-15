@@ -40,8 +40,8 @@ INSERT INTO Fattorino VALUES (
 );
 
 /* CONSEGNA */
-INSERT INTO Consegna(data, tipoConsegna, fattorino) VALUES (
-	now(), "da effettuare", "paolo.naeser"
+INSERT INTO consegna(data, tipoConsegna, fattorino, ordinazione) VALUES (
+	now(), "da effettuare", "paolo.naeser", 50
 );
 
 /* ARTICOLO */
