@@ -107,7 +107,15 @@ class PizzaDeliveryModel
     }
 
     public function getFattorini(){
-        return $this->execQuery("SELECT * FROM Fattorino;");
+        $fattorini = $this->execQuery("SELECT * FROM Fattorino;");
+        for($i = 0; $i < count($fattorini); $i++){
+            $fattorini[$i]['consegneOggi'] = $this->getConsegneOggi($fattorini[$i]['username'])[0]['COUNT(*)'];
+        }
+        return $fattorini;
+    }
+
+    public function getConsegneOggi(string $username){
+        return $this->execQuery("SELECT COUNT(*) FROM Consegna WHERE fattorino LIKE '$username' AND CURRENT_DATE() LIKE CONCAT(YEAR(data), '-', MONTH(data), '-', DAY(data));");
     }
 
     public function dropArticolo(int $id){
@@ -115,7 +123,8 @@ class PizzaDeliveryModel
     }
 
     public function dropUser(string $username){
-        return $this->insertQuery("DELETE FROM utente WHERE username = '$username';");
+        $this->insertQuery("DELETE FROM fattorino WHERE username = '$username';");
+        $this->insertQuery("DELETE FROM utente WHERE username = '$username';");
     }
 
     public function addToCart(int $id){
