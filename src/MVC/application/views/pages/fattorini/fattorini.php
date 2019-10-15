@@ -13,7 +13,7 @@
             <tbody>
                 <?php if(isset($_SESSION['fattorini']) && count($_SESSION['fattorini']) > 0): ?>
                     <?php foreach ($_SESSION['fattorini'] as $fattorino): ?>
-                        <?php echo "<tr><td>" . $fattorino['username'] . "</td><td style='text-danger'>DA FARE</td><td>"; ?>
+                        <?php echo "<tr><td>" . $fattorino['username'] . "</td><td style='text-danger'>" . $fattorino['consegneOggi'] . "</td><td>"; ?>
                         <?php if($fattorino['inServizio'] == 1){echo "<span class=\"badge badge-danger\">In Servizio</span>";}else{echo "<span class=\"badge badge-success\">Libero</span>";} ?>
                         <?php echo "</td></tr>"; ?>
                     <?php endforeach; ?>
