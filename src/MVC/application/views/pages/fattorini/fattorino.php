@@ -31,7 +31,7 @@
         </div>
         <br>
         <br>
-        <h3 class="text-left">Consegne effettuate <span style="color: gray;">[<?php echo date("d.m.Y"); ?>]</span></h3>
+        <h3 class="text-left">Consegne <span style="color: gray;">[<?php echo date("d.m.Y"); ?>]</span></h3>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -39,22 +39,23 @@
                     <th scope="col">ID Consegna</th>
                     <th scope="col">Orario</th>
                     <th scope="col">Via</th>
+                    <th scope="col">Tipologia</th>
                     <th scope="col">Incasso</th>
                 </tr>
                 </thead>
                 <tbody>
                     <?php if(isset($_SESSION['consegneFattorino']) && count($_SESSION['consegneFattorino']) > 0):?>
                         <?php foreach ($_SESSION['consegneFattorino'] as $consegna): ?>
-                            <?php echo "<tr><td>" . $consegna['id'] . "</td><td>" . $consegna['data'] . "</td><td>" . $consegna['via'] . "</td><td>" . $consegna['costoTotale'] . "</td></tr>"; ?>
+                            <?php echo "<tr><td>" . $consegna['id'] . "</td><td>" . $consegna['data'] . "</td><td>" . $consegna['via'][0]['via'] . "</td><td>"; if(strcmp($consegna['tipoConsegna'], "da effettuare") == 0){echo "<span class='badge badge-danger'>Da Effettuare</span>"; }else if(strcmp($consegna['tipoConsegna'], "in corso") == 0){echo "<span class='badge badge-warning'>In Corso</span>"; }else{echo "<span class='badge badge-success'>Terminata</span>"; } echo "</td><td>"; if(isset($consegna['costoTotale'][0]['SommaCosti'])){ echo $consegna['costoTotale'][0]['SommaCosti']; }else{ echo "-"; } echo "</td></tr>"; ?>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <?php echo "<tr><td colspan='4'>Nessuna consegna trovata.</td>"; ?>
+                        <?php echo "<tr><td colspan='5'>Nessuna consegna trovata.</td>"; ?>
                     <?php endif; ?>
                 </tbody>
             </table>
         </div>
         <div class="text-center">
-            <a href="<?php echo URL?>ordinazioni/home" class="btn btn-danger btn-lg">Torna agli ordini</a>
+            <a href="<?php echo URL?>fattorini/home" class="btn btn-danger btn-lg">Torna ai fattorini</a>
         </div>
     <?php else: ?>
         <div class="centerVerticallyDiv">
