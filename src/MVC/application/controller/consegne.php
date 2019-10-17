@@ -20,7 +20,10 @@ class Consegne
         }
     }
 
-    public function home(){
+    public function home(int $weeks){
+
+        $_SESSION['number'] = $weeks;
+
         // Carico Views
         $this->header->getRightHeader();
         require 'application/views/pages/consegne/consegne.php';
