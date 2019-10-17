@@ -1,15 +1,16 @@
 <div class="container padding-footer text-center">
     <h1>CONSEGNE</h1>
     <br>
+    <pre><?php print_r($_SESSION['consegne']); ?></pre>
     <div class="form-group float-center" align="center">
         <label for="exampleFormControlSelect1">Fino a</label>
         <select class="form-control col-md-3" id="selectTime">
+            <option>Tutte</option>
             <option>Questa settimana</option>
             <option>2 settimane fa</option>
             <option>3 settimane fa</option>
             <option>1 mese fa</option>
             <option>6 mesi fa</option>
-            <option>Tutte</option>
         </select>
     </div>
     <div class="row col-md-12 table-responsive">
@@ -25,16 +26,15 @@
             </thead>
             <tbody>
             <?php if(isset($_SESSION['consegne']) && count($_SESSION['consegne']) > 0): ?>
-
+                <?php foreach ($_SESSION['consegne'] as $consegna): ?>
+                    <?php echo "<tr><td>" . $consegna['id'] . "</td><td>" . $consegna['ordinazione'] . "</td><td>" . $consegna['fattorino'] . "</td><td>" . $consegna['data'] . "</td><td>"; ; if(strcmp($consegna['tipoConsegna'], "da effettuare") == 0){echo "<span class='badge badge-danger'>Da Effettuare</span>"; }else if(strcmp($consegna['tipoConsegna'], "in corso") == 0){echo "<span class='badge badge-warning'>In Corso</span>"; }else{echo "<span class='badge badge-success'>Terminata</span>"; } echo "</td></tr>"; ?>
+                <?php endforeach; ?>
             <?php else: ?>
                 <?php echo "<tr><td colspan='5'>Nessuna consegna trovata.</td></tr>"; ?>
             <?php endif; ?>
             </tbody>
         </table>
     </div>
-
-    <?php echo "Number: " . $_SESSION['number']; ?>
-
     <script>
         jQuery(document).ready(function($) {
 
@@ -61,7 +61,7 @@
                         setWeeks(10000);
                         break;
                     default:
-                        setWeeks(1);
+                        setWeeks(10000);
                         break;
                 }
             });
