@@ -54,6 +54,30 @@ class PizzaDeliveryModel
         }
     }
 
+    /**
+     * Metodo privato usato solamente in casi necessari nel quale il filtraggio della query potrebbe
+     * corrompere il suo corretto funzionamento come ad esempio la seguente istruzione che
+     * da così: SELECT nome FROM Esempio WHERE eta < 5;
+     * a così: SELECT nome FROM Esempio WHERE eta &lt; 5;
+     *
+     * @param string $query
+     * @return array
+     */
+    private function execQueryWithoutValidating(string $query){
+        try{
+            if(isset($this->connection)){
+                $tmp = $this->connection->prepare($query);
+                $tmp->execute();
+                return $tmp->fetchAll(PDO::FETCH_ASSOC);
+            }else{
+                header("Location: " . URL . "errorController/requireQueryError");
+            }
+        }catch(PDOException $e){
+            $_SESSION['queryError'] = $e->getMessage();
+            header("Location: " . URL . "errorController/requireQueryError");
+        }
+    }
+
     public function getUtenti(){
         return $this->execQuery("SELECT * FROM utente;");
     }
@@ -137,6 +161,35 @@ class PizzaDeliveryModel
                                                            ");
         }
         return $consegne;
+    }
+
+    public function getConsegneConData($number){
+        if(!is_int($number)){
+            $number = intval($number);
+        }
+        switch ($number){
+            case 1:
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE data > DATE_SUB(NOW(), INTERVAL 1 WEEK);");
+                break;
+            case 2:
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE data > DATE_SUB(NOW(), INTERVAL 2 WEEK);");
+                break;
+            case 3:
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE data > DATE_SUB(NOW(), INTERVAL 3 WEEK);");
+                break;
+            case 4:
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE data > DATE_SUB(NOW(), INTERVAL 4 WEEK);");
+                break;
+            case 24:
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE data > DATE_SUB(NOW(), INTERVAL 24 WEEK);");
+                break;
+            case 10000:
+                return $this->execQuery("SELECT * FROM CONSEGNA;");
+                break;
+            default:
+                return $this->execQuery("SELECT * FROM CONSEGNA;");
+                break;
+        }
     }
 
     public function dropArticolo(int $id){
