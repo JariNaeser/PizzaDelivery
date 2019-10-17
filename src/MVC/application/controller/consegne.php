@@ -22,7 +22,7 @@ class Consegne
 
     public function home(int $weeks){
 
-        $_SESSION['number'] = $weeks;
+        $_SESSION['consegne'] = $this->pdModel->getConsegneConData($weeks);
 
         // Carico Views
         $this->header->getRightHeader();
