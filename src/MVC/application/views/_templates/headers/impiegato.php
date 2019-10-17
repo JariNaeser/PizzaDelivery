@@ -41,7 +41,7 @@
                 <a class="nav-link" href="<?php echo URL ?>ordinazioni/home">Ordinazioni</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo URL ?>consegne/home">Consegne</a>
+                <a class="nav-link" href="<?php echo URL ?>consegne/home/1">Consegne</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="<?php echo URL ?>fattorini/home">Fattorini</a>
