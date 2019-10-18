@@ -21,7 +21,12 @@
                     <td><b>Via:</b> <?php echo $userFattorino['via']; ?></td>
                 </tr>
                 <tr>
-                    <td><b>Stato:</b> <?php if($fattorino['inServizio'] == 1){echo "<span class=\"badge badge-danger\">In Servizio</span>";}else{echo "<span class=\"badge badge-success\">Libero</span>";} ?></td>
+                    <td><b>Stato:</b> <?php if($fattorino['inServizio'] == 1){
+                                                echo "<span class=\"badge badge-danger\">In Servizio</span>";
+                                            }else{
+                                                echo "<span class=\"badge badge-success\">Libero</span>";
+                                            } ?>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -37,7 +42,8 @@
                 <thead>
                 <tr>
                     <th scope="col">ID Consegna</th>
-                    <th scope="col">Orario</th>
+                    <th scope="col">Orario Inserimento</th>
+                    <th scope="col">Orario Consegna</th>
                     <th scope="col">Via</th>
                     <th scope="col">Tipologia</th>
                     <th scope="col">Incasso</th>
@@ -46,10 +52,29 @@
                 <tbody>
                     <?php if(isset($_SESSION['consegneFattorino']) && count($_SESSION['consegneFattorino']) > 0):?>
                         <?php foreach ($_SESSION['consegneFattorino'] as $consegna): ?>
-                            <?php echo "<tr><td>" . $consegna['id'] . "</td><td>" . $consegna['data'] . "</td><td>" . $consegna['via'][0]['via'] . "</td><td>"; if(strcmp($consegna['tipoConsegna'], "da effettuare") == 0){echo "<span class='badge badge-danger'>Da Effettuare</span>"; }else if(strcmp($consegna['tipoConsegna'], "in corso") == 0){echo "<span class='badge badge-warning'>In Corso</span>"; }else{echo "<span class='badge badge-success'>Terminata</span>"; } echo "</td><td>"; if(isset($consegna['costoTotale'][0]['SommaCosti'])){ echo $consegna['costoTotale'][0]['SommaCosti']; }else{ echo "-"; } echo "</td></tr>"; ?>
+                            <tr>
+                                <td><?php echo $consegna['id'];?></td>
+                                <td><?php echo $consegna['dataInserimento'];?></td>
+                                <td><?php echo $consegna['dataConsegna'];?></td>
+                                <td><?php echo $consegna['via'][0]['via'];?></td>
+                                <td><?php if(strcmp($consegna['tipoConsegna'], "da effettuare") == 0){
+                                                echo "<span class='badge badge-danger'>Da Effettuare</span>";
+                                            }else if(strcmp($consegna['tipoConsegna'], "in corso") == 0){
+                                                echo "<span class='badge badge-warning'>In Corso</span>";
+                                            }else{
+                                                echo "<span class='badge badge-success'>Terminata</span>";
+                                            } ?>
+                                </td>
+                                <td><?php if(isset($consegna['costoTotale'][0]['SommaCosti'])){
+                                                echo $consegna['costoTotale'][0]['SommaCosti'];
+                                            }else{
+                                                echo "-";
+                                            }?>
+                                </td>
+                            </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <?php echo "<tr><td colspan='5'>Nessuna consegna trovata.</td>"; ?>
+                        <?php echo "<tr><td colspan='6'>Nessuna consegna trovata.</td>"; ?>
                     <?php endif; ?>
                 </tbody>
             </table>

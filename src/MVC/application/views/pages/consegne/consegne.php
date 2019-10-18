@@ -22,14 +22,31 @@
                 <th scope="col">ID Consegna</th>
                 <th scope="col">ID Ordinazione</th>
                 <th scope="col">Fattorino</th>
-                <th scope="col">Data</th>
+                <th scope="col">Data Inserimento</th>
+                <th scope="col">Data Consegna</th>
                 <th scope="col">TipoConsegna</th>
             </tr>
             </thead>
             <tbody>
             <?php if(isset($consegne) && count($consegne) > 0): ?>
                 <?php foreach ($consegne as $consegna): ?>
-                    <?php echo "<tr><td>" . $consegna['id'] . "</td><td>" . $consegna['ordinazione'] . "</td><td>" . $consegna['fattorino'] . "</td><td>"; if(isset($consegna['data'])){echo $consegna['data'];}else{echo "-";} echo "</td><td>"; ; if(strcmp($consegna['tipoConsegna'], "da effettuare") == 0){echo "<span class='badge badge-danger'>Da Effettuare</span>"; }else if(strcmp($consegna['tipoConsegna'], "in corso") == 0){echo "<span class='badge badge-warning'>In Corso</span>"; }else{echo "<span class='badge badge-success'>Terminata</span>"; } echo "</td></tr>"; ?>
+                    <tr>
+                        <td><?php echo $consegna['id']; ?></td>
+                        <td><?php echo $consegna['ordinazione']; ?></td>
+                        <td><?php echo $consegna['fattorino']; ?></td>
+                        <td><?php echo $consegna['dataInserimento']; ?></td>
+                        <td><?php if(isset($consegna['dataConsegna'])){echo $consegna['dataConsegna'];}else{echo "-";} ?></td>
+                        <td>
+                            <?php if(strcmp($consegna['tipoConsegna'], "da effettuare") == 0){
+                                        echo "<span class='badge badge-danger'>Da Effettuare</span>";
+                                    }else if(strcmp($consegna['tipoConsegna'], "in corso") == 0){
+                                        echo "<span class='badge badge-warning'>In Corso</span>";
+                                    }else{
+                                        echo "<span class='badge badge-success'>Terminata</span>";
+                                    }
+                            ?>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
             <?php else: ?>
                 <?php echo "<tr><td colspan='5'>Nessuna consegna trovata.</td></tr>"; ?>

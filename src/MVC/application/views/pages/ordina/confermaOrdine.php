@@ -52,15 +52,26 @@
                     <?php if(count($cart) > 0): ?>
                         <?php foreach ($cart as $element): ?>
 
-                            <?php $select = "<select class='form-control form-control-sm' name='select" . $element[0]['id'] . "' id='select" . $element[0]['id'] . "'>";
-                                                for($i = 0; $i < 31; $i++){if($i == 1){$select .= "<option selected='selected'>$i</option>";}else{$select .= "<option>$i</option>";}}
+                            <?php $select = "<select class='form-control form-control-sm' name='select"
+                                                . $element[0]['id'] . "' id='select" . $element[0]['id'] . "'>";
+
+                                                for($i = 0; $i < 31; $i++){
+                                                    if($i == 1){
+                                                        $select .= "<option selected='selected'>$i</option>";
+                                                    }else{
+                                                        $select .= "<option>$i</option>";
+                                                    }
+                                                }
                                                 $select .= "</select>" ?>
 
-                            <?php echo "<tr id='" . $element[0]['id'] . "'><td><img style='height: 50px; width: 50px;' src='" . URL . $element[0]['urlFoto']
-                                    . "'></td><td>" . $element[0]['nome'] . "</td><td>"
-                                    . $element[0]['descrizione'] . "</td><td>"
-                                    . $select . "</td><td>"
-                                    . $element[0]['prezzo'] . "</td><td id='total" . $element[0]['id'] . "'>x</td></tr>";?>
+                            <tr id="<?php echo $element[0]['id']; ?>">
+                                <td><img style='height: 50px; width: 50px;' src='<?php echo URL . $element[0]['urlFoto'];?>'></td>
+                                <td><?php echo $element[0]['nome']; ?></td>
+                                <td><?php echo $element[0]['descrizione']; ?></td>
+                                <td><?php echo $select; ?></td>
+                                <td><?php echo $element[0]['prezzo']; ?></td>
+                                <td id='<?php echo "total" . $element[0]['id']; ?>'>x</td>
+                            </tr>
 
                             <script>
                                 function countTotal() {
