@@ -23,6 +23,7 @@ class Consegne
     public function home(int $weeks){
 
         $_SESSION['consegne'] = $this->pdModel->getConsegneConData($weeks);
+        $_SESSION['consegne']['dropDownValue'] = $weeks;
 
         // Carico Views
         $this->header->getRightHeader();
