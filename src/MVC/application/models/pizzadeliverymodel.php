@@ -169,25 +169,25 @@ class PizzaDeliveryModel
         }
         switch ($number){
             case 1:
-                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 1 WEEK);");
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 1 WEEK) ORDER BY dataInserimento DESC;");
                 break;
             case 2:
-                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 2 WEEK);");
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 2 WEEK) ORDER BY dataInserimento DESC;");
                 break;
             case 3:
-                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 3 WEEK);");
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 3 WEEK) ORDER BY dataInserimento DESC;");
                 break;
             case 4:
-                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 4 WEEK);");
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 4 WEEK) ORDER BY dataInserimento DESC;");
                 break;
             case 24:
-                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 24 WEEK);");
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 24 WEEK) ORDER BY dataInserimento DESC;");
                 break;
             case 10000:
-                return $this->execQuery("SELECT * FROM CONSEGNA;");
+                return $this->execQuery("SELECT * FROM CONSEGNA ORDER BY dataInserimento DESC;");
                 break;
             default:
-                return $this->execQuery("SELECT * FROM CONSEGNA;");
+                return $this->execQuery("SELECT * FROM CONSEGNA ORDER BY dataInserimento DESC;");
                 break;
         }
     }
@@ -220,6 +220,14 @@ class PizzaDeliveryModel
             }
             $_SESSION['cart'] = $arr;
         }
+    }
+
+    public function setConsegnaInCorso(int $id){
+        $this->execQuery("UPDATE Consegna SET tipoConsegna = 'in corso' WHERE id = $id;");
+    }
+
+    public function setConsegnaTerminata(int $id){
+        $this->execQuery("UPDATE Consegna SET tipoConsegna = 'Terminata', dataConsegna = now() WHERE id = $id;");
     }
 
 }
