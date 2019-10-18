@@ -1,16 +1,18 @@
+<?php $consegne = $_SESSION['consegne']; ?>
 <div class="container padding-footer text-center">
     <h1>CONSEGNE</h1>
     <br>
-    <pre><?php print_r($_SESSION['consegne']); ?></pre>
     <div class="form-group float-center" align="center">
         <label for="exampleFormControlSelect1">Fino a</label>
         <select class="form-control col-md-3" id="selectTime">
-            <option>Tutte</option>
-            <option>Questa settimana</option>
-            <option>2 settimane fa</option>
-            <option>3 settimane fa</option>
-            <option>1 mese fa</option>
-            <option>6 mesi fa</option>
+            <!-- Fill select -->
+            <?php if($consegne['dropDownValue'] == 10000){echo "<option selected='selected'>Tutte</option>";}else{echo "<option>Tutte</option>";} ?>
+            <?php if($consegne['dropDownValue'] == 1){echo "<option selected='selected'>Questa settimana</option>";}else{echo "<option>Questa settimana</option>";} ?>
+            <?php if($consegne['dropDownValue'] == 2){echo "<option selected='selected'>2 settimane fa</option>";}else{echo "<option>2 settimane fa</option>";} ?>
+            <?php if($consegne['dropDownValue'] == 3){echo "<option selected='selected'>3 settimane fa</option>";}else{echo "<option>3 settimane fa</option>";} ?>
+            <?php if($consegne['dropDownValue'] == 4){echo "<option selected='selected'>1 mese fa</option>";}else{echo "<option>1 mese fa</option>";} ?>
+            <?php if($consegne['dropDownValue'] == 24){echo "<option selected='selected'>6 mesi fa</option>";}else{echo "<option>6 mesi fa</option>";} ?>
+            <?php unset($consegne['dropDownValue']); ?>
         </select>
     </div>
     <div class="row col-md-12 table-responsive">
@@ -25,9 +27,9 @@
             </tr>
             </thead>
             <tbody>
-            <?php if(isset($_SESSION['consegne']) && count($_SESSION['consegne']) > 0): ?>
-                <?php foreach ($_SESSION['consegne'] as $consegna): ?>
-                    <?php echo "<tr><td>" . $consegna['id'] . "</td><td>" . $consegna['ordinazione'] . "</td><td>" . $consegna['fattorino'] . "</td><td>" . $consegna['data'] . "</td><td>"; ; if(strcmp($consegna['tipoConsegna'], "da effettuare") == 0){echo "<span class='badge badge-danger'>Da Effettuare</span>"; }else if(strcmp($consegna['tipoConsegna'], "in corso") == 0){echo "<span class='badge badge-warning'>In Corso</span>"; }else{echo "<span class='badge badge-success'>Terminata</span>"; } echo "</td></tr>"; ?>
+            <?php if(isset($consegne) && count($consegne) > 0): ?>
+                <?php foreach ($consegne as $consegna): ?>
+                    <?php echo "<tr><td>" . $consegna['id'] . "</td><td>" . $consegna['ordinazione'] . "</td><td>" . $consegna['fattorino'] . "</td><td>"; if(isset($consegna['data'])){echo $consegna['data'];}else{echo "-";} echo "</td><td>"; ; if(strcmp($consegna['tipoConsegna'], "da effettuare") == 0){echo "<span class='badge badge-danger'>Da Effettuare</span>"; }else if(strcmp($consegna['tipoConsegna'], "in corso") == 0){echo "<span class='badge badge-warning'>In Corso</span>"; }else{echo "<span class='badge badge-success'>Terminata</span>"; } echo "</td></tr>"; ?>
                 <?php endforeach; ?>
             <?php else: ?>
                 <?php echo "<tr><td colspan='5'>Nessuna consegna trovata.</td></tr>"; ?>
@@ -76,9 +78,9 @@
                 type: "GET",
                 url: ("<?php echo URL ?>consegne/home/" + weeks),
                 dataType: "text"
-            }).done(function (res) {
+            }).done(function (response) {
                 document.open();
-                document.write(res);
+                document.write(response);
                 document.close();
             });
         }
