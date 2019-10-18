@@ -8,6 +8,7 @@
                 <th scope="col">Cliente</th>
                 <th scope="col">Posizione</th>
                 <th scope="col">Pz. Ordine</th>
+                <th scope="col">Assegna Ordine</th>
             </tr>
             </thead>
             <tbody>
@@ -23,6 +24,7 @@
                         <td><?php echo $ordine[0]['nomeCliente'] . " " . $ordine[0]['cognomeCliente']; ?></td>
                         <td><?php echo $ordine[0]['via']; ?></td>
                         <td><?php echo $sum; ?></td>
+                        <td><a href="<?php echo URL?>ordina/home" class="btn btn-warning btn-md">Assegna a fattorino</a></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
