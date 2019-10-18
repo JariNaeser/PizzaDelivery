@@ -40,9 +40,14 @@ INSERT INTO Fattorino VALUES (
 );
 
 /* CONSEGNA */
-INSERT INTO consegna(data, tipoConsegna, fattorino, ordinazione) VALUES (
-	now(), "da effettuare", "paolo.naeser", 50
-);
+INSERT INTO `Consegna` (`id`,`dataInserimento`,`dataConsegna`,`tipoConsegna`,`fattorino`,`ordinazione`) VALUES (1,'2019-10-16 14:04:42',NULL,'da effettuare','paolo.naeser', 49);
+INSERT INTO `Consegna` (`id`,`dataInserimento`,`dataConsegna`,`tipoConsegna`,`fattorino`,`ordinazione`) VALUES (2,'2019-09-18 14:06:25',NULL,'in corso','franco.fattorino', 50);
+INSERT INTO `Consegna` (`id`,`dataInserimento`,`dataConsegna`,`tipoConsegna`,`fattorino`,`ordinazione`) VALUES (3,'2019-10-12 14:06:25',NULL,'da effettuare','franco.fattorino', 51);
+INSERT INTO `Consegna` (`id`,`dataInserimento`,`dataConsegna`,`tipoConsegna`,`fattorino`,`ordinazione`) VALUES (4,'2019-03-18 14:06:25',NULL,'in corso','paolo.naeser', 68);
+INSERT INTO `Consegna` (`id`,`dataInserimento`,`dataConsegna`,`tipoConsegna`,`fattorino`,`ordinazione`) VALUES (7,'2018-12-18 14:07:22','2019-10-18 14:07:22','Terminata','franco.fattorino', 69);
+INSERT INTO `Consegna` (`id`,`dataInserimento`,`dataConsegna`,`tipoConsegna`,`fattorino`,`ordinazione`) VALUES (8,'2013-06-18 14:07:34','2019-10-18 14:07:34','Terminata','franco.fattorino', 70);
+INSERT INTO `Consegna` (`id`,`dataInserimento`,`dataConsegna`,`tipoConsegna`,`fattorino`,`ordinazione`) VALUES (9,'2019-10-18 14:07:34','2019-10-18 14:07:34','Terminata','paolo.naeser', 71);
+
 
 /* ARTICOLO */
 INSERT INTO Articolo(nome, descrizione, prezzo, urlFoto) VALUES ("Pizza margherita", "Molto Buona e grande", 12, "application/img/pizzaMargherita.jpg");
