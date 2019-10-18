@@ -139,7 +139,7 @@ class PizzaDeliveryModel
     }
 
     public function getConsegneOggi(string $username){
-        return $this->execQuery("SELECT COUNT(*) AS 'consegneOggi' FROM Consegna WHERE fattorino LIKE '$username' AND tipoConsegna LIKE 'terminata' AND CURRENT_DATE() LIKE CONCAT(YEAR(data), '-', MONTH(data), '-', DAY(data));");
+        return $this->execQuery("SELECT COUNT(*) AS 'consegneOggi' FROM Consegna WHERE fattorino LIKE '$username' AND tipoConsegna LIKE 'terminata' AND CURRENT_DATE() LIKE CONCAT(YEAR(dataInserimento), '-', MONTH(dataInserimento), '-', DAY(dataInserimento));");
     }
 
     public function getFattorino(string $username){
@@ -149,7 +149,7 @@ class PizzaDeliveryModel
     }
 
     public function getConsegne(string $username){
-        $consegne = $this->execQuery("SELECT * FROM Consegna WHERE fattorino LIKE '$username' AND CONCAT(YEAR(data),'-', MONTH(data),'-', DAY(data)) LIKE CURRENT_DATE()");
+        $consegne = $this->execQuery("SELECT * FROM Consegna WHERE fattorino LIKE '$username' AND CONCAT(YEAR(dataInserimento),'-', MONTH(dataInserimento),'-', DAY(dataInserimento)) LIKE CURRENT_DATE()");
         for($i = 0; $i < count($consegne); $i++){
             //Get via
             $consegne[$i]['via'] = $this->execQuery("SELECT via FROM Ordinazione WHERE id = (SELECT ordinazione FROM Consegna WHERE id = " . $consegne[$i]['id'] . ");");
@@ -169,19 +169,19 @@ class PizzaDeliveryModel
         }
         switch ($number){
             case 1:
-                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE data > DATE_SUB(NOW(), INTERVAL 1 WEEK);");
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 1 WEEK);");
                 break;
             case 2:
-                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE data > DATE_SUB(NOW(), INTERVAL 2 WEEK);");
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 2 WEEK);");
                 break;
             case 3:
-                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE data > DATE_SUB(NOW(), INTERVAL 3 WEEK);");
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 3 WEEK);");
                 break;
             case 4:
-                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE data > DATE_SUB(NOW(), INTERVAL 4 WEEK);");
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 4 WEEK);");
                 break;
             case 24:
-                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE data > DATE_SUB(NOW(), INTERVAL 24 WEEK);");
+                return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 24 WEEK);");
                 break;
             case 10000:
                 return $this->execQuery("SELECT * FROM CONSEGNA;");
