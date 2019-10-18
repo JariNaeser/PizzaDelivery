@@ -203,7 +203,7 @@ class PizzaDeliveryModel
 
     public function addToCart(int $id){
         if(isset($_SESSION['cart']) && is_int($id)){
-            $item = $this->pdModel->getArticolo($id);
+            $item = $this->getArticolo($id);
             if(!in_array($item, $_SESSION['cart'])){
                 array_push($_SESSION['cart'], $item);
             }
