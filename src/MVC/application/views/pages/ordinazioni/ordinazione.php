@@ -42,6 +42,7 @@
             <?php foreach ($ordine[1] as $elemento): ?>
                 <tr>
                     <td><?php echo $elemento['quantita'] . "x " . $articoli[$elemento['articolo']-1]['nome']; ?></td>
+                    <td><?php echo $articoli[$elemento['articolo']-1]['prezzo']; ?></td>
                     <td><?php echo $elemento['quantita']*$articoli[$elemento['articolo']-1]['prezzo']; ?></td>
                 </tr>
             <?php endforeach; ?>
