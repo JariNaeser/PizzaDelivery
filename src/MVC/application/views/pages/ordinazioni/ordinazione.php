@@ -40,7 +40,10 @@
         <tbody>
         <?php if(isset($_SESSION['ordine']) && count($_SESSION['ordine']) > 0): ?>
             <?php foreach ($ordine[1] as $elemento): ?>
-                <?php echo "<tr><td>" . $elemento['quantita'] . "x " . $articoli[$elemento['articolo']-1]['nome'] . "</td><td>" . $articoli[$elemento['articolo']-1]['prezzo'] . ".-</td><td>" . $elemento['quantita']*$articoli[$elemento['articolo']-1]['prezzo'] . "</td></tr>"?>
+                <tr>
+                    <td><?php echo $elemento['quantita'] . "x " . $articoli[$elemento['articolo']-1]['nome']; ?></td>
+                    <td><?php echo $elemento['quantita']*$articoli[$elemento['articolo']-1]['prezzo']; ?></td>
+                </tr>
             <?php endforeach; ?>
         <?php else: ?>
             <?php echo "<tr><td colspan='3'>Nessuna elemento trovato.</td></tr>"?>

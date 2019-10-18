@@ -18,7 +18,12 @@
                     <?php for($i = 1; $i < count($ordine); $i++): ?>
                         <?php $sum += $ordine[$i]['quantita']; ?>
                     <?php endfor; ?>
-                    <?php echo "<tr class='clickable-row' data-href='" . URL . "ordinazioni/ordinazione/" . $ordine[0]['id'] . "'><td>" . $ordine[0]['id'] . "</td><td>" . $ordine[0]['nomeCliente'] . " " . $ordine[0]['cognomeCliente'] . "</td><td>" . $ordine[0]['via'] . "</td><td>" . $sum . "</td></tr>" ?>
+                    <tr class='clickable-row' data-href='<?php echo URL . "ordinazioni/ordinazione/" . $ordine[0]['id']; ?>'>
+                        <td><?php echo $ordine[0]['id']; ?></td>
+                        <td><?php echo $ordine[0]['nomeCliente'] . " " . $ordine[0]['cognomeCliente']; ?></td>
+                        <td><?php echo $ordine[0]['via']; ?></td>
+                        <td><?php echo $sum; ?></td>
+                    </tr>
                 <?php endforeach; ?>
             <?php else: ?>
                 <?php echo "<tr><td colspan='4'>Nessuna ordinazione trovata.</td></tr>"?>

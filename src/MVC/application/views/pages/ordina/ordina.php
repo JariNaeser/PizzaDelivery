@@ -1,8 +1,3 @@
-<!-- TO FIX:
-
- - remove space on the right of eleziona prodotti
-
- -->
 <form class="container padding-footer">
     <h1 class="text-center">ORDINA</h1>
     <div class="row" style="padding: 1em">
@@ -23,14 +18,19 @@
                 <?php if(count($articoli) != 0): ?>
                     <?php foreach ($articoli as $articolo): ?>
                         <?php $nome = $articolo['nome'] ?>
-                        <?php echo "<tr>" ?>
 
-                        <?php echo "<td><img style='height: 50px; width: 50px;' src='"
-                            . URL . $articolo['urlFoto'] . "'><td>" . $articolo['nome']
-                            . "<td>" . $articolo['descrizione'] . "<td>"
-                            . $articolo['prezzo'] . "</td><td>" .
-                            "<a class='text-dark' href='" . URL . "ordina/addToCart/" . $articolo['id'] . "'><i class='fas fa-shopping-cart' alt='X'></i></a></td>"?>
-                        <?php echo "</tr>" ?>
+                        <tr>
+                            <td><img style='height: 50px; width: 50px;' src='<?php echo URL . $articolo['urlFoto']; ?>'></td>
+                            <td><?php echo $articolo['nome']; ?></td>
+                            <td><?php echo $articolo['descrizione']; ?></td>
+                            <td><?php echo $articolo['prezzo']; ?></td>
+                            <td>
+                                <a class='text-dark' href='<?php echo URL . "ordina/addToCart/" . $articolo['id']; ?>'>
+                                    <i class='fas fa-shopping-cart' alt='X'></i>
+                                </a>
+                            </td>
+                        </tr>
+
                     <?php endforeach; ?>
                 <?php else: ?>
                     <?php echo "<tr><td colspan='5' class='text-center'>Nessun prodotto disponibile.</td></tr>" ?>
@@ -52,17 +52,23 @@
             </thead>
             <tbody>
             <?php $cart = $_SESSION['cart']; ?>
-            <?php if(count($cart) == 0): ?>
-                <?php echo "<tr><td colspan='5' class='text-center'>Nessun elemento selezionato.</td></tr>"; ?>
+            <?php if(count($cart) > 0): ?>
+                <?php foreach ($cart as $element): ?>
+
+                    <tr>
+                        <td><img style='height: 50px; width: 50px;' src='<?php echo URL . $element[0]['urlFoto']; ?>'></td>
+                        <td><?php echo $element[0]['nome']; ?></td>
+                        <td><?php echo $element[0]['prezzo']; ?></td>
+                        <td>
+                            <a class='text-danger' href='<?php echo URL . "ordina/removeFromCart/" . $element[0]['id']; ?>'>
+                                <i class='fas fa-times' alt='X'></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                <?php endforeach; ?>
             <?php else: ?>
-                <?php if(count($cart) > 0): ?>
-                    <?php foreach ($cart as $element): ?>
-                        <?php echo "<tr><td><img style='height: 50px; width: 50px;' src='" . URL . $element[0]['urlFoto']
-                            . "'></td><td>" . $element[0]['nome'] . "</td><td>"
-                            . $element[0]['prezzo'] . "</td><td>"
-                            . "<a class='text-danger' href='" . URL . "ordina/removeFromCart/" . $element[0]['id'] . "'><i class='fas fa-times' alt='X'></i></a></td></tr>"; ?>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+                <?php echo "<tr><td colspan='5' class='text-center'>Nessun elemento selezionato.</td></tr>"; ?>
             <?php endif; ?>
             </tbody>
         </table>
