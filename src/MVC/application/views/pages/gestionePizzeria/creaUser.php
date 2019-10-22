@@ -48,8 +48,8 @@
                  </tbody>
              </table>
          </div>
-         <button type="submit" class="btn btn-danger btn-lg">Crea</button>
          <a href="<?php echo URL . "gestionePizzeria/home";?>" class="btn btn-danger btn-lg">Esci</a>
+         <button type="submit" class="btn btn-success btn-lg">Crea</button>
      </form>
  </div>
 

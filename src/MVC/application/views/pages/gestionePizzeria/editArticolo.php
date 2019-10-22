@@ -26,9 +26,9 @@
                     </tbody>
                 </table>
             </div>
-            <a href="<?php echo URL . "gestionePizzeria/eliminaArticolo/" . $articoloToModify['id'];?>" class="btn btn-danger btn-lg">Elimina</a>
-            <button type="submit" class="btn btn-primary btn-lg">Aggiorna</button>
             <a href="<?php echo URL . "gestionePizzeria/home";?>" class="btn btn-danger btn-lg">Esci</a>
+            <a href="<?php echo URL . "gestionePizzeria/eliminaArticolo/" . $articoloToModify['id'];?>" class="btn btn-warning btn-lg">Elimina</a>
+            <button type="submit" class="btn btn-primary btn-lg">Aggiorna</button>
         </form>
     </div>
 <?php else: ?>
