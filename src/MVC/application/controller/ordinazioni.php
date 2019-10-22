@@ -23,6 +23,7 @@ class Ordinazioni
     public function home(){
 
         $_SESSION['ordinazioni'] = $this->pdModel->getPreparedOrdinazioni();
+        $_SESSION['fattoriniOrdinatiLiberiENon'] = $this->pdModel->getFattoriniOrdinatiENon();
 
         // Carico Views
         $this->header->getRightHeader();
@@ -39,7 +40,19 @@ class Ordinazioni
         $this->header->getRightHeader();
         require 'application/views/pages/ordinazioni/ordinazione.php';
         require 'application/views/_templates/footer.php';
-        //header("Location: " . PAGES . "ordinazione");
+    }
+
+    public function assegnaAFattorino(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if(isset($_POST['fattorino']) && isset($_POST['nrOrdine'])){
+                $fattorino = $_POST['fattorino'];
+                $nrOrdine = $_POST['nrOrdine'];
+            }else{
+                header("Location: " . URL . "errorController/assegnaAFattorinoError");
+            }
+        }else{
+            header("Location: " . URL . "errorController/assegnaAFattorinoError");
+        }
     }
 
 }

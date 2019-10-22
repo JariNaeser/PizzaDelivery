@@ -192,6 +192,10 @@ class PizzaDeliveryModel
         }
     }
 
+    public function getFattoriniOrdinatiENon(){
+        return $this->execQuery("SELECT username, inServizio FROM PizzaDelivery.Fattorino ORDER BY inServizio;");
+    }
+
     public function dropArticolo(int $id){
         return $this->insertQuery("DELETE FROM articolo WHERE id = $id;");
     }
