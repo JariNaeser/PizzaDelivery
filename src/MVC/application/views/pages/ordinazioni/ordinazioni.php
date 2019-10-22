@@ -15,17 +15,19 @@
             <?php if(isset($_SESSION['ordinazioni']) && count($_SESSION['ordinazioni']) > 0): ?>
                 <?php $ordini = $_SESSION['ordinazioni']; ?>
                 <?php foreach ($ordini as $ordine): ?>
-                    <?php $sum = 0; ?>
-                    <?php for($i = 1; $i < count($ordine); $i++): ?>
-                        <?php $sum += $ordine[$i]['quantita']; ?>
-                    <?php endfor; ?>
-                    <tr class='clickable-row' data-href='<?php echo URL . "ordinazioni/ordinazione/" . $ordine[0]['id']; ?>'>
-                        <td><?php echo $ordine[0]['id']; ?></td>
-                        <td><?php echo $ordine[0]['nomeCliente'] . " " . $ordine[0]['cognomeCliente']; ?></td>
-                        <td><?php echo $ordine[0]['via']; ?></td>
-                        <td><?php echo $sum; ?></td>
-                        <td><button class="btn btn-warning btn-md assegnaAFattorino" id="<?php echo $ordine[0]['id']?>">Assegna a fattorino</button></td>
-                    </tr>
+                    <?php if($ordine[0]['prontaPerConsegna'] == 0): ?>
+                        <?php $sum = 0; ?>
+                        <?php for($i = 1; $i < count($ordine); $i++): ?>
+                            <?php $sum += $ordine[$i]['quantita']; ?>
+                        <?php endfor; ?>
+                        <tr class='clickable-row' data-href='<?php echo URL . "ordinazioni/ordinazione/" . $ordine[0]['id']; ?>'>
+                            <td><?php echo $ordine[0]['id']; ?></td>
+                            <td><?php echo $ordine[0]['nomeCliente'] . " " . $ordine[0]['cognomeCliente']; ?></td>
+                            <td><?php echo $ordine[0]['via']; ?></td>
+                            <td><?php echo $sum; ?></td>
+                            <td><button class="btn btn-warning btn-md assegnaAFattorino" id="<?php echo $ordine[0]['id']?>">Assegna a fattorino</button></td>
+                        </tr>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             <?php else: ?>
                 <?php echo "<tr><td colspan='4'>Nessuna ordinazione trovata.</td></tr>"?>
@@ -77,6 +79,7 @@
                     </div>
                 </div>
             </div>
+            <input type="hidden" name="nrOrdine" value="" id="hidden">
         </form>
     </div>
     <script>
@@ -92,6 +95,7 @@
             e.stopPropagation();
             $('#assegnaAFattorinoModal').modal('show');
             $('#orderNumber').text(" [" + this.id + "]");
+            $("#hidden").val(this.id);
         });
 
 

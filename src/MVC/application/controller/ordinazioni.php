@@ -44,9 +44,17 @@ class Ordinazioni
 
     public function assegnaAFattorino(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            if(isset($_POST['fattorino']) && isset($_POST['nrOrdine'])){
-                $fattorino = $_POST['fattorino'];
+            if(isset($_POST['selezioneFattorino']) && isset($_POST['nrOrdine'])){
+                $fattorino = $_POST['selezioneFattorino'];
                 $nrOrdine = $_POST['nrOrdine'];
+
+                $this->pdModel->insertQuery("INSERT INTO Consegna(tipoConsegna, fattorino, ordinazione) VALUES ('da effettuare', '$fattorino', $nrOrdine);");
+                $this->pdModel->insertQuery("UPDATE Ordinazione SET prontaPerConsegna = 1 WHERE id = $nrOrdine");
+
+                //Redirect alla home
+                header("Location: " . URL . "ordinazioni/home");
+                $this->home();
+
             }else{
                 header("Location: " . URL . "errorController/assegnaAFattorinoError");
             }
