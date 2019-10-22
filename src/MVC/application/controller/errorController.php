@@ -34,4 +34,10 @@ class ErrorController
         require 'application/views/_templates/footer.php';
     }
 
+    public function assegnaAFattorinoError(){
+        require 'application/views/_templates/headers/error.php';
+        require 'application/views/error/assegnaAFattorinoError.php';
+        require 'application/views/_templates/footer.php';
+    }
+
 }
