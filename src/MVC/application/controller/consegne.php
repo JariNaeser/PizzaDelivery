@@ -25,8 +25,6 @@ class Consegne
         $_SESSION['consegne'] = $this->pdModel->getConsegneConData($weeks);
         $_SESSION['consegne']['dropDownValue'] = $weeks;
 
-        //$this->pdModel->setConsegnaTerminata(4);
-
         // Carico Views
         $this->header->getRightHeader();
         require 'application/views/pages/consegne/consegne.php';

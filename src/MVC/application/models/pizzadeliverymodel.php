@@ -226,12 +226,16 @@ class PizzaDeliveryModel
         }
     }
 
+    public function setConsegnaDaEffettuare(int $id){
+        $this->insertQuery("UPDATE Consegna SET tipoConsegna = 'da effettuare', dataConsegna = null WHERE id = $id AND tipoConsegna NOT LIKE 'da effettuare';");
+    }
+
     public function setConsegnaInCorso(int $id){
-        $this->execQuery("UPDATE Consegna SET tipoConsegna = 'in corso' WHERE id = $id;");
+        $this->insertQuery("UPDATE Consegna SET tipoConsegna = 'in corso', dataConsegna = null WHERE id = $id AND tipoConsegna NOT LIKE 'in corso';");
     }
 
     public function setConsegnaTerminata(int $id){
-        $this->execQuery("UPDATE Consegna SET tipoConsegna = 'Terminata', dataConsegna = now() WHERE id = $id;");
+        $this->insertQuery("UPDATE Consegna SET tipoConsegna = 'terminata', dataConsegna = now() WHERE id = $id AND tipoConsegna NOT LIKE 'terminata';");
     }
 
 }
