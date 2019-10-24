@@ -23,3 +23,10 @@
     border: solid 1px lightgrey;
     border-radius: 10px;
 }
+
+.spinnerMiddle{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
