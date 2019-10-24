@@ -22,16 +22,16 @@
                             <?php $sum += $ordine[$i]['quantita']; ?>
                         <?php endfor; ?>
                         <tr class='clickable-row' data-href='<?php echo URL . "ordinazioni/ordinazione/" . $ordine[0]['id']; ?>'>
-                            <td><?php echo $ordine[0]['id']; ?></td>
-                            <td><?php echo $ordine[0]['nomeCliente'] . " " . $ordine[0]['cognomeCliente']; ?></td>
-                            <td><?php echo $ordine[0]['via']; ?></td>
-                            <td><?php echo $sum; ?></td>
-                            <td><button class="btn btn-warning btn-md assegnaAFattorino" id="<?php echo $ordine[0]['id']?>">Assegna a fattorino</button></td>
+                            <td class="align-middle"><?php echo $ordine[0]['id']; ?></td>
+                            <td class="align-middle"><?php echo $ordine[0]['nomeCliente'] . " " . $ordine[0]['cognomeCliente']; ?></td>
+                            <td class="align-middle"><?php echo $ordine[0]['via']; ?></td>
+                            <td class="align-middle"><?php echo $sum; ?></td>
+                            <td class="align-middle"><button class="btn btn-warning btn-md assegnaAFattorino" id="<?php echo $ordine[0]['id']?>">Assegna a fattorino</button></td>
                         </tr>
                     <?php endif; ?>
                 <?php endforeach; ?>
             <?php else: ?>
-                <?php echo "<tr><td colspan='4'>Nessuna ordinazione trovata.</td></tr>"?>
+                <?php echo "<tr><td colspan='5'>Nessuna ordinazione trovata.</td></tr>"?>
             <?php endif; ?>
             </tbody>
         </table>

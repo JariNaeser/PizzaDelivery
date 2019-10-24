@@ -14,9 +14,9 @@
             <?php if(isset($_SESSION['fattorini']) && count($_SESSION['fattorini']) > 0): ?>
                 <?php foreach ($_SESSION['fattorini'] as $fattorino): ?>
                     <tr class='clickable-row' data-href='<?php echo URL . "fattorini/fattorino/" . $fattorino['username']; ?>'>
-                        <td><?php echo $fattorino['username']; ?></td>
-                        <td><?php echo $fattorino['consegneOggi']; ?></td>
-                        <td><?php
+                        <td class="align-middle"><?php echo $fattorino['username']; ?></td>
+                        <td class="align-middle"><?php echo $fattorino['consegneOggi']; ?></td>
+                        <td class="align-middle"><?php
                             if($fattorino['inServizio'] == 1){
                                 echo "<span class=\"badge badge-danger\">In Servizio</span>";
                             }else{

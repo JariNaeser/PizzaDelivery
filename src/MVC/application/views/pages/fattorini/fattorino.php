@@ -53,11 +53,11 @@
                     <?php if(isset($_SESSION['consegneFattorino']) && count($_SESSION['consegneFattorino']) > 0):?>
                         <?php foreach ($_SESSION['consegneFattorino'] as $consegna): ?>
                             <tr>
-                                <td><?php echo $consegna['id'];?></td>
-                                <td><?php echo $consegna['dataInserimento'];?></td>
-                                <td><?php echo $consegna['dataConsegna'];?></td>
-                                <td><?php echo $consegna['via'][0]['via'];?></td>
-                                <td><?php if(strcmp($consegna['tipoConsegna'], "da effettuare") == 0){
+                                <td class="align-middle"><?php echo $consegna['id'];?></td>
+                                <td class="align-middle"><?php echo $consegna['dataInserimento'];?></td>
+                                <td class="align-middle"><?php echo $consegna['dataConsegna'];?></td>
+                                <td class="align-middle"><?php echo $consegna['via'][0]['via'];?></td>
+                                <td class="align-middle"><?php if(strcmp($consegna['tipoConsegna'], "da effettuare") == 0){
                                                 echo "<span class='badge badge-danger'>Da Effettuare</span>";
                                             }else if(strcmp($consegna['tipoConsegna'], "in corso") == 0){
                                                 echo "<span class='badge badge-warning'>In Corso</span>";

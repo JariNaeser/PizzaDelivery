@@ -26,10 +26,10 @@
                 <input type="text" class="form-control" placeholder="Via" name="via" required>
             </div>
             <div class="col-3">
-                <input type="number" class="form-control" placeholder="Cap" name="cap" required>
+                <input type="text" class="form-control" placeholder="Nr." name="numero" required>
             </div>
             <div class="col-3">
-                <input type="text" class="form-control" placeholder="Nr." name="numero" required>
+                <input type="number" class="form-control" placeholder="Cap" name="cap" required>
             </div>
         </div>
         <br>
@@ -65,12 +65,12 @@
                                                 $select .= "</select>" ?>
 
                             <tr id="<?php echo $element[0]['id']; ?>">
-                                <td><img style='height: 50px; width: 50px;' src='<?php echo URL . $element[0]['urlFoto'];?>'></td>
-                                <td><?php echo $element[0]['nome']; ?></td>
-                                <td><?php echo $element[0]['descrizione']; ?></td>
-                                <td><?php echo $select; ?></td>
-                                <td><?php echo $element[0]['prezzo']; ?></td>
-                                <td id='<?php echo "total" . $element[0]['id']; ?>'>x</td>
+                                <td class="align-middle"><img style='height: 50px; width: 50px;' src='<?php echo URL . $element[0]['urlFoto'];?>'></td>
+                                <td class="align-middle"><?php echo $element[0]['nome']; ?></td>
+                                <td class="align-middle"><?php echo $element[0]['descrizione']; ?></td>
+                                <td class="align-middle"><?php echo $select; ?></td>
+                                <td class="align-middle"><?php echo $element[0]['prezzo']; ?></td>
+                                <td class="align-middle" id='<?php echo "total" . $element[0]['id']; ?>'>x</td>
                             </tr>
 
                             <script>

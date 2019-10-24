@@ -56,10 +56,10 @@
                 <?php foreach ($cart as $element): ?>
 
                     <tr>
-                        <td><img style='height: 50px; width: 50px;' src='<?php echo URL . $element[0]['urlFoto']; ?>'></td>
-                        <td><?php echo $element[0]['nome']; ?></td>
-                        <td><?php echo $element[0]['prezzo']; ?></td>
-                        <td>
+                        <td class="align-middle"><img style='height: 50px; width: 50px;' src='<?php echo URL . $element[0]['urlFoto']; ?>'></td>
+                        <td class="align-middle"><?php echo $element[0]['nome']; ?></td>
+                        <td class="align-middle"><?php echo $element[0]['prezzo']; ?></td>
+                        <td class="align-middle">
                             <a class='text-danger' href='<?php echo URL . "ordina/removeFromCart/" . $element[0]['id']; ?>'>
                                 <i class='fas fa-times' alt='X'></i>
                             </a>

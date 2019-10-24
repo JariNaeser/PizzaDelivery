@@ -49,7 +49,7 @@
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
-                <?php echo "<tr><td colspan='5'>Nessuna consegna trovata.</td></tr>"; ?>
+                <?php echo "<tr><td colspan='6'>Nessuna consegna trovata.</td></tr>"; ?>
             <?php endif; ?>
             </tbody>
         </table>
