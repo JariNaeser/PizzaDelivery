@@ -8,6 +8,7 @@ class Home
 
     public function __construct()
     {
+        session_start();
         $this->header = new RightHeader();
     }
 

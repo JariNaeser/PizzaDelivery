@@ -5,7 +5,7 @@ class ErrorController
 
     public function __construct()
     {
-
+        session_start();
     }
 
     public function requireConnectionError(){
