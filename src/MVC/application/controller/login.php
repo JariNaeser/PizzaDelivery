@@ -30,33 +30,34 @@ class Login
     public function login(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if(isset($_POST['username']) && isset($_POST['password'])){
+
                 $username = htmlspecialchars(stripslashes($_POST['username']));
                 $password = htmlspecialchars(stripslashes($_POST['password']));
+
                 $utenti = $this->pdModel->getUtenti();
-                $user = null;
+                $password = hash('sha256', $password);
 
                 foreach ($utenti as $utente){
-                    if(strcmp($utente['username'], $username) == 0){
-                        $user = $utente;
-                        break;
+
+                    if(strcmp($utente['username'], $username) == 0 && strcmp($utente['password'], $password) == 0){
+
+                        $_SESSION['user'] = $this->pdModel->getUser($username);
+
+                        $this->header->getRightHeader();
+                        require 'application/views/pages/index/benvenuto.php';
+                        require 'application/views/_templates/footer.php';
+                        exit;
                     }
                 }
 
-                if(isset($user) && strcmp($user['password'], $password) == 0){
-                    $_SESSION['user'] = $user;
+                $this->loginForm();
+                echo "<div class=\"alert alert-warning alert-danger fade show padding-footer\" style='margin: 1em;' role=\"alert\">".
+                    "<strong>Errore:</strong> Il nome utente oppure la password sono errati.".
+                    "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">".
+                    "<span aria-hidden=\"true\">&times;</span>".
+                    "</button>".
+                    "</div>";
 
-                    $this->header->getRightHeader();
-                    require 'application/views/pages/index/benvenuto.php';
-                    require 'application/views/_templates/footer.php';
-                }else{
-                    $this->loginForm();
-                    echo "<div class=\"alert alert-warning alert-danger fade show padding-footer\" style='margin: 1em;' role=\"alert\">".
-                        "<strong>Errore:</strong> Il nome utente oppure la password sono errati.".
-                        "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">".
-                        "<span aria-hidden=\"true\">&times;</span>".
-                        "</button>".
-                        "</div>";
-                }
             }
         }
     }

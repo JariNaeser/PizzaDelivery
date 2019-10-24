@@ -7,7 +7,7 @@ class RightHeader
 
     public function getRightHeader(){
         if(isset($_SESSION['user'])){
-            $user = $_SESSION['user'];
+            $user = $_SESSION['user'][0];
             switch($user['tipoUtente']){
                 case "impiegato vendita":
                     require 'application/views/_templates/headers/impiegato.php';

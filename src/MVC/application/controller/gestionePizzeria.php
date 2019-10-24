@@ -48,7 +48,7 @@ class GestionePizzeria
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if(isset($_POST['nomeMU'])&&isset($_POST['cognomeMU'])&&isset($_POST['viaMU'])&&isset($_POST['capMU'])&&isset($_POST['paeseMU'])&&isset($_POST['emailMU'])&&isset($_POST['tipologiaMU'])){
                 if(isset($_POST['passwordMU']) && strlen(trim($_POST['passwordMU'])) != 0){
-                    $password = $_POST['passwordMU'];
+                    $password = hash('sha256', $_POST['passwordMU']);
                 }else{
                     $password = $_SESSION['userToModify'][0]['password'];
                 }
@@ -83,7 +83,7 @@ class GestionePizzeria
     public function createUser(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if(isset($_POST['nomeNU'])&&isset($_POST['cognomeNU'])&&isset($_POST['viaNU'])&&isset($_POST['capNU'])&&isset($_POST['paeseNU'])&&isset($_POST['emailNU'])&&isset($_POST['passwordNU'])&&isset($_POST['tipologiaNU'])){
-                $this->pdModel->insertQuery("INSERT INTO utente VALUES ('" . strtolower($_POST['nomeNU']) . "." . strtolower($_POST['cognomeNU']) . "', '" . $_POST['nomeNU'] ."', '" . $_POST['cognomeNU'] . "', '" . $_POST['viaNU'] . "', '" . $_POST['capNU'] . "', '" . $_POST['paeseNU'] . "', '" . $_POST['emailNU'] . "', '" . $_POST['passwordNU'] . "', '" . $_POST['tipologiaNU'] . "');");
+                $this->pdModel->insertQuery("INSERT INTO utente VALUES ('" . strtolower($_POST['nomeNU']) . "." . strtolower($_POST['cognomeNU']) . "', '" . $_POST['nomeNU'] ."', '" . $_POST['cognomeNU'] . "', '" . $_POST['viaNU'] . "', '" . $_POST['capNU'] . "', '" . $_POST['paeseNU'] . "', '" . $_POST['emailNU'] . "', '" . hash('sha256', $_POST['passwordNU']) . "', '" . $_POST['tipologiaNU'] . "');");
                 header("Location: " . URL . "gestionePizzeria/home");
                 $this->home();
             }
