@@ -3,17 +3,9 @@
 class ErrorController
 {
 
-    private $pdModel;
-
     public function __construct()
     {
-        if(file_exists('application/models/pizzadeliverymodel.php')){
-            require_once 'application/models/pizzadeliverymodel.php';
-            $this->pdModel = new PizzaDeliveryModel();
-            session_start();
-        }else{
-            exit("ERRORE nel costruttore della classe errorController dei controller.");
-        }
+
     }
 
     public function requireConnectionError(){
