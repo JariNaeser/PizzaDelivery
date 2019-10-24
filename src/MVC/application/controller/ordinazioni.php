@@ -50,6 +50,7 @@ class Ordinazioni
 
                 $this->pdModel->insertQuery("INSERT INTO Consegna(tipoConsegna, fattorino, ordinazione) VALUES ('da effettuare', '$fattorino', $nrOrdine);");
                 $this->pdModel->insertQuery("UPDATE Ordinazione SET prontaPerConsegna = 1 WHERE id = $nrOrdine");
+                $this->pdModel->setFattorinoOccupato($fattorino);
 
                 //Redirect alla home
                 header("Location: " . URL . "ordinazioni/home");

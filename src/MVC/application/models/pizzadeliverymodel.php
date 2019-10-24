@@ -238,4 +238,12 @@ class PizzaDeliveryModel
         $this->insertQuery("UPDATE Consegna SET tipoConsegna = 'terminata', dataConsegna = now() WHERE id = $id AND tipoConsegna NOT LIKE 'terminata';");
     }
 
+    public function setFattorinoLibero(string $username){
+        $this->insertQuery("UPDATE fattorino SET inServizio = 0 WHERE username LIKE '$username';");
+    }
+
+    public function setFattorinoOccupato(string $username){
+        $this->insertQuery("UPDATE fattorino SET inServizio = 1 WHERE username LIKE '$username';");
+    }
+
 }
