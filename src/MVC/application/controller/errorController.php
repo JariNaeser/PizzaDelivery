@@ -32,4 +32,10 @@ class ErrorController
         require 'application/views/_templates/footer.php';
     }
 
+    public function paginaNonTrovataOAccessibile(){
+        require 'application/views/_templates/headers/error.php';
+        require 'application/views/error/pageNotFoundOrNoPermission.php';
+        require 'application/views/_templates/footer.php';
+    }
+
 }
