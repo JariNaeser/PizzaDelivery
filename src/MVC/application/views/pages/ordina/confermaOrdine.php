@@ -116,6 +116,7 @@
                 countTotal();
             </script>
             <div class="col-md-12 text-center">
+                <a href="<?php echo URL?>ordina/home" class="btn btn-danger btn-lg">Torna all'ordine</a>
                 <button type="button" class="btn btn-danger btn-lg" id="ordina">Ordina</button>
                 <script>
 
@@ -262,9 +263,16 @@
                     }
 
                     $('#ordina').click(function(){
-                       if($('#ordina').attr('type') === 'button'){
-                           alert("Devi immettere correttamente tutte le tue informazioni personali.");
-                       }
+                        if($('#ordina').attr('type') === 'button'){
+                            $('body').append(
+                                "<div class=\"alert alert-warning alert-danger fade show padding-footer\" style='margin: 1em;' role=\"alert\">"+
+                                "<strong>Errore:</strong> Immetti correttamente tutti i dati."+
+                                "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">"+
+                                "<span aria-hidden=\"true\">&times;</span>"+
+                                "</button>"+
+                                "</div>"
+                            );
+                        }
                     });
 
                 </script>
