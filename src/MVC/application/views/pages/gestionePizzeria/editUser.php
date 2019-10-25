@@ -57,10 +57,30 @@
                 </table>
             </div>
             <a href="<?php echo URL . "gestionePizzeria/home";?>" class="btn btn-danger btn-lg">Esci</a>
-            <a href="<?php echo URL . "gestionePizzeria/eliminaUtente/" . $userToModify['username'];?>" class="btn btn-warning btn-lg">Elimina</a>
+            <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#modaleElimina">Elimina</a>
             <button type="submit" class="btn btn-primary btn-lg">Aggiorna</button>
         </form>
 
+        <!-- Modal -->
+        <div class="modal fade" id="modaleElimina" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-danger" id="exampleModalLabel">ATTENZIONE</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Sei sicuro di voler eliminare l'utente <?php echo $userToModify['username']; ?> ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                        <a href="<?php echo URL . "gestionePizzeria/eliminaUtente/" . $userToModify['username'];?>" class="btn btn-warning btn-md">Conferma</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 <?php else: ?>
