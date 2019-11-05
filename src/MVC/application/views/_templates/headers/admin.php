@@ -22,6 +22,10 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo URL . "css/style.css"?>">
 
+    <!-- Mapbox -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
