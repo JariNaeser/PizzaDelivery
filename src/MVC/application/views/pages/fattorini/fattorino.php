@@ -165,7 +165,7 @@
                     "features": [{
                         "type": "Feature",
                         "properties": {
-                            "description": "<strong>Fattorino: <?php echo $userFattorino['nome'] . " " . $userFattorino['cognome']; ?></strong><p>Posizione attuale [<?php echo $fattorino['posizioneLat']; ?> , <?php echo $fattorino['posizioneLon']; ?>]</p>",
+                            "description": "<strong>Fattorino: <?php echo $userFattorino['nome'] . " " . $userFattorino['cognome']; ?></strong><p>Posizione attuale [<?php echo $fattorino['posizioneLat']; ?>, <?php echo $fattorino['posizioneLon']; ?>]</p>",
                             "icon": "theatre"
                         },
                         "geometry": {

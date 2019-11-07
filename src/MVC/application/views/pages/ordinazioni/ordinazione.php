@@ -52,8 +52,56 @@
         </table>
         </div>
         <div class="text-center">
+            <button class="btn btn-warning btn-lg assegnaAFattorino" id="<?php echo $ordine[0][0]['id']?>">Assegna a fattorino</button>
             <a href="<?php echo URL?>ordinazioni/home" class="btn btn-danger btn-lg">Torna agli ordini</a>
         </div>
+        <!-- Modal -->
+        <form action="<?php echo URL . 'ordinazioni/assegnaAFattorino'; ?>" method="post">
+            <div class="modal fade" id="assegnaAFattorinoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Assegna Ordinazione<span id="orderNumber"></span> ad un Fattorino</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body table-responsive">
+                            <?php if(isset($_SESSION['fattoriniOrdinatiLiberiENon']) && count($_SESSION['fattoriniOrdinatiLiberiENon']) > 0): ?>
+                                <?php $fattorini = $_SESSION['fattoriniOrdinatiLiberiENon']; ?>
+                                <table class="table">
+                                    <tr>
+                                        <th>Seleziona</th>
+                                        <th>Nome</th>
+                                        <th>Stato</th>
+                                    </tr>
+                                    <?php foreach ($fattorini as $fattorino): ?>
+                                        <tr>
+                                            <td><input type="radio" name="selezioneFattorino" value="<?php echo $fattorino['username']; ?>" required></td>
+                                            <td><?php echo $fattorino['username']; ?></td>
+                                            <td><?php
+                                                if($fattorino['inServizio'] == 1){
+                                                    echo "<span class=\"badge badge-danger\">In Servizio</span>";
+                                                }else{
+                                                    echo "<span class=\"badge badge-success\">Libero</span>";
+                                                } ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </table>
+                            <?php else: ?>
+                                <?php echo "<h3 class='text-danger'>ERRORE: Nessun fattorino trovato.</h3>"; ?>
+                            <?php endif; ?>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Esci</button>
+                            <button type="submit" class="btn btn-warning">Assegna</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="nrOrdine" value="" id="hidden">
+        </form>
     </div>
 <?php else: ?>
     <?php echo "Session articoli or/and cart not found."; ?>
@@ -61,145 +109,156 @@
 
 <script>
 
+    //Modal
+
+    $('.assegnaAFattorino').click(function(){
+        $('#assegnaAFattorinoModal').modal('show');
+        $('#orderNumber').text(" [" + this.id + "]");
+        $("#hidden").val(this.id);
+    });
+
+    //Mappa
+
     var request = "https://api.mapbox.com/geocoding/v5/mapbox.places/<?php echo $ordine[0][0]['via']; ?>.json?limit=1&access_token=pk.eyJ1IjoiamFyaS1uYWVzZXIiLCJhIjoiY2sybHc4YjliMGFsbTNvcDBoNnJvZXludCJ9.b_eEj1vnKie7ZjsR4wNqdA";
     var requestResponse = null;
+    var lat;
+    var lon;
 
     //Make request
     $.getJSON(request, function(data){
-        console.log(data);
-        var lat = data.features.0.geometry.coordinates.0;
-        //var lon = data[features][0][geometry][coordinates][1];
+
+        var cordinates = data.features[0]['center'];
+
+        lat = cordinates[0];
+        lon = cordinates[1];
+
         console.log(lat + " " + lon);
-    });
 
+        //Map
 
+        //Pointer size
+        var size = 150;
 
-
-
-
-    //Map
-
-    //Pointer size
-    var size = 150;
-
-    mapboxgl.accessToken = 'pk.eyJ1IjoiamFyaS1uYWVzZXIiLCJhIjoiY2sybHc4YjliMGFsbTNvcDBoNnJvZXludCJ9.b_eEj1vnKie7ZjsR4wNqdA';
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [0, 0],
-        zoom: 10
-    });
-
-    var pulsingDot = {
-        width: size,
-        height: size,
-        data: new Uint8Array(size * size * 4),
-
-        onAdd: function() {
-            var canvas = document.createElement('canvas');
-            canvas.width = this.width;
-            canvas.height = this.height;
-            this.context = canvas.getContext('2d');
-        },
-
-        render: function() {
-            var duration = 1000;
-            var t = (performance.now() % duration) / duration;
-
-            var radius = size / 2 * 0.3;
-            var outerRadius = size / 2 * 0.7 * t + radius;
-            var context = this.context;
-
-            // draw outer circle
-            context.clearRect(0, 0, this.width, this.height);
-            context.beginPath();
-            context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2);
-            context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
-            context.fill();
-
-            // draw inner circle
-            context.beginPath();
-            context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2);
-            context.fillStyle = 'rgba(255, 100, 100, 1)';
-            context.strokeStyle = 'white';
-            context.lineWidth = 2 + 4 * (1 - t);
-            context.fill();
-            context.stroke();
-
-            // update this image's data with data from the canvas
-            this.data = context.getImageData(0, 0, this.width, this.height).data;
-
-            // keep the map repainting
-            map.triggerRepaint();
-
-            // return `true` to let the map know that the image was updated
-            return true;
-        }
-    };
-
-    map.on('load', function () {
-
-        map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
-
-        map.addLayer({
-            "id": "places",
-            "type": "symbol",
-            "source": {
-                "type": "geojson",
-                "data": {
-                    "type": "FeatureCollection",
-                    "features": [{
-                        "type": "Feature",
-                        "properties": {
-                            "description": "<strong>Fattorino: <?php echo ""; ?></strong><p>Posizione attuale [<?php echo "0"; ?> , <?php echo "0"; ?>]</p>",
-                            "icon": "theatre"
-                        },
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [<?php echo "0"; ?>, <?php echo "0"; ?>]
-                        }
-                    }]
-                }
-            },
-            "layout": {
-                "icon-image": "pulsing-dot",
-                "icon-allow-overlap": true
-            }
+        mapboxgl.accessToken = 'pk.eyJ1IjoiamFyaS1uYWVzZXIiLCJhIjoiY2sybHc4YjliMGFsbTNvcDBoNnJvZXludCJ9.b_eEj1vnKie7ZjsR4wNqdA';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [lat, lon],
+            zoom: 10
         });
-    });
 
-    //Add popup actions
+        var pulsingDot = {
+            width: size,
+            height: size,
+            data: new Uint8Array(size * size * 4),
 
-    // Create a popup, but don't add it to the map yet.
-    var popup = new mapboxgl.Popup({
-        closeButton: false,
-        closeOnClick: false
-    });
+            onAdd: function() {
+                var canvas = document.createElement('canvas');
+                canvas.width = this.width;
+                canvas.height = this.height;
+                this.context = canvas.getContext('2d');
+            },
 
-    map.on('mouseenter', 'places', function(e) {
-        // Change the cursor style as a UI indicator.
-        map.getCanvas().style.cursor = 'pointer';
+            render: function() {
+                var duration = 1000;
+                var t = (performance.now() % duration) / duration;
 
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = e.features[0].properties.description;
+                var radius = size / 2 * 0.3;
+                var outerRadius = size / 2 * 0.7 * t + radius;
+                var context = this.context;
 
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
+                // draw outer circle
+                context.clearRect(0, 0, this.width, this.height);
+                context.beginPath();
+                context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2);
+                context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
+                context.fill();
 
-        // Populate the popup and set its coordinates
-        // based on the feature found.
-        popup.setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
-    });
+                // draw inner circle
+                context.beginPath();
+                context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2);
+                context.fillStyle = 'rgba(255, 100, 100, 1)';
+                context.strokeStyle = 'white';
+                context.lineWidth = 2 + 4 * (1 - t);
+                context.fill();
+                context.stroke();
 
-    map.on('mouseleave', 'places', function() {
-        map.getCanvas().style.cursor = '';
-        popup.remove();
+                // update this image's data with data from the canvas
+                this.data = context.getImageData(0, 0, this.width, this.height).data;
+
+                // keep the map repainting
+                map.triggerRepaint();
+
+                // return `true` to let the map know that the image was updated
+                return true;
+            }
+        };
+
+        map.on('load', function () {
+
+            map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+
+            map.addLayer({
+                "id": "places",
+                "type": "symbol",
+                "source": {
+                    "type": "geojson",
+                    "data": {
+                        "type": "FeatureCollection",
+                        "features": [{
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Cliente: <?php echo $ordine[0][0]['nomeCliente'] . " " . $ordine[0][0]['cognomeCliente']; ?></strong><p>Posizione attuale '<?php echo $ordine[0][0]['via']; ?>' [" + lat + ", " + lon + "]</p>",
+                                "icon": "theatre"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [lat, lon]
+                            }
+                        }]
+                    }
+                },
+                "layout": {
+                    "icon-image": "pulsing-dot",
+                    "icon-allow-overlap": true
+                }
+            });
+        });
+
+        //Add popup actions
+
+        // Create a popup, but don't add it to the map yet.
+        var popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false
+        });
+
+        map.on('mouseenter', 'places', function(e) {
+            // Change the cursor style as a UI indicator.
+            map.getCanvas().style.cursor = 'pointer';
+
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = e.features[0].properties.description;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            // Populate the popup and set its coordinates
+            // based on the feature found.
+            popup.setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        });
+
+        map.on('mouseleave', 'places', function() {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+
     });
 
 </script>
