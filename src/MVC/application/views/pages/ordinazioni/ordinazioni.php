@@ -2,7 +2,7 @@
     <h1>ORDINAZIONI</h1>
     <br>
     <div class="row col-md-12 table-responsive">
-        <table class="table">
+        <table class="table" id="myTB">
             <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -84,6 +84,15 @@
         </form>
     </div>
     <script>
+
+        //Workaround per controllare se la tabella è vuota anche se le sessioni contengono qualcosa.
+        var rowNum = $('#myTB tr').length;
+
+        //Prima riga (titoli) inclusa.
+        if(rowNum <= 1){
+            $('#myTB').append("<tr><td colspan='5'>Nessuna ordinazione trovata.</td></tr>");
+        }
+
         jQuery(document).ready(function($) {
             $(".clickable-row").click(function() {
                 window.location = $(this).data("href");
