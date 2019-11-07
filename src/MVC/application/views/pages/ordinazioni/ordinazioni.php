@@ -108,7 +108,5 @@
             $("#hidden").val(this.id);
         });
 
-
-
     </script>
 </div>

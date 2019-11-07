@@ -110,7 +110,6 @@
 <script>
 
     //Modal
-
     $('.assegnaAFattorino').click(function(){
         $('#assegnaAFattorinoModal').modal('show');
         $('#orderNumber').text(" [" + this.id + "]");
@@ -118,23 +117,15 @@
     });
 
     //Mappa
-
     var request = "https://api.mapbox.com/geocoding/v5/mapbox.places/<?php echo $ordine[0][0]['via']; ?>.json?limit=1&access_token=pk.eyJ1IjoiamFyaS1uYWVzZXIiLCJhIjoiY2sybHc4YjliMGFsbTNvcDBoNnJvZXludCJ9.b_eEj1vnKie7ZjsR4wNqdA";
-    var requestResponse = null;
-    var lat;
-    var lon;
 
     //Make request
     $.getJSON(request, function(data){
 
         var cordinates = data.features[0]['center'];
 
-        lat = cordinates[0];
-        lon = cordinates[1];
-
-        console.log(lat + " " + lon);
-
-        //Map
+        var lat = cordinates[0];
+        var lon = cordinates[1];
 
         //Pointer size
         var size = 150;
