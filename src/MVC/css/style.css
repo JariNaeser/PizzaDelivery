@@ -18,10 +18,21 @@
     background-color: lightgrey;
 }
 
+.background{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
 .wrapper{
     margin: 1em;
     border: solid 1px lightgrey;
     border-radius: 10px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
 }
 
 .spinnerMiddle{
@@ -29,6 +40,14 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.welcomeHolder{
+    position: absolute;
+    text-align: center;
+    top: 45%;
+    transform: translateY(-50%);
+    color: white;
 }
 
 /* MAP POPUP */
