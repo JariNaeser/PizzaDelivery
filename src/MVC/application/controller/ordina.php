@@ -62,19 +62,24 @@ class Ordina
     public function creaOrdine(){
         //Crea ordine.
         if(isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['numeroTelefono']) && isset($_POST['paese']) && isset($_POST['cap']) && isset($_POST['via']) && isset($_POST['numero']) && isset($_SESSION['cart']) && count($_SESSION['cart']) > 0){
-            $nome = $_POST['nome'];
-            $cognome = $_POST['cognome'];
-            $telefono = intval($_POST['numeroTelefono']);
-            $paese = $_POST['paese'];
-            $cap = $_POST['cap'];
-            $via = $_POST['via'] . " " . $_POST['numero'];
 
             //Insert into ordine
-            $id = $this->pdModel->insertQuery("INSERT INTO Ordinazione(nomeCliente, cognomeCliente, numeroTelefonoCliente, via, cap, paese) VALUES ('$nome', '$cognome', $telefono, '$via', $cap, '$paese');");
+            $id = $this->pdModel->insertOrdinazione(
+                $_POST['nome'],
+                $_POST['cognome'],
+                $_POST['numeroTelefono'],
+                ($_POST['via'] . " " . $_POST['numero']),
+                $_POST['cap'],
+                $_POST['paese']
+            );
 
             //Insert into OrdineArticolo
             foreach ($_SESSION['cart'] as $element){
-                $this->pdModel->insertQuery("INSERT INTO OrdineArticolo VALUES ($id, '" . $element[0]['id'] . "', " . $_POST['select' . $element[0]['id']] . ");");
+                $this->pdModel->insertOrdineArticolo(
+                    $id,
+                    $element[0]['id'],
+                    $_POST['select' . $element[0]['id']]
+                );
             }
 
             //Se andato a buon fine

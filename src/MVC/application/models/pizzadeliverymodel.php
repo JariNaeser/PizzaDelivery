@@ -337,6 +337,51 @@ class PizzaDeliveryModel
         }
     }
 
+    public function insertOrdinazione(string $nome, string $cognome, int $numeroTelefono, string $via, int $cap, string $paese){
+        //Controllo
+        $nome = $this->validator->validateString($nome);
+        $cognome = $this->validator->validateString($cognome);
+        $numeroTelefono = $this->validator->validateInt($numeroTelefono);
+        $via = $this->validator->validateString($via);
+        $cap = $this->validator->validateInt($cap);
+        $paese = $this->validator->validateString($paese);
+
+        //Query
+        try{
+            $tmp = $this->connection->prepare("INSERT INTO Ordinazione(nomeCliente, cognomeCliente, numeroTelefonoCliente, via, cap, paese) VALUES (:nome, :cognome, :numeroTelefono, :via, :cap, :paese);");
+            $tmp->bindParam(":nome", $nome);
+            $tmp->bindParam(":cognome", $cognome);
+            $tmp->bindParam(":numeroTelefono", $numeroTelefono);
+            $tmp->bindParam(":via", $via);
+            $tmp->bindParam(":cap", $cap);
+            $tmp->bindParam(":paese", $paese);
+            $tmp->execute();
+            return $this->connection->lastInsertId();
+        }catch(PDOException $e){
+            $_SESSION['queryError'] = $e->getMessage();
+            header("Location: " . URL . "errorController/requireQueryError");
+        }
+    }
+
+    public function insertOrdineArticolo(int $ordinazione, int $articolo, int $quantita){
+        //Controllo
+        $ordinazione = $this->validator->validateInt($ordinazione);
+        $articolo = $this->validator->validateInt($articolo);
+        $quantita = $this->validator->validateInt($quantita);
+
+        //Query
+        try{
+            $tmp = $this->connection->prepare("INSERT INTO OrdineArticolo VALUES (:ordinazione, :articolo, :quantita);");
+            $tmp->bindParam(":ordinazione", $ordinazione);
+            $tmp->bindParam(":articolo", $articolo);
+            $tmp->bindParam(":quantita", $quantita);
+            $tmp->execute();
+        }catch(PDOException $e){
+            $_SESSION['queryError'] = $e->getMessage();
+            header("Location: " . URL . "errorController/requireQueryError");
+        }
+    }
+
     public function setConsegnaDaEffettuare(int $id){
         $this->insertQuery("UPDATE Consegna SET tipoConsegna = 'da effettuare', dataConsegna = null WHERE id = $id AND tipoConsegna NOT LIKE 'da effettuare';");
     }
