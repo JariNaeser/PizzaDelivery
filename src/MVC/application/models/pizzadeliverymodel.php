@@ -382,6 +382,40 @@ class PizzaDeliveryModel
         }
     }
 
+    public function insertConsegna(string $tipoConsegna, string $fattorino, int $ordinazione){
+        //Controllo
+        $tipoConsegna = $this->validator->validateString($tipoConsegna);
+        $fattorino = $this->validator->validateString($fattorino);
+        $ordinazione = $this->validator->validateInt($ordinazione);
+
+        //Query
+        try{
+            $tmp = $this->connection->prepare("INSERT INTO Consegna(tipoConsegna, fattorino, ordinazione) VALUES (:tipoConsegna, :fattorino, :ordinazione);");
+            $tmp->bindParam(":tipoConsegna", $tipoConsegna);
+            $tmp->bindParam(":fattorino", $fattorino);
+            $tmp->bindParam(":ordinazione", $ordinazione);
+            $tmp->execute();
+        }catch(PDOException $e){
+            $_SESSION['queryError'] = $e->getMessage();
+            header("Location: " . URL . "errorController/requireQueryError");
+        }
+    }
+
+    public function updateOrdinazionePPC(int $nrOrdine){
+        //Controllo
+        $nrOrdine = $this->validator->validateInt($nrOrdine);
+
+        //Query
+        try{
+            $tmp = $this->connection->prepare("UPDATE Ordinazione SET prontaPerConsegna = 1 WHERE id = :nrOrdine;");
+            $tmp->bindParam(":nrOrdine", $nrOrdine);
+            $tmp->execute();
+        }catch(PDOException $e){
+            $_SESSION['queryError'] = $e->getMessage();
+            header("Location: " . URL . "errorController/requireQueryError");
+        }
+    }
+
     public function setConsegnaDaEffettuare(int $id){
         $this->insertQuery("UPDATE Consegna SET tipoConsegna = 'da effettuare', dataConsegna = null WHERE id = $id AND tipoConsegna NOT LIKE 'da effettuare';");
     }

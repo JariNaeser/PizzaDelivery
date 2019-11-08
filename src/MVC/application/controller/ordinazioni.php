@@ -48,8 +48,16 @@ class Ordinazioni
                 $fattorino = $_POST['selezioneFattorino'];
                 $nrOrdine = $_POST['nrOrdine'];
 
-                $this->pdModel->insertQuery("INSERT INTO Consegna(tipoConsegna, fattorino, ordinazione) VALUES ('da effettuare', '$fattorino', $nrOrdine);");
-                $this->pdModel->insertQuery("UPDATE Ordinazione SET prontaPerConsegna = 1 WHERE id = $nrOrdine");
+                $this->pdModel->insertConsegna(
+                    'da effettuare',
+                    $fattorino,
+                    $nrOrdine
+                );
+
+                $this->pdModel->updateOrdinazionePPC(
+                    $nrOrdine
+                );
+
                 $this->pdModel->setFattorinoOccupato($fattorino);
 
                 //Redirect alla home
