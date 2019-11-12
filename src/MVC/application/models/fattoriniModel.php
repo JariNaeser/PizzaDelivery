@@ -107,7 +107,7 @@ class FattoriniModel{
      * Metodo che ritorna le consegne che un fattorino ha eseguito in questa giornata.
      *
      * @param string $username Fattorino da cercare.
-     * @return array Consegne effettuate oggi di un certo fattorino.
+     * @return array Consegne effettuate oggi di un certo fattorino
      */
     public function getConsegneOggi(string $username){
         return $this->execQuery("SELECT COUNT(*) AS 'consegneOggi' FROM Consegna WHERE fattorino LIKE '$username' AND tipoConsegna LIKE 'terminata' AND CURRENT_DATE() LIKE CONCAT(YEAR(dataInserimento), '-', MONTH(dataInserimento), '-', DAY(dataInserimento));");
