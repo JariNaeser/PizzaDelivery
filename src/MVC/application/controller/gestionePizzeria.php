@@ -12,7 +12,7 @@ class GestionePizzeria
     {
         if(file_exists('application/models/pizzadeliverymodel.php')){
             require_once 'application/models/pizzadeliverymodel.php';
-            $this->pdModel = new PizzaDeliveryModel();
+            $this->pdModel = new GestionePizzeriaModel();
             $this->header = new RightHeader();
             session_start();
             $_SESSION['userTypes'] = $this->pdModel->getUserTypes();

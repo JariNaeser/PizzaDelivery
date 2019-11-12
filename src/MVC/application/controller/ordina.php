@@ -12,7 +12,7 @@ class Ordina
     {
         if(file_exists('application/models/pizzadeliverymodel.php')){
             require_once 'application/models/pizzadeliverymodel.php';
-            $this->pdModel = new PizzaDeliveryModel();
+            $this->pdModel = new OrdinaModel();
             $this->header = new RightHeader();
 
             $this->cart = array();

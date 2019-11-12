@@ -12,7 +12,7 @@ class Login
     {
         if(file_exists('application/models/pizzadeliverymodel.php')){
             require_once 'application/models/pizzadeliverymodel.php';
-            $this->pdModel = new PizzaDeliveryModel();
+            $this->pdModel = new LoginModel();
             $this->header = new RightHeader();
             session_start();
         }else{
