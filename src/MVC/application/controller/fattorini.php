@@ -10,8 +10,8 @@ class Fattorini
 
     public function __construct()
     {
-        if(file_exists('application/models/pizzadeliverymodel.php')){
-            require_once 'application/models/pizzadeliverymodel.php';
+        if(file_exists('application/models/fattoriniModel.php')){
+            require_once 'application/models/fattoriniModel.php';
             $this->pdModel = new FattoriniModel();
             $this->header = new RightHeader();
             session_start();

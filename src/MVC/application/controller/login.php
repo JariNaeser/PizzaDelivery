@@ -10,8 +10,8 @@ class Login
 
     public function __construct()
     {
-        if(file_exists('application/models/pizzadeliverymodel.php')){
-            require_once 'application/models/pizzadeliverymodel.php';
+        if(file_exists('application/models/loginModel.php')){
+            require_once 'application/models/loginModel.php';
             $this->pdModel = new LoginModel();
             $this->header = new RightHeader();
             session_start();

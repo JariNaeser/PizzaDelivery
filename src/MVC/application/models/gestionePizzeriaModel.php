@@ -40,6 +40,22 @@ class GestionePizzeriaModel{
         }
     }
 
+    public function insertQuery(string $query){
+        try{
+            if(isset($this->connection)){
+                $query = $this->validator->validateString($query);
+                $tmp = $this->connection->prepare($query);
+                $tmp->execute();
+                return $this->connection->lastInsertId();
+            }else{
+                header("Location: " . URL . "errorController/requireQueryError");
+            }
+        }catch(PDOException $e){
+            $_SESSION['queryError'] = $e->getMessage();
+            header("Location: " . URL . "errorController/requireQueryError");
+        }
+    }
+
     public function getUserTypes(){
         return $this->execQuery("SELECT DISTINCT nome FROM TipoUtente;");
     }
@@ -90,7 +106,6 @@ class GestionePizzeriaModel{
     }
 
     public function dropUser(string $username){
-        $this->insertQuery("DELETE FROM fattorino WHERE username = '$username';");
         $this->insertQuery("DELETE FROM utente WHERE username = '$username';");
     }
 

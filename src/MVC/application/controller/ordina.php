@@ -10,8 +10,8 @@ class Ordina
 
     public function __construct()
     {
-        if(file_exists('application/models/pizzadeliverymodel.php')){
-            require_once 'application/models/pizzadeliverymodel.php';
+        if(file_exists('application/models/ordinaModel.php')){
+            require_once 'application/models/ordinaModel.php';
             $this->pdModel = new OrdinaModel();
             $this->header = new RightHeader();
 

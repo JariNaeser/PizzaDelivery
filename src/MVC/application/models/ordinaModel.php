@@ -110,4 +110,8 @@ class OrdinaModel{
         }
     }
 
+    public function getArticolo($id){
+        return $this->execQuery("SELECT * FROM articolo WHERE id = $id;");
+    }
+
 }

@@ -10,8 +10,8 @@ class Consegne
 
     public function __construct()
     {
-        if(file_exists('application/models/pizzadeliverymodel.php')){
-            require_once 'application/models/pizzadeliverymodel.php';
+        if(file_exists('application/models/consegneModel.php')){
+            require_once 'application/models/consegneModel.php';
             $this->pdModel = new ConsegneModel();
             $this->header = new RightHeader();
             session_start();

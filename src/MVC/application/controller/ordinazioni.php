@@ -10,8 +10,8 @@ class Ordinazioni
 
     public function __construct()
     {
-        if(file_exists('application/models/pizzadeliverymodel.php')){
-            require_once 'application/models/pizzadeliverymodel.php';
+        if(file_exists('application/models/ordinazioniModel.php')){
+            require_once 'application/models/ordinazioniModel.php';
             $this->pdModel = new OrdinazioniModel();
             $this->header = new RightHeader();
             session_start();

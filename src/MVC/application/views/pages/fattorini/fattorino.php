@@ -53,7 +53,7 @@
                             <tr>
                                 <td class="align-middle"><?php echo $consegna['id'];?></td>
                                 <td class="align-middle"><?php echo $consegna['dataInserimento'];?></td>
-                                <td class="align-middle"><?php echo $consegna['dataConsegna'];?></td>
+                                <td class="align-middle"><?php if(isset($consegna['dataConsegna'])){echo $consegna['dataConsegna'];}else{echo "-";}?></td>
                                 <td class="align-middle"><?php echo $consegna['via'][0]['via'];?></td>
                                 <td class="align-middle"><?php if(strcmp($consegna['tipoConsegna'], "da effettuare") == 0){
                                                 echo "<span class='badge badge-danger'>Da Effettuare</span>";
@@ -63,11 +63,13 @@
                                                 echo "<span class='badge badge-success'>Terminata</span>";
                                             } ?>
                                 </td>
-                                <td><?php if(isset($consegna['costoTotale'][0]['SommaCosti'])){
+                                <td>
+                                    <?php if(isset($consegna['costoTotale'][0]['SommaCosti'])){
                                                 echo $consegna['costoTotale'][0]['SommaCosti'];
                                             }else{
                                                 echo "-";
-                                            }?>
+                                            }
+                                    ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
