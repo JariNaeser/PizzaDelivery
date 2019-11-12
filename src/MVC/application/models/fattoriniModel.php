@@ -28,6 +28,13 @@ class FattoriniModel{
         }
     }
 
+    /**
+     * Metodo execQuery che si occupa di ricevere una query come parametro senza dover fare nessun
+     * bind, la esegue e ritorna il risultato di essa.
+     *
+     * @param string $query Query da eseguire.
+     * @return array Risultato della query eseguita.
+     */
     public function execQuery(string $query){
         try{
             $query = $this->validator->validateString($query);
@@ -40,6 +47,12 @@ class FattoriniModel{
         }
     }
 
+    /**
+     * Metodo che ritorna tutte le consegne che un fattorino ha eseguito.
+     *
+     * @param string $username Nome utente del fattorino.
+     * @return array Consegne effettuate dal fattorino.
+     */
     public function getConsegne(string $username){
         $consegne = $this->execQuery("SELECT * FROM Consegna WHERE fattorino LIKE '$username' AND CONCAT(YEAR(dataInserimento),'-', MONTH(dataInserimento),'-', DAY(dataInserimento)) LIKE CURRENT_DATE()");
         for($i = 0; $i < count($consegne); $i++){
@@ -55,10 +68,21 @@ class FattoriniModel{
         return $consegne;
     }
 
+    /**
+     * Metodo che ritorna un'utente se il suo username esiste.
+     *
+     * @param string $username Username dell'utente da cercare.
+     * @return array Utente trovato.
+     */
     public function getUser(string $username){
         return $this->execQuery("SELECT * FROM utente WHERE username = '$username';");
     }
 
+    /**
+     * Metodo che ritorna tutti i fattorini.
+     *
+     * @return array Tutti i fattorini.
+     */
     public function getFattorini(){
         $fattorini = $this->execQuery("SELECT * FROM Fattorino;");
         for($i = 0; $i < count($fattorini); $i++){
@@ -67,12 +91,24 @@ class FattoriniModel{
         return $fattorini;
     }
 
+    /**
+     * Ritorna un fattorino se il suo username esiste.
+     *
+     * @param string $username Username del fattorino da cercare.
+     * @return array Ritorna fattorino se esiste.
+     */
     public function getFattorino(string $username){
         $fattorino = $this->execQuery("SELECT * FROM Fattorino WHERE username LIKE '$username';");
         $fattorino['consegneOggi'] = $this->getConsegneOggi($username)[0]['consegneOggi'];
         return $fattorino;
     }
 
+    /**
+     * Metodo che ritorna le consegne che un fattorino ha eseguito in questa giornata.
+     *
+     * @param string $username Fattorino da cercare.
+     * @return array Consegne effettuate oggi di un certo fattorino.
+     */
     public function getConsegneOggi(string $username){
         return $this->execQuery("SELECT COUNT(*) AS 'consegneOggi' FROM Consegna WHERE fattorino LIKE '$username' AND tipoConsegna LIKE 'terminata' AND CURRENT_DATE() LIKE CONCAT(YEAR(dataInserimento), '-', MONTH(dataInserimento), '-', DAY(dataInserimento));");
     }

@@ -28,6 +28,13 @@ class ConsegneModel{
         }
     }
 
+    /**
+     * Metodo execQuery che si occupa di ricevere una query come parametro senza dover fare nessun
+     * bind, la esegue e ritorna il risultato di essa.
+     *
+     * @param string $query Query da eseguire.
+     * @return array Risultato della query eseguita.
+     */
     public function execQuery(string $query){
         try{
             $query = $this->validator->validateString($query);
@@ -40,6 +47,13 @@ class ConsegneModel{
         }
     }
 
+    /**
+     * Metodo insertQuery che si occupa di ricevere una query come parametro senza dover fare nessun
+     * bind, la esegue e ritorna l'ultimo id inserito.
+     *
+     * @param string $query Query da eseguire.
+     * @return string Ultimo id inserito.
+     */
     public function insertQuery(string $query){
         try{
             if(isset($this->connection)){
@@ -80,6 +94,12 @@ class ConsegneModel{
         }
     }
 
+    /**
+     * Metodo che ritorna tutte le consegne da oggi fino a x settimane (impostate con $number).
+     *
+     * @param $number Numero di settimane da usare.
+     * @return array Consegne da oggi a $number settimane fa.
+     */
     public function getConsegneConData($number){
         if(!is_int($number)){
             $number = intval($number);
@@ -109,14 +129,29 @@ class ConsegneModel{
         }
     }
 
+    /**
+     * Metodo che setta una consegna da effettuare.
+     *
+     * @param int $id Chiave della consegna da modificare.
+     */
     public function setConsegnaDaEffettuare(int $id){
         $this->insertQuery("UPDATE Consegna SET tipoConsegna = 'da effettuare', dataConsegna = null WHERE id = $id AND tipoConsegna NOT LIKE 'da effettuare';");
     }
 
+    /**
+     * Metodo che setta una consegna in corso.
+     *
+     * @param int $id Chiave della consegna da modificare.
+     */
     public function setConsegnaInCorso(int $id){
         $this->insertQuery("UPDATE Consegna SET tipoConsegna = 'in corso', dataConsegna = null WHERE id = $id AND tipoConsegna NOT LIKE 'in corso';");
     }
 
+    /**
+     * Metodo che setta una consegna terminata.
+     *
+     * @param int $id Chiave della consegna da modificare.
+     */
     public function setConsegnaTerminata(int $id){
         $this->insertQuery("UPDATE Consegna SET tipoConsegna = 'terminata', dataConsegna = now() WHERE id = $id AND tipoConsegna NOT LIKE 'terminata';");
     }

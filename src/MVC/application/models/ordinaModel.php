@@ -28,6 +28,13 @@ class OrdinaModel{
         }
     }
 
+    /**
+     * Metodo execQuery che si occupa di ricevere una query come parametro senza dover fare nessun
+     * bind, la esegue e ritorna il risultato di essa.
+     *
+     * @param string $query Query da eseguire.
+     * @return array Risultato della query eseguita.
+     */
     public function execQuery(string $query){
         try{
             $query = $this->validator->validateString($query);
