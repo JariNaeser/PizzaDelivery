@@ -12,8 +12,6 @@ class Home
         $this->header = new RightHeader();
     }
 
-    /* FRONTEND METHODS */
-
     public function index(){
         // Carico Views
         $this->header->getRightHeader();

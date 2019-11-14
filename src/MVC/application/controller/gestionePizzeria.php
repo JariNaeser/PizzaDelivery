@@ -71,9 +71,16 @@ class GestionePizzeria
     }
 
     public function eliminaUtente(string $username){
-        $this->pdModel->dropUser($username);
-        header("Location: " . URL . 'gestionePizzeria/home');
-        $this->home();
+
+        $response = $this->pdModel->dropUser($username);
+
+        if(isset($response)){
+            header("Location: " . URL . 'error/lastAdminDelete');
+        }else{
+            header("Location: " . URL . 'gestionePizzeria/home');
+            $this->home();
+        }
+
     }
 
     public function creaUtente(){
