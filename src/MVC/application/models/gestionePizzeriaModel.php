@@ -86,8 +86,10 @@ class GestionePizzeriaModel{
         return $this->execQuery("SELECT * FROM utente WHERE username = '$username';");
     }
 
-    public function updateUtente(string $nome, string $cognome, string $via, int $cap, string $paese, string $email, string $password, string $tipologia){
+    public function updateUtente(string $username, string $nome, string $cognome, string $via, int $cap, string $paese, string $email, string $password, string $tipologia){
+
         //Controllo
+        $username = $this->validator->validateString(strtolower($username));
         $nome = $this->validator->validateString(strtolower($nome));
         $cognome = $this->validator->validateString(strtolower($cognome));
         $via = $this->validator->validateString($via);
@@ -96,8 +98,6 @@ class GestionePizzeriaModel{
         $email = $this->validator->validateString($email);
         $password = $this->validator->validateString($password);
         $tipologia = $this->validator->validateString($tipologia);
-
-        $username = $nome . "." . $cognome;
 
         //Query
         try{

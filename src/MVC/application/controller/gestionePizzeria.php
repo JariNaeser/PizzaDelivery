@@ -46,7 +46,7 @@ class GestionePizzeria
 
     public function modifyUserContent(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            if(isset($_POST['nomeMU'])&&isset($_POST['cognomeMU'])&&isset($_POST['viaMU'])&&isset($_POST['capMU'])&&isset($_POST['paeseMU'])&&isset($_POST['emailMU'])&&isset($_POST['tipologiaMU'])){
+            if(isset($_POST['usernameMU'])&&isset($_POST['nomeMU'])&&isset($_POST['cognomeMU'])&&isset($_POST['viaMU'])&&isset($_POST['capMU'])&&isset($_POST['paeseMU'])&&isset($_POST['emailMU'])&&isset($_POST['tipologiaMU'])){
                 if(isset($_POST['passwordMU']) && strlen(trim($_POST['passwordMU'])) != 0){
                     $password = hash('sha256', $_POST['passwordMU']);
                 }else{
@@ -54,6 +54,7 @@ class GestionePizzeria
                 }
 
                 $this->pdModel->updateUtente(
+                    $_POST['usernameMU'],
                     $_POST['nomeMU'],
                     $_POST['cognomeMU'],
                     $_POST['viaMU'],

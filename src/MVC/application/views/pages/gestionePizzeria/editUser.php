@@ -10,6 +10,7 @@
                         <tr class="text-inline">
                             <td scope="col">Nome</td>
                             <td><input type="text" class="form-control" value="<?php echo $userToModify['nome']; ?>" name="nomeMU" required></td>
+                            <input type="hidden" name="usernameMU" value="<?php echo $userToModify['username']; ?>">
                         </tr>
                         <tr class="text-inline">
                             <td scope="col">Cognome</td>
