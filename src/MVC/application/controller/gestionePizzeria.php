@@ -74,8 +74,8 @@ class GestionePizzeria
 
         $response = $this->pdModel->dropUser($username);
 
-        if(isset($response)){
-            header("Location: " . URL . 'error/lastAdminDelete');
+        if(isset($response) && strcmp($response, "ERRORE" )== 0){
+            header("Location: " . URL . 'errorController/lastAdminDelete');
         }else{
             header("Location: " . URL . 'gestionePizzeria/home');
             $this->home();

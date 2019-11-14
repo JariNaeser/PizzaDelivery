@@ -84,7 +84,7 @@
 
     </div>
 <?php else: ?>
-    <div class="col-md-12 container text-center">
+    <div class="col-md-12 container text-center centerVerticallyDiv">
         <h1 class='text-danger text-center'>ERRORE: Nessun utente trovato.</h1>
         <a href="<?php echo URL?>home/index" class="btn btn-danger btn-lg">Torna alla home</a>
     </div>
