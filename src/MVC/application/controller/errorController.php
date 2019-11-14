@@ -38,4 +38,10 @@ class ErrorController
         require 'application/views/_templates/footer.php';
     }
 
+    public function lastAdminDelete(){
+        require 'application/views/_templates/headers/error.php';
+        require 'application/views/error/lastAdminDeleteError.php';
+        require 'application/views/_templates/footer.php';
+    }
+
 }
