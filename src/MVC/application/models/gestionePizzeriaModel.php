@@ -120,7 +120,12 @@ class GestionePizzeriaModel{
     }
 
     public function dropUser(string $username){
-        $this->insertQuery("DELETE FROM utente WHERE username = '$username';");
+        $user = $this->getUser($username);
+        if(strcmp($user[0]['tipoUtente'], 'amministratore') == 0 && $this->execQuery("SELECT COUNT(username) AS 'numAdmin' FROM utente WHERE tipoUtente LIKE 'amministratore';")[0]['numAdmin'] <= 1){
+            return "ERRORE";
+        }else{
+            $this->insertQuery("DELETE FROM utente WHERE username = '$username';");
+        }
     }
 
     public function insertUtente(string $nome, string $cognome, string $via, int $cap, string $paese, string $email, string $password, string $tipologia){
@@ -135,6 +140,13 @@ class GestionePizzeriaModel{
         $tipologia = $this->validator->validateString($tipologia);
 
         $username = $nome . "." . $cognome;
+
+        //Check if this username already exists
+        $tmp = $this->execQuery("SELECT COUNT(*) AS 'numeroUsernameUguale' FROM Utente WHERE username LIKE '$username';");
+        if($tmp[0]['numeroUsernameUguale'] != 0){
+            $selectUsernames = $this->execQuery("SELECT COUNT(*) AS 'countUsers' FROM Utente WHERE username LIKE '$username%';");
+            $username .= $selectUsernames[0]['countUsers']++;
+        }
 
         //Query
         try{
