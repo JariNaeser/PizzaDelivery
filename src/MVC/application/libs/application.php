@@ -44,8 +44,19 @@ class Application
 
             // tolgo il carattere / dalla fine della stringa
             $url = rtrim($_GET['url'], '/');
+
+            //ATTENZIONE: Ho aggiunto urlencode e urldecode per far si che metta le percentuali prima dei caratteri e
+            // poi li ritolga, con questo sistema anche i caratteri come la ä vengono passati invece che tagiati
+            // fuori dal metodo filter_var
+
+            $url = urlencode($url);
+
             //rimuove tutti i caratteri illegali dall'URL
             $url = filter_var($url, FILTER_SANITIZE_URL);
+
+            $url = urldecode($url);
+
+
             //divido in un array in base al carattere /
             $url = explode('/', $url);
 
