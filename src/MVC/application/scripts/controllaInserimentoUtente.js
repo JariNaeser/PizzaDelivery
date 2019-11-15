@@ -93,7 +93,7 @@ paeseSelector.keyup(function(event){
     checkIfOk();
 });
 
-// telefono field
+// email field
 var emailSelector = $('input[name=emailNU]');
 emailSelector.keyup(function(event){
     if(validate(emailSelector.val(), LUNGHEZZA_MASSIMA_EMAIL, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé .-0-9@])/)){
@@ -106,7 +106,7 @@ emailSelector.keyup(function(event){
     checkIfOk();
 });
 
-// numero field
+// password field
 var passwordSelector = $('input[name=passwordNU]');
 passwordSelector.keyup(function(event){
     if(validate(passwordSelector.val(), LUNGHEZZA_MASSIMA_PASSWORD, null)){
