@@ -1,4 +1,4 @@
-const status = [false, false, false];
+const status = [false, false, false, true];
 
 //Si riferisce alla lunghezza massima della tabella del DB.
 const LUNGHEZZA_MASSIMA_NOME = 50;
@@ -67,7 +67,7 @@ priceSelector.keyup(function(event){
 // path field
 var pathSelector = $('input[name=pathImmaginaNA]');
 pathSelector.keyup(function(event){
-    if(pathSelector.val() <= LUNGHEZZA_MASSIMA_NOME_IMMAGINE){
+    if(pathSelector.val().length <= LUNGHEZZA_MASSIMA_NOME_IMMAGINE){
         isOk(pathSelector);
         status[3] = true;
     }else{
