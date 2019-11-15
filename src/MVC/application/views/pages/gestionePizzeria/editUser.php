@@ -59,7 +59,7 @@
             </div>
             <a href="<?php echo URL . "gestionePizzeria/home";?>" class="btn btn-danger btn-lg">Esci</a>
             <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#modaleElimina">Elimina</a>
-            <button type="submit" class="btn btn-primary btn-lg">Aggiorna</button>
+            <button type="submit" class="btn btn-primary btn-lg" id="aggiorna">Aggiorna</button>
         </form>
 
         <!-- Modal -->
