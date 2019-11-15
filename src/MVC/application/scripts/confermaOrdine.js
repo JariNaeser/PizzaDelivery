@@ -26,7 +26,7 @@ function validate(string, maxLen, regex){
 
 // nome field
 var nameSelector = $('input[name=nome]');
-nameSelector.blur(function(event){
+nameSelector.keyup(function(event){
     if(validate(nameSelector.val(), LUNGHEZZA_MASSIMA_NOME, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
         isOk(nameSelector);
         status[0] = true;
@@ -39,7 +39,7 @@ nameSelector.blur(function(event){
 
 // cognome field
 var surnameSelector = $('input[name=cognome]');
-surnameSelector.blur(function(event){
+surnameSelector.keyup(function(event){
     if(validate(surnameSelector.val(), LUNGHEZZA_MASSIMA_COGNOME, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
         isOk(surnameSelector);
         status[1] = true;
@@ -52,7 +52,7 @@ surnameSelector.blur(function(event){
 
 // paese field
 var paeseSelector = $('input[name=paese]');
-paeseSelector.blur(function(event){
+paeseSelector.keyup(function(event){
     if(validate(paeseSelector.val(), LUNGHEZZA_MASSIMA_PAESE, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -])/)){
         isOk(paeseSelector);
         status[2] = true;
@@ -65,7 +65,7 @@ paeseSelector.blur(function(event){
 
 // telefono field
 var telefonoSelector = $('input[name=numeroTelefono]');
-telefonoSelector.blur(function(event){
+telefonoSelector.keyup(function(event){
     if(validate(telefonoSelector.val(), LUNGHEZZA_MASSIMA_TELEFONO, /([^0-9+ ])/)){
         isOk(telefonoSelector);
         status[3] = true;
@@ -78,7 +78,7 @@ telefonoSelector.blur(function(event){
 
 // via field
 var viaSelector = $('input[name=via]');
-viaSelector.blur(function(event){
+viaSelector.keyup(function(event){
     if(validate(viaSelector.val(), LUNGHEZZA_MASSIMA_VIA, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
         isOk(viaSelector);
         status[4] = true;
@@ -91,7 +91,7 @@ viaSelector.blur(function(event){
 
 // cap field
 var capSelector = $('input[name=cap]');
-capSelector.blur(function(event){
+capSelector.keyup(function(event){
     if(validate(capSelector.val(), LUNGHEZZA_MASSIMA_CAP, /([^0-9])/)){
         isOk(capSelector);
         status[5] = true;
@@ -104,7 +104,7 @@ capSelector.blur(function(event){
 
 // numero field
 var numeroSelector = $('input[name=numero]');
-numeroSelector.blur(function(event){
+numeroSelector.keyup(function(event){
     if(validate(numeroSelector.val(), LUNGHEZZA_MASSIMA_NUMERO, /([^0-9A-za-z])/)){
         isOk(numeroSelector);
         status[6] = true;
