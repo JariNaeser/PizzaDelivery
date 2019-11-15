@@ -7,10 +7,13 @@ const LUNGHEZZA_MASSIMA_VIA = 50;
 const LUNGHEZZA_MASSIMA_CAP = 6;
 const LUNGHEZZA_MASSIMA_PAESE = 50;
 const LUNGHEZZA_MASSIMA_EMAIL = 255;
-const LUNGHEZZA_PASSWORD = 255;
+const LUNGHEZZA_MASSIMA_PASSWORD = 255;
 
 function validate(string, maxLen, regex){
     try{
+        if(regex === null){
+            return (string.length > 0);
+        }
         string = string.trim();
         if(string.length > 0 && string.length <= maxLen){
             if(!regex.test(string)){
@@ -25,8 +28,8 @@ function validate(string, maxLen, regex){
 }
 
 // nome field
-var nameSelector = $('input[name=nome]');
-nameSelector.blur(function(event){
+var nameSelector = $('input[name=nomeNU]');
+nameSelector.keyup(function(event){
     if(validate(nameSelector.val(), LUNGHEZZA_MASSIMA_NOME, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
         isOk(nameSelector);
         status[0] = true;
@@ -38,8 +41,8 @@ nameSelector.blur(function(event){
 });
 
 // cognome field
-var surnameSelector = $('input[name=cognome]');
-surnameSelector.blur(function(event){
+var surnameSelector = $('input[name=cognomeNU]');
+surnameSelector.keyup(function(event){
     if(validate(surnameSelector.val(), LUNGHEZZA_MASSIMA_COGNOME, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
         isOk(surnameSelector);
         status[1] = true;
@@ -50,66 +53,67 @@ surnameSelector.blur(function(event){
     checkIfOk();
 });
 
-// paese field
-var paeseSelector = $('input[name=paese]');
-paeseSelector.blur(function(event){
-    if(validate(paeseSelector.val(), LUNGHEZZA_MASSIMA_PAESE, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -])/)){
-        isOk(paeseSelector);
+
+// via field
+var viaSelector = $('input[name=viaNU]');
+viaSelector.keyup(function(event){
+    if(validate(viaSelector.val(), LUNGHEZZA_MASSIMA_VIA, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.0-9])/)){
+        isOk(viaSelector);
         status[2] = true;
     }else{
-        isNotOk(paeseSelector);
+        isNotOk(viaSelector);
         status[2] = false;
     }
     checkIfOk();
 });
 
-// telefono field
-var telefonoSelector = $('input[name=numeroTelefono]');
-telefonoSelector.blur(function(event){
-    if(validate(telefonoSelector.val(), LUNGHEZZA_MASSIMA_TELEFONO, /([^0-9+ ])/)){
-        isOk(telefonoSelector);
+// cap field
+var capSelector = $('input[name=capNU]');
+capSelector.keyup(function(event){
+    if(validate(capSelector.val(), LUNGHEZZA_MASSIMA_CAP, /([^0-9])/)){
+        isOk(capSelector);
         status[3] = true;
     }else{
-        isNotOk(telefonoSelector);
+        isNotOk(capSelector);
         status[3] = false;
     }
     checkIfOk();
 });
 
-// via field
-var viaSelector = $('input[name=via]');
-viaSelector.blur(function(event){
-    if(validate(viaSelector.val(), LUNGHEZZA_MASSIMA_VIA, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
-        isOk(viaSelector);
+// paese field
+var paeseSelector = $('input[name=paeseNU]');
+paeseSelector.keyup(function(event){
+    if(validate(paeseSelector.val(), LUNGHEZZA_MASSIMA_PAESE, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -])/)){
+        isOk(paeseSelector);
         status[4] = true;
     }else{
-        isNotOk(viaSelector);
+        isNotOk(paeseSelector);
         status[4] = false;
     }
     checkIfOk();
 });
 
-// cap field
-var capSelector = $('input[name=cap]');
-capSelector.blur(function(event){
-    if(validate(capSelector.val(), LUNGHEZZA_MASSIMA_CAP, /([^0-9])/)){
-        isOk(capSelector);
+// telefono field
+var emailSelector = $('input[name=emailNU]');
+emailSelector.keyup(function(event){
+    if(validate(emailSelector.val(), LUNGHEZZA_MASSIMA_EMAIL, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé .-0-9@])/)){
+        isOk(emailSelector);
         status[5] = true;
     }else{
-        isNotOk(capSelector);
+        isNotOk(emailSelector);
         status[5] = false;
     }
     checkIfOk();
 });
 
 // numero field
-var numeroSelector = $('input[name=numero]');
-numeroSelector.blur(function(event){
-    if(validate(numeroSelector.val(), LUNGHEZZA_MASSIMA_NUMERO, /([^0-9A-za-z])/)){
-        isOk(numeroSelector);
+var passwordSelector = $('input[name=passwordNU]');
+passwordSelector.keyup(function(event){
+    if(validate(passwordSelector.val(), LUNGHEZZA_MASSIMA_PASSWORD, null)){
+        isOk(passwordSelector);
         status[6] = true;
     }else{
-        isNotOk(numeroSelector);
+        isNotOk(passwordSelector);
         status[6] = false;
     }
     checkIfOk();
@@ -134,14 +138,14 @@ function areAllOk(){
 
 function checkIfOk(){
     if(areAllOk()){
-        $('#ordina').removeAttr('type').attr('type', 'submit');
+        $('#crea').removeAttr('type').attr('type', 'submit');
     }else{
-        $('#ordina').removeAttr('type').attr('type', 'button');
+        $('#crea').removeAttr('type').attr('type', 'button');
     }
 }
 
-$('#ordina').click(function(){
-    if($('#ordina').attr('type') === 'button'){
+$('#crea').click(function(){
+    if($('#crea').attr('type') === 'button'){
         $('body').append(
             "<div class=\"alert alert-warning alert-danger fade show padding-footer\" style='margin: 1em;' role=\"alert\">"+
             "<strong>Errore:</strong> Immetti correttamente tutti i dati."+
