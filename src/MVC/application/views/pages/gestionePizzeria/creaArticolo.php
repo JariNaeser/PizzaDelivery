@@ -29,4 +29,6 @@
     </form>
 </div>
 
+<script src="<?php echo URL; ?>application/scripts/controllaInserimentoArticolo.js"></script>
+
 

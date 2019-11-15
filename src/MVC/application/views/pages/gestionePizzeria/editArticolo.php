@@ -60,4 +60,6 @@
     </div>
 <?php endif; ?>
 
+<script src="<?php echo URL; ?>application/scripts/controllaModificaArticolo.js"></script>
+
 

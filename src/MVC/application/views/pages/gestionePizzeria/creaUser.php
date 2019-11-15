@@ -52,5 +52,5 @@
         <button type="submit" class="btn btn-success btn-lg" id="crea">Crea</button>
     </form>
 </div>
-<script src="<?php echo URL; ?>application/scripts/controllaUtente.js"></script>
+<script src="<?php echo URL; ?>application/scripts/controllaInserimentoUtente.js"></script>
 

@@ -91,4 +91,4 @@
     </div>
 <?php endif; ?>
 
-
+<script src="<?php echo URL; ?>application/scripts/controllaModificaUtente.js"></script>
