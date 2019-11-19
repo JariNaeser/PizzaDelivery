@@ -171,11 +171,11 @@ class GestionePizzeriaModel{
         return $this->execQuery("SELECT * FROM articolo WHERE id = $id;");
     }
 
-    public function updateArticolo(string $nome, string $descrizione, int $prezzo, string $path, int $id){
+    public function updateArticolo(string $nome, string $descrizione, float $prezzo, string $path, int $id){
         //Controllo
         $nome = $this->validator->validateString($nome);
         $descrizione = $this->validator->validateString($descrizione);
-        $prezzo = $this->validator->validateInt($prezzo);
+        $prezzo = $this->validator->validateDouble($prezzo);
         $path = $this->validator->validateString($path);
         $id = $this->validator->validateInt($id);
 
@@ -194,11 +194,11 @@ class GestionePizzeriaModel{
         }
     }
 
-    public function insertArticolo(string $nome, string $descrizione, int $prezzo, $path){
+    public function insertArticolo(string $nome, string $descrizione, float $prezzo, $path){
         //Controllo
         $nome = $this->validator->validateString($nome);
         $descrizione = $this->validator->validateString($descrizione);
-        $prezzo = $this->validator->validateInt($prezzo);
+        $prezzo = $this->validator->validateDouble($prezzo);
         if(isset($path)){
             $path = $this->validator->validateString($path);
         }

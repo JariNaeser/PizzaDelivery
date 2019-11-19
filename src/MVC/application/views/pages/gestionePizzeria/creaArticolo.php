@@ -15,7 +15,7 @@
                     </tr>
                     <tr class="text-inline">
                         <td scope="col">Prezzo<span class="text-danger"> *</span></td>
-                        <td><input type="number" class="form-control" name="prezzoNA" required></td>
+                        <td><input type="number" class="form-control" name="prezzoNA" step=".01" min="0" required></td>
                     </tr>
                     <tr class="text-inline">
                         <td scope="col">Nome immagine</td>

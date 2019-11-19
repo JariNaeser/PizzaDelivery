@@ -17,7 +17,7 @@
                     </tr>
                     <tr class="text-inline">
                         <td scope="col">Prezzo<span class="text-danger"> *</span></td>
-                        <td><input type="number" class="form-control" name="prezzoMA" required value="<?php echo $articoloToModify['prezzo']; ?>"></td>
+                        <td><input type="number" class="form-control" name="prezzoMA" min="0" step=".01" required value="<?php echo $articoloToModify['prezzo']; ?>"></td>
                     </tr>
                     <tr class="text-inline">
                         <td scope="col">Path immagine</td>

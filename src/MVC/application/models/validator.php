@@ -27,6 +27,10 @@ class Validator
         return intval($this->validateInput($text));
     }
 
+    public function validateDouble(string $text){
+        return doubleval($this->validateInput($text));
+    }
+
     public function validateString(string $text){
         return $this->validateInput($text);
     }
