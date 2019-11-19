@@ -120,10 +120,7 @@ class ConsegneModel{
             case 24:
                 return $this->execQueryWithoutValidating("SELECT * FROM CONSEGNA WHERE dataInserimento > DATE_SUB(NOW(), INTERVAL 24 WEEK) ORDER BY dataInserimento DESC;");
                 break;
-            case 10000:
-                return $this->execQuery("SELECT * FROM CONSEGNA ORDER BY dataInserimento DESC;");
-                break;
-            default:
+            default: //Also if case 10000
                 return $this->execQuery("SELECT * FROM CONSEGNA ORDER BY dataInserimento DESC;");
                 break;
         }
