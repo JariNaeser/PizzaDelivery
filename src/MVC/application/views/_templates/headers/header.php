@@ -6,18 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="<?php echo URL . "application/libs/jQuery/jquery-3.4.1.min.js"?>"></script>
 
     <!-- Bootstrap -->
     <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="<?php echo URL . "application/libs/popper/popper-1.14.7.js"?>"></script>
+
     <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="<?php echo URL . "application/libs/bootstrap/js/bootstrap.js"?>"></script>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo URL . "application/libs/bootstrap/css/bootstrap.css"?>">
 
     <!-- Font awesome -->
-    <script src="https://kit.fontawesome.com/8d7154f948.js" crossorigin="anonymous"></script>
+    <script src="<?php echo URL . "application/libs/fontawesome/js/all.js"?>"></script>
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo URL . "css/style.css"?>">
