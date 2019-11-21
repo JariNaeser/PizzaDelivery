@@ -153,4 +153,8 @@ class ConsegneModel{
         $this->insertQuery("UPDATE Consegna SET tipoConsegna = 'terminata', dataConsegna = now() WHERE id = $id AND tipoConsegna NOT LIKE 'terminata';");
     }
 
+    public function getTipiConsegne(){
+        return $this->execQuery("SELECT * FROM TipoConsegna;");
+    }
+
 }

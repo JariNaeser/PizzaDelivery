@@ -21,11 +21,11 @@
                 <thead>
                 <tr>
                     <th scope="col">ID Consegna</th>
-                    <th scope="col">ID Ordinazione</th>
                     <th scope="col">Fattorino</th>
                     <th scope="col">Data Inserimento</th>
                     <th scope="col">Data Consegna</th>
                     <th scope="col">TipoConsegna</th>
+                    <th scope="col">Modifica</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,7 +33,6 @@
                     <?php foreach ($consegne as $consegna): ?>
                         <tr>
                             <td><?php echo $consegna['id']; ?></td>
-                            <td><?php echo $consegna['ordinazione']; ?></td>
                             <td><?php echo $consegna['fattorino']; ?></td>
                             <td><?php echo $consegna['dataInserimento']; ?></td>
                             <td><?php if(isset($consegna['dataConsegna'])){echo $consegna['dataConsegna'];}else{echo "-";} ?></td>
@@ -47,6 +46,7 @@
                                         }
                                 ?>
                             </td>
+                            <td><?php echo "<span class='modificaStato' id='" . $consegna['id'] . "'><i class='far fa-edit'></i></span>"; ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -55,8 +55,60 @@
                 </tbody>
             </table>
         </div>
+        <!-- Modal -->
+        <form action="<?php echo URL . 'consegne/aggiornaTipoConsegna'; ?>" method="post">
+            <div class="modal fade" id="modificaStatoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modifica stato Consegna <span id="deliveryNumber"></span></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body table-responsive">
+                            <?php if(isset($_SESSION['consegne']) && count($_SESSION['consegne']) > 0): ?>
+                                <?php $fattorini = $_SESSION['consegne']; ?>
+                                <table class="table">
+                                    <tr>
+                                        <th>Seleziona</th>
+                                        <th>Stato</th>
+                                    </tr>
+                                    <?php if(isset($_SESSION['tipiConsegne'])){$options = $_SESSION['tipiConsegne']; } ?>
+                                    <?php foreach ($options as $option): ?>
+                                        <tr>
+                                            <td><input type="radio" name="selezioneConsegna" value="<?php echo $option['nome']; ?>" required></td>
+
+                                            <?php switch($option['nome']){
+                                                case "terminata":
+                                                    echo "<td><span class='badge badge-success'>Terminata</span></td>";
+                                                    break;
+                                                case "in corso":
+                                                    echo "<td><span class='badge badge-warning'>In Corso</span></td>";
+                                                    break;
+                                                case "da effettuare":
+                                                    echo "<td><span class='badge badge-danger'>Da Effettuare</span></td>";
+                                                    break;
+                                            }?>
+                                        </tr>
+                                    <?php endforeach; ?>
+
+                                </table>
+                            <?php else: ?>
+                                <?php echo "<h3 class='text-danger'>ERRORE: Nessun fattorino trovato.</h3>"; ?>
+                            <?php endif; ?>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Esci</button>
+                            <button type="submit" class="btn btn-secondary">Assegna</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="nrOrdine" value="" id="hidden">
+        </form>
         <script>
-            jQuery(document).ready(function($) {
+            $(document).ready(function($) {
 
                 var select = $('#selectTime');
 
@@ -102,6 +154,13 @@
                     document.close();
                 });
             }
+
+            //Modal
+            $('.modificaStato').click(function(e){
+                $('#modificaStatoModal').modal('show');
+                $('#deliveryNumber').text(" [" + this.id + "]");
+                $("#hidden").val(this.id);
+            });
 
         </script>
     </div>
