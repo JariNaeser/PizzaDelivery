@@ -21,7 +21,6 @@ class Fattorini
     }
 
     public function home(){
-
         $_SESSION['fattorini'] = $this->pdModel->getFattorini();
 
         // Carico Views
