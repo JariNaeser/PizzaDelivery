@@ -4,6 +4,7 @@
     <meta name="author" content="Jari Naeser">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PizzaDelivery</title>
 
     <!-- JQuery -->
     <script src="<?php echo URL . "application/libs/jQuery/jquery-3.4.1.min.js"?>"></script>

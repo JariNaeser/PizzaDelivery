@@ -4,6 +4,7 @@
     <meta name="author" content="Jari Naeser">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PizzaDelivery</title>
 
     <!-- JQuery -->
     <script src="<?php echo URL . "application/libs/jQuery/jquery-3.4.1.min.js"?>"></script>
@@ -30,8 +31,8 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-    <a class="navbar-brand" href="<?php echo URL?>home/index">PizzaDelivery<?php if(isset($_SESSION['user'])){echo " • " . $_SESSION['user'][0]['tipoUtente'];}?></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="<?php echo URL?>home/index">PizzaDelivery<span id='userTypeText'><?php if(isset($_SESSION['user'])){echo " • " . $_SESSION['user'][0]['tipoUtente'];}?></span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="dropdownButton">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="justify-content-end collapse navbar-collapse" id="navbarNav">

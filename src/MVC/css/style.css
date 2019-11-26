@@ -10,6 +10,11 @@
     z-index: -1;
 }
 
+#userTypeText{
+    vertical-align: unset;
+    font-size: 1em;
+}
+
 .container{
     padding: 1em;
 }
@@ -57,4 +62,31 @@
 
 nav{
     z-index: 1;
+}
+
+#dropdownButton{
+    position: fixed;
+    right: 0.8em;
+    top: 0.4em;
+}
+
+@media screen and (max-width: 450px) {
+    #userTypeText{
+        vertical-align: middle;
+        font-size: 0.8em;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    #userTypeText{
+        vertical-align: middle;
+        font-size: 0.6em;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    #userTypeText{
+        vertical-align: middle;
+        font-size: 0.5em;
+    }
 }
