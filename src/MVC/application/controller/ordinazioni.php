@@ -72,4 +72,14 @@ class Ordinazioni
         }
     }
 
+    public function eliminaOrdinazione(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if(isset($_POST['idOrdinazione'])){
+                echo "Value: " . $_POST['idOrdinazione'];
+                $this->pdModel->eliminaOrdinazione(intval($_POST['idOrdinazione']));
+            }
+        }
+        header("Location: " . URL . "ordinazioni/home");
+    }
+
 }

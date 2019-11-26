@@ -10,6 +10,7 @@
                 <th scope="col">Posizione</th>
                 <th scope="col">Pz. Ordine</th>
                 <th scope="col">Assegna Ordine</th>
+                <th scope="col">Elimina</th>
             </tr>
             </thead>
             <tbody>
@@ -27,6 +28,7 @@
                             <td class="align-middle"><?php echo $ordine[0]['via']; ?></td>
                             <td class="align-middle"><?php echo $sum; ?></td>
                             <td class="align-middle"><button class="btn btn-warning btn-md assegnaAFattorino" id="<?php echo $ordine[0]['id']?>">Assegna a fattorino</button></td>
+                            <td class="align-middle"><?php echo "<span class='eliminaOrdinazione' id='" . $ordine[0]['id'] . "'><i class='fas fa-times text-danger'></i></span>"; ?></td>
                         </tr>
                     <?php endif; ?>
                 <?php endforeach; ?>
@@ -82,6 +84,29 @@
             </div>
             <input type="hidden" name="nrOrdine" value="" id="hidden">
         </form>
+        <!-- Modal -->
+        <form action="<?php echo URL . "ordinazioni/eliminaOrdinazione";?>" method="POST">
+            <div class="modal fade" id="eliminaOrdinazioneModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-danger" id="exampleModalLabel">ATTENZIONE</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Sei sicuro di voler eliminare l'ordinazione <span id="ordinazioneNumber"></span> ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                            <button type="submit" class="btn btn-warning">Conferma</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="idOrdinazione" value="" id="idOrdinazione">
+        </form>
     </div>
     <script>
 
@@ -106,6 +131,15 @@
             $('#assegnaAFattorinoModal').modal('show');
             $('#orderNumber').text(" [" + this.id + "]");
             $("#hidden").val(this.id);
+        });
+
+        //Apri modale
+        $('.eliminaOrdinazione').click(function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            $('#eliminaOrdinazioneModal').modal('show');
+            $('#ordinazioneNumber').text(" [" + this.id + "]");
+            $("#idOrdinazione").val(this.id);
         });
 
     </script>

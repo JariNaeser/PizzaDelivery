@@ -136,6 +136,20 @@ class OrdinazioniModel{
         }
     }
 
+    public function eliminaOrdinazione(int $id){
+        //Controllo
+        $id = $this->validator->validateInt($id);
+        //Query
+        try{
+            $tmp = $this->connection->prepare("DELETE FROM Ordinazione WHERE id = :id;");
+            $tmp->bindParam(":id", $id);
+            $tmp->execute();
+        }catch(PDOException $e){
+            $_SESSION['queryError'] = $e->getMessage();
+            header("Location: " . URL . "errorController/requireQueryError");
+        }
+    }
+
     public function setFattorinoLibero(string $username){
         $this->insertQuery("UPDATE fattorino SET inServizio = 0 WHERE username LIKE '$username';");
     }
