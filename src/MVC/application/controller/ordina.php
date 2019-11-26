@@ -63,30 +63,53 @@ class Ordina
         //Crea ordine.
         if(isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['numeroTelefono']) && isset($_POST['paese']) && isset($_POST['cap']) && isset($_POST['via']) && isset($_POST['numero']) && isset($_SESSION['cart']) && count($_SESSION['cart']) > 0){
 
-            //Insert into ordine
-            $id = $this->pdModel->insertOrdinazione(
-                $_POST['nome'],
-                $_POST['cognome'],
-                $_POST['numeroTelefono'],
-                ($_POST['via'] . " " . $_POST['numero']),
-                $_POST['cap'],
-                $_POST['paese']
-            );
+            $atLeastOneFound = false;
 
-            //Insert into OrdineArticolo
             foreach ($_SESSION['cart'] as $element){
-                $this->pdModel->insertOrdineArticolo(
-                    $id,
-                    $element[0]['id'],
-                    $_POST['select' . $element[0]['id']]
-                );
+                if($_POST['select' . $element[0]['id']] != 0){
+                    //Insert into ordine
+                    $id = $this->pdModel->insertOrdinazione(
+                        $_POST['nome'],
+                        $_POST['cognome'],
+                        $_POST['numeroTelefono'],
+                        ($_POST['via'] . " " . $_POST['numero']),
+                        $_POST['cap'],
+                        $_POST['paese']
+                    );
+                    $atLeastOneFound = true;
+                    break;
+                }
             }
 
-            //Se andato a buon fine
-            $this->header->getRightHeader();
-            require 'application/views/pages/ordina/ringraziamentoOrdine.php';
-            require 'application/views/_templates/footer.php';
+            if($atLeastOneFound){
+                //Insert into OrdineArticolo
 
+                $counter = 0;
+
+                foreach ($_SESSION['cart'] as $element){
+                    if($_POST['select' . $element[0]['id']] != 0){
+                        $this->pdModel->insertOrdineArticolo(
+                            $id,
+                            $element[0]['id'],
+                            $_POST['select' . $element[0]['id']]
+                        );
+                        $counter++;
+                    }
+                }
+
+                if($counter > 0){
+                    //Se andato a buon fine
+                    $this->header->getRightHeader();
+                    require 'application/views/pages/ordina/ringraziamentoOrdine.php';
+                    require 'application/views/_templates/footer.php';
+                }else{
+                    //Cart vuoto, mostra errore.
+                    header("Location: " . URL . "errorController/emptyCartError");
+                }
+            }else{
+                //Cart vuoto, mostra errore.
+                header("Location: " . URL . "errorController/emptyCartError");
+            }
             //Azzera contenuto carrello
             $_SESSION['cart'] = null;
         }else{
