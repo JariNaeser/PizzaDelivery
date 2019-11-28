@@ -37,6 +37,16 @@
                             <td><input type="password" class="form-control" placeholder="Password non mostrata." name="passwordMU"></td>
                         </tr>
                         <tr class="text-inline">
+                            <td scope="col">Stato</td>
+                            <td>
+                                <?php if($userToModify['utenteAbilitato'] == 1): ?>
+                                    <a href="<?php echo URL . "gestionePizzeria/disabilitaUtente/" . $userToModify['username'];?>" class="btn btn-secondary btn-md">Disabilita</a>
+                                <?php else: ?>
+                                    <a href="<?php echo URL . "gestionePizzeria/abilitaUtente/" . $userToModify['username'];?>" class="btn btn-secondary btn-md">Abilita</a>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                        <tr class="text-inline">
                             <td scope="col">Tipologia</td>
                             <td>
                                 <select class="form-control" name="tipologiaMU" required>

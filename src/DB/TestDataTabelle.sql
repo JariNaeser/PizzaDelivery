@@ -20,14 +20,41 @@ INSERT INTO TipoUtente VALUES ("fattorino");
 /* CREAZIONE UTENTE */
 INSERT INTO Utente VALUES (
 	"jari.naeser",
-	"jari", 
-	"naeser", 
-	"Via Mer Zarei 12", 
-	6965, 
+	"jari",
+	"naeser",
+	"Via Mer Zarei 12",
+	6965,
 	"Svizzera",
-	"jari.naeser@samtrevano.ch", 
-	"9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08", 
-	"amministratore"
+	"jari.naeser@samtrevano.ch",
+	"9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+	"amministratore",
+    1
+);
+
+INSERT INTO Utente VALUES (
+    "franco.gialli",
+    "Franco",
+    "Gialli",
+    "Via Scuole 12",
+    6900,
+    "Svizzera",
+    "franco.gialli@pizzadelivery.ch",
+    "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+    "impiegato vendita",
+    1
+);
+
+INSERT INTO Utente VALUES (
+    "franco.neri",
+    "Franco",
+    "Neri",
+    "Via Mare 4",
+    6900,
+    "Svizzera",
+    "franco.neri@pizzadelivery.ch",
+    "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+    "fattorino",
+    1
 );
 
 /* ARTICOLO */

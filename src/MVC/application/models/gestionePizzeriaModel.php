@@ -150,7 +150,7 @@ class GestionePizzeriaModel{
 
         //Query
         try{
-            $tmp = $this->connection->prepare("INSERT INTO utente VALUES (:username, :nome, :cognome, :via, :cap, :paese, :email, :password, :tipoUtente);");
+            $tmp = $this->connection->prepare("INSERT INTO utente VALUES (:username, :nome, :cognome, :via, :cap, :paese, :email, :password, :tipoUtente, 1);");
             $tmp->bindParam(":nome", $nome);
             $tmp->bindParam(":cognome", $cognome);
             $tmp->bindParam(":via", $via);
@@ -226,6 +226,36 @@ class GestionePizzeriaModel{
         return $this->insertQuery("DELETE FROM articolo WHERE id = $id;");
     }
 
+    public function abilitaUtente(string $username){
+        //Controllo
+        $username = $this->validator->validateString($username);
+
+        //Query
+        try{
+            $tmp = $this->connection->prepare("UPDATE Utente SET utenteAbilitato = 1 WHERE username = :username;");
+            $tmp->bindParam(":username", $username);
+            $tmp->execute();
+        }catch(PDOException $e){
+            $_SESSION['queryError'] = $e->getMessage();
+            header("Location: " . URL . "errorController/requireQueryError");
+        }
+    }
+
+    public function disabilitaUtente(string $username){
+        //Controllo
+        $username = $this->validator->validateString($username);
+
+        //Query
+        try{
+            $tmp = $this->connection->prepare("UPDATE Utente SET utenteAbilitato = 0 WHERE username = :username;");
+            $tmp->bindParam(":username", $username);
+            $tmp->execute();
+        }catch(PDOException $e){
+            $_SESSION['queryError'] = $e->getMessage();
+            header("Location: " . URL . "errorController/requireQueryError");
+        }
+    }
+
     public function abilitaArticolo(int $id){
         //Controllo
         $id = $this->validator->validateInt($id);
@@ -250,6 +280,18 @@ class GestionePizzeriaModel{
             $tmp = $this->connection->prepare("UPDATE Articolo SET articoloAttivo = 0 WHERE id = :id;");
             $tmp->bindParam(":id", $id);
             $tmp->execute();
+        }catch(PDOException $e){
+            $_SESSION['queryError'] = $e->getMessage();
+            header("Location: " . URL . "errorController/requireQueryError");
+        }
+    }
+
+    public function getAdminsCount(){
+        //Query
+        try{
+            $tmp = $this->connection->prepare("SELECT COUNT(*) AS 'adminsNum' FROM Utente WHERE tipoUtente LIKE 'amministratore';");
+            $tmp->execute();
+            return $tmp->fetchAll(PDO::FETCH_ASSOC);
         }catch(PDOException $e){
             $_SESSION['queryError'] = $e->getMessage();
             header("Location: " . URL . "errorController/requireQueryError");

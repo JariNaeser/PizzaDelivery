@@ -94,7 +94,6 @@ class GestionePizzeria
     public function createUser(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if(isset($_POST['nomeNU'])&&isset($_POST['cognomeNU'])&&isset($_POST['viaNU'])&&isset($_POST['capNU'])&&isset($_POST['paeseNU'])&&isset($_POST['emailNU'])&&isset($_POST['passwordNU'])&&isset($_POST['tipologiaNU'])){
-
                 $this->pdModel->insertUtente(
                     $_POST['nomeNU'],
                     $_POST['cognomeNU'],
@@ -181,6 +180,21 @@ class GestionePizzeria
                 header("Location: " . URL . 'gestionePizzeria/home');
                 $this->home();
             }
+        }
+    }
+
+    public function abilitaUtente(string $username){
+        $this->pdModel->abilitaUtente($username);
+        header("Location: " . URL . "gestionePizzeria/home");
+    }
+
+    public function disabilitaUtente(string $username){
+        $totNum = $this->pdModel->getAdminsCount()[0]['adminsNum'];
+        if($totNum > 1){
+            $this->pdModel->disabilitaUtente($username);
+            header("Location: " . URL . "gestionePizzeria/home");
+        }else{
+            header("Location: " . URL . 'errorController/lastAdminDelete');
         }
     }
 

@@ -29,6 +29,7 @@
                 <tr>
                     <th scope="col">Username</th>
                     <th scope="col">Tipologia</th>
+                    <th scope="col">Abilitato</th>
                     <th scope="col">Modifica</th>
                 </tr>
                 </thead>
@@ -37,8 +38,9 @@
                         <?php $utenti = $_SESSION['utenti']; ?>
                         <?php foreach ($utenti as $utente): ?>
                             <tr>
-                                <td><?php echo $utente['username'];?></td>
+                                <td><?php if($utente['utenteAbilitato'] == 1){echo $utente['username'];}else{echo "<strike class='text-danger'> <span class='text-dark'>" . $utente['username'] . "</span></strike>";}?></td>
                                 <td><?php echo $utente['tipoUtente'];?></td>
+                                <td><?php if($utente['utenteAbilitato'] == 1){echo "<i class=\"fas fa-check\"></i>";}else{echo "<i class=\"fas fa-times\"></i>";}?></td>
                                 <td>
                                     <a href='<?php echo URL . "gestionePizzeria/modifyUser/" . $utente['username']; ?>' class='text-dark'>
                                         <i class="fas fa-user-edit"></i>
@@ -93,8 +95,7 @@
                     <?php foreach ($prodotti as $prodotto): ?>
                         <tr>
                             <td><img style='height: 50px; width: 50px;' src='<?php echo URL . $prodotto['urlFoto']; ?>'></td>
-                            <td>
-                                <?php if($prodotto['articoloAttivo'] == 1){echo $prodotto['nome'];}else{echo "<strike class='text-danger'> <span class='text-dark'>" . $prodotto['nome'] . "</span></strike>";}?></td>
+                            <td><?php if($prodotto['articoloAttivo'] == 1){echo $prodotto['nome'];}else{echo "<strike class='text-danger'> <span class='text-dark'>" . $prodotto['nome'] . "</span></strike>";}?></td>
                             <td><?php echo $prodotto['prezzo'];?></td>
                             <td><?php if($prodotto['articoloAttivo'] == 1){echo "<i class=\"fas fa-check\"></i>";}else{echo "<i class=\"fas fa-times\"></i>";}?></td>
                             <td>
