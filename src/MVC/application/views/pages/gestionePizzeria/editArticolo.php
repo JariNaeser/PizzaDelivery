@@ -1,7 +1,7 @@
 <?php if(isset($_SESSION['articoloToModify']) && count($_SESSION['articoloToModify']) > 0): ?>
     <?php $articoloToModify = $_SESSION['articoloToModify'][0]; ?>
     <div class="col-md-12 container text-center padding-footer">
-        <h1>Articolo "<?php echo $articoloToModify['nome']; ?>"</h1>
+        <h1>Articolo <?php echo $articoloToModify['nome']; ?></h1>
         <br>
         <form action="<?php echo URL . "gestionePizzeria/modifyArticoloContent"?>" method="post">
             <div class="table-responsive col-md-6 mx-auto">
@@ -22,6 +22,16 @@
                     <tr class="text-inline">
                         <td scope="col">Path immagine</td>
                         <td><input type="text" class="form-control" name="pathImmaginaMA" value="<?php echo $articoloToModify['urlFoto']; ?>"></td>
+                    </tr>
+                    <tr class="text-inline">
+                        <td scope="col">Stato</td>
+                        <td>
+                            <?php if($articoloToModify['articoloAttivo'] == 1): ?>
+                                <a href="<?php echo URL . "gestionePizzeria/disabilitaArticolo/" . $articoloToModify['id'];?>" class="btn btn-secondary btn-md">Disabilita</a>
+                            <?php else: ?>
+                                <a href="<?php echo URL . "gestionePizzeria/abilitaArticolo/" . $articoloToModify['id'];?>" class="btn btn-secondary btn-md">Abilita</a>
+                            <?php endif; ?>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

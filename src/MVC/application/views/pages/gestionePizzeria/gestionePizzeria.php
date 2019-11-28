@@ -83,6 +83,7 @@
                     <th scope="col">Immagine</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Prezzo</th>
+                    <th scope="col">Abilitato</th>
                     <th scope="col">Modifica</th>
                 </tr>
                 </thead>
@@ -92,8 +93,10 @@
                     <?php foreach ($prodotti as $prodotto): ?>
                         <tr>
                             <td><img style='height: 50px; width: 50px;' src='<?php echo URL . $prodotto['urlFoto']; ?>'></td>
-                            <td><?php echo $prodotto['nome'];?></td>
+                            <td>
+                                <?php if($prodotto['articoloAttivo'] == 1){echo $prodotto['nome'];}else{echo "<strike class='text-danger'> <span class='text-dark'>" . $prodotto['nome'] . "</span></strike>";}?></td>
                             <td><?php echo $prodotto['prezzo'];?></td>
+                            <td><?php if($prodotto['articoloAttivo'] == 1){echo "<i class=\"fas fa-check\"></i>";}else{echo "<i class=\"fas fa-times\"></i>";}?></td>
                             <td>
                                 <a href='<?php echo URL . "gestionePizzeria/modifyArticolo/" . $prodotto['id']; ?>' class='text-dark'>
                                     <i class="fas fa-user-edit"></i>

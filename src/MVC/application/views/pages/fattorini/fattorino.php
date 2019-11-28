@@ -2,7 +2,7 @@
     <?php if(isset($_SESSION['fattorino']) && count($_SESSION['fattorino']) > 0 && isset($_SESSION['userFattorino']) && count($_SESSION['userFattorino']) > 0): ?>
         <?php $fattorino = $_SESSION['fattorino'][0]; ?>
         <?php $userFattorino = $_SESSION['userFattorino'][0]; ?>
-        <h1>FATTORINO "<?php echo $fattorino['username']; ?>"</h1>
+        <h1>Fattorino <?php echo $fattorino['username']; ?></h1>
         <br>
         <br>
         <div class="row">

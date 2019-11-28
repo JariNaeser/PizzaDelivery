@@ -184,4 +184,14 @@ class GestionePizzeria
         }
     }
 
+    public function abilitaArticolo(string $id){
+        $this->pdModel->abilitaArticolo(intval($id));
+        header("Location: " . URL . "gestionePizzeria/home");
+    }
+
+    public function disabilitaArticolo(string $id){
+        $this->pdModel->disabilitaArticolo(intval($id));
+        header("Location: " . URL . "gestionePizzeria/home");
+    }
+
 }

@@ -19,19 +19,19 @@
                     <?php if(count($articoli) != 0): ?>
                         <?php foreach ($articoli as $articolo): ?>
                             <?php $nome = $articolo['nome'] ?>
-
-                            <tr>
-                                <td><img style='height: 50px; width: 50px;' src='<?php echo URL . $articolo['urlFoto']; ?>'></td>
-                                <td><?php echo $articolo['nome']; ?></td>
-                                <td><?php echo $articolo['descrizione']; ?></td>
-                                <td><?php echo $articolo['prezzo']; ?></td>
-                                <td>
-                                    <a class='text-dark' href='<?php echo URL . "ordina/addToCart/" . $articolo['id']; ?>'>
-                                        <i class='fas fa-shopping-cart' alt='X'></i>
-                                    </a>
-                                </td>
-                            </tr>
-
+                            <?php if($articolo['articoloAttivo'] == 1): ?>
+                                <tr>
+                                    <td><img style='height: 50px; width: 50px;' src='<?php echo URL . $articolo['urlFoto']; ?>'></td>
+                                    <td><?php echo $articolo['nome']; ?></td>
+                                    <td><?php echo $articolo['descrizione']; ?></td>
+                                    <td><?php echo $articolo['prezzo']; ?></td>
+                                    <td>
+                                        <a class='text-dark' href='<?php echo URL . "ordina/addToCart/" . $articolo['id']; ?>'>
+                                            <i class='fas fa-shopping-cart' alt='X'></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <?php echo "<tr><td colspan='5' class='text-center'>Nessun prodotto disponibile.</td></tr>" ?>
@@ -70,7 +70,7 @@
 
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <?php echo "<tr><td colspan='5' class='text-center'>Nessun elemento selezionato.</td></tr>"; ?>
+                        <?php echo "<tr><td colspan='4' class='text-center'>Nessun elemento selezionato.</td></tr>"; ?>
                     <?php endif; ?>
                 <?php else: ?>
                     <?php echo "Session cart not found."; ?>

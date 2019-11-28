@@ -222,7 +222,38 @@ class GestionePizzeriaModel{
     }
 
     public function dropArticolo(int $id){
+        $id = $this->validator->validateInt($id);
         return $this->insertQuery("DELETE FROM articolo WHERE id = $id;");
+    }
+
+    public function abilitaArticolo(int $id){
+        //Controllo
+        $id = $this->validator->validateInt($id);
+
+        //Query
+        try{
+            $tmp = $this->connection->prepare("UPDATE Articolo SET articoloAttivo = 1 WHERE id = :id;");
+            $tmp->bindParam(":id", $id);
+            $tmp->execute();
+        }catch(PDOException $e){
+            $_SESSION['queryError'] = $e->getMessage();
+            header("Location: " . URL . "errorController/requireQueryError");
+        }
+    }
+
+    public function disabilitaArticolo(int $id){
+        //Controllo
+        $id = $this->validator->validateInt($id);
+
+        //Query
+        try{
+            $tmp = $this->connection->prepare("UPDATE Articolo SET articoloAttivo = 0 WHERE id = :id;");
+            $tmp->bindParam(":id", $id);
+            $tmp->execute();
+        }catch(PDOException $e){
+            $_SESSION['queryError'] = $e->getMessage();
+            header("Location: " . URL . "errorController/requireQueryError");
+        }
     }
 
 }

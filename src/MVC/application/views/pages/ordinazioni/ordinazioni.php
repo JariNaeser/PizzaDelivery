@@ -115,7 +115,7 @@
 
         //Prima riga (titoli) inclusa.
         if(rowNum <= 1){
-            $('#myTB').append("<tr><td colspan='5'>Nessuna ordinazione trovata.</td></tr>");
+            $('#myTB').append("<tr><td colspan='6'>Nessuna ordinazione trovata.</td></tr>");
         }
 
         jQuery(document).ready(function($) {
