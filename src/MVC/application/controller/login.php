@@ -41,11 +41,21 @@ class Login
 
                     if(strcmp($utente['username'], $username) == 0 && strcmp($utente['password'], $password) == 0){
 
-                        $_SESSION['user'] = $this->pdModel->getUser($username);
+                        if($utente['utenteAbilitato'] == 1){
+                            $_SESSION['user'] = $this->pdModel->getUser($username);
 
-                        $this->header->getRightHeader();
-                        require 'application/views/pages/index/benvenuto.php';
-                        require 'application/views/_templates/footer.php';
+                            $this->header->getRightHeader();
+                            require 'application/views/pages/index/benvenuto.php';
+                            require 'application/views/_templates/footer.php';
+                        }else{
+                            $this->loginForm();
+                            echo "<div class=\"alert alert-warning alert-danger fade show padding-footer\" style='margin: 1em;' role=\"alert\">".
+                                "<strong>Errore:</strong> L'utente che provi ad utilizzare è attualmente disattivato.".
+                                "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">".
+                                "<span aria-hidden=\"true\">&times;</span>".
+                                "</button>".
+                                "</div>";
+                        }
                         exit;
                     }
                 }
