@@ -95,7 +95,10 @@ class OrdinazioniModel{
     }
 
     public function getFattoriniOrdinatiENon(){
-        return $this->execQuery("SELECT username, inServizio FROM Fattorino ORDER BY inServizio");
+        return $this->execQuery("SELECT f.username, f.inServizio 
+                                        FROM Fattorino f JOIN utente u ON u.username = f.username 
+                                        WHERE u.utenteAbilitato = 1 ORDER BY f.inServizio;
+                                ");
     }
 
     public function getArticoli(){
