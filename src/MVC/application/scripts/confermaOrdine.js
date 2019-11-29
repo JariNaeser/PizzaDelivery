@@ -11,12 +11,19 @@ const LUNGHEZZA_MASSIMA_NUMERO = 5;
 
 function validate(string, maxLen, regex){
     try{
+        if(regex === null){
+            return (string.length > 0);
+        }
+
+        regex = new RegExp(regex);
         string = string.trim();
+
         if(string.length > 0 && string.length <= maxLen){
-            if(!regex.test(string)){
+            if(regex.test(string)){
                 return true;
             }
         }
+
         return false;
     }catch(error){
         console.log("Error: " + error);
@@ -27,7 +34,7 @@ function validate(string, maxLen, regex){
 // nome field
 var nameSelector = $('input[name=nome]');
 nameSelector.keyup(function(event){
-    if(validate(nameSelector.val(), LUNGHEZZA_MASSIMA_NOME, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
+    if(validate(nameSelector.val(), LUNGHEZZA_MASSIMA_NOME, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé\. \-])+$/)){
         isOk(nameSelector);
         status[0] = true;
     }else{
@@ -40,7 +47,7 @@ nameSelector.keyup(function(event){
 // cognome field
 var surnameSelector = $('input[name=cognome]');
 surnameSelector.keyup(function(event){
-    if(validate(surnameSelector.val(), LUNGHEZZA_MASSIMA_COGNOME, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
+    if(validate(surnameSelector.val(), LUNGHEZZA_MASSIMA_COGNOME, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé\. \-])+$/)){
         isOk(surnameSelector);
         status[1] = true;
     }else{
@@ -53,7 +60,7 @@ surnameSelector.keyup(function(event){
 // paese field
 var paeseSelector = $('input[name=paese]');
 paeseSelector.keyup(function(event){
-    if(validate(paeseSelector.val(), LUNGHEZZA_MASSIMA_PAESE, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -])/)){
+    if(validate(paeseSelector.val(), LUNGHEZZA_MASSIMA_PAESE, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé \-])+$/)){
         isOk(paeseSelector);
         status[2] = true;
     }else{
@@ -66,7 +73,7 @@ paeseSelector.keyup(function(event){
 // telefono field
 var telefonoSelector = $('input[name=numeroTelefono]');
 telefonoSelector.keyup(function(event){
-    if(validate(telefonoSelector.val(), LUNGHEZZA_MASSIMA_TELEFONO, /([^0-9+ ])/)){
+    if(validate(telefonoSelector.val(), LUNGHEZZA_MASSIMA_TELEFONO, /^([0-9+ ])+$/)){
         isOk(telefonoSelector);
         status[3] = true;
     }else{
@@ -79,7 +86,7 @@ telefonoSelector.keyup(function(event){
 // via field
 var viaSelector = $('input[name=via]');
 viaSelector.keyup(function(event){
-    if(validate(viaSelector.val(), LUNGHEZZA_MASSIMA_VIA, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
+    if(validate(viaSelector.val(), LUNGHEZZA_MASSIMA_VIA, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé\. \-])+$/)){
         isOk(viaSelector);
         status[4] = true;
     }else{
@@ -92,7 +99,7 @@ viaSelector.keyup(function(event){
 // cap field
 var capSelector = $('input[name=cap]');
 capSelector.keyup(function(event){
-    if(validate(capSelector.val(), LUNGHEZZA_MASSIMA_CAP, /([^0-9])/)){
+    if(validate(capSelector.val(), LUNGHEZZA_MASSIMA_CAP, /^([0-9])+$/)){
         isOk(capSelector);
         status[5] = true;
     }else{
@@ -105,7 +112,7 @@ capSelector.keyup(function(event){
 // numero field
 var numeroSelector = $('input[name=numero]');
 numeroSelector.keyup(function(event){
-    if(validate(numeroSelector.val(), LUNGHEZZA_MASSIMA_NUMERO, /([^0-9A-za-z])/)){
+    if(validate(numeroSelector.val(), LUNGHEZZA_MASSIMA_NUMERO, /^([A-Za-z0-9])+$/)){
         isOk(numeroSelector);
         status[6] = true;
     }else{
