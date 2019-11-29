@@ -1,4 +1,4 @@
-const status = [true, true, true, true, true, true, true];
+const status = [true, true, true, true, true, true];
 
 //Si riferisce alla lunghezza massima della tabella del DB.
 const LUNGHEZZA_MASSIMA_NOME = 50;
@@ -7,19 +7,22 @@ const LUNGHEZZA_MASSIMA_VIA = 50;
 const LUNGHEZZA_MASSIMA_CAP = 6;
 const LUNGHEZZA_MASSIMA_PAESE = 50;
 const LUNGHEZZA_MASSIMA_EMAIL = 255;
-const LUNGHEZZA_MASSIMA_PASSWORD = 255;
 
 function validate(string, maxLen, regex){
     try{
         if(regex === null){
-            return true;
+            return (string.length > 0);
         }
+
+        regex = new RegExp(regex);
         string = string.trim();
+
         if(string.length > 0 && string.length <= maxLen){
-            if(!regex.test(string)){
+            if(regex.test(string)){
                 return true;
             }
         }
+
         return false;
     }catch(error){
         console.log("Error: " + error);
@@ -29,8 +32,8 @@ function validate(string, maxLen, regex){
 
 // nome field
 var nameSelector = $('input[name=nomeMU]');
-nameSelector.change(function(event){
-    if(validate(nameSelector.val(), LUNGHEZZA_MASSIMA_NOME, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
+nameSelector.keyup(function(event){
+    if(validate(nameSelector.val(), LUNGHEZZA_MASSIMA_NOME, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé\. \-])+$/)){
         isOk(nameSelector);
         status[0] = true;
     }else{
@@ -42,8 +45,8 @@ nameSelector.change(function(event){
 
 // cognome field
 var surnameSelector = $('input[name=cognomeMU]');
-surnameSelector.change(function(event){
-    if(validate(surnameSelector.val(), LUNGHEZZA_MASSIMA_COGNOME, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
+surnameSelector.keyup(function(event){
+    if(validate(surnameSelector.val(), LUNGHEZZA_MASSIMA_COGNOME, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé\. \-])+$/)){
         isOk(surnameSelector);
         status[1] = true;
     }else{
@@ -56,8 +59,8 @@ surnameSelector.change(function(event){
 
 // via field
 var viaSelector = $('input[name=viaMU]');
-viaSelector.change(function(event){
-    if(validate(viaSelector.val(), LUNGHEZZA_MASSIMA_VIA, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.0-9])/)){
+viaSelector.keyup(function(event){
+    if(validate(viaSelector.val(), LUNGHEZZA_MASSIMA_VIA, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé\. \-0-9])+$/)){
         isOk(viaSelector);
         status[2] = true;
     }else{
@@ -69,8 +72,8 @@ viaSelector.change(function(event){
 
 // cap field
 var capSelector = $('input[name=capMU]');
-capSelector.change(function(event){
-    if(validate(capSelector.val(), LUNGHEZZA_MASSIMA_CAP, /([^0-9])/)){
+capSelector.keyup(function(event){
+    if(validate(capSelector.val(), LUNGHEZZA_MASSIMA_CAP, /^([0-9])+$/)){
         isOk(capSelector);
         status[3] = true;
     }else{
@@ -82,8 +85,8 @@ capSelector.change(function(event){
 
 // paese field
 var paeseSelector = $('input[name=paeseMU]');
-paeseSelector.change(function(event){
-    if(validate(paeseSelector.val(), LUNGHEZZA_MASSIMA_PAESE, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -])/)){
+paeseSelector.keyup(function(event){
+    if(validate(paeseSelector.val(), LUNGHEZZA_MASSIMA_PAESE, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé \-])+$/)){
         isOk(paeseSelector);
         status[4] = true;
     }else{
@@ -95,26 +98,13 @@ paeseSelector.change(function(event){
 
 // email field
 var emailSelector = $('input[name=emailMU]');
-emailSelector.change(function(event){
-    if(validate(emailSelector.val(), LUNGHEZZA_MASSIMA_EMAIL, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé .-0-9@])/)){
+emailSelector.keyup(function(event){
+    if(validate(emailSelector.val(), LUNGHEZZA_MASSIMA_EMAIL, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé\. \-0-9@])+$/)){
         isOk(emailSelector);
         status[5] = true;
     }else{
         isNotOk(emailSelector);
         status[5] = false;
-    }
-    checkIfOk();
-});
-
-// password field
-var passwordSelector = $('input[name=passwordMU]');
-passwordSelector.change(function(event){
-    if(validate(passwordSelector.val(), LUNGHEZZA_MASSIMA_PASSWORD, null)){
-        isOk(passwordSelector);
-        status[6] = true;
-    }else{
-        isNotOk(passwordSelector);
-        status[6] = false;
     }
     checkIfOk();
 });

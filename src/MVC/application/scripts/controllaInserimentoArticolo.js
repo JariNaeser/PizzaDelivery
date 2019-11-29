@@ -11,12 +11,16 @@ function validate(string, maxLen, regex){
         if(regex === null){
             return (string.length > 0);
         }
+
+        regex = new RegExp(regex);
         string = string.trim();
+
         if(string.length > 0 && string.length <= maxLen){
-            if(!regex.test(string)){
+            if(regex.test(string)){
                 return true;
             }
         }
+
         return false;
     }catch(error){
         console.log("Error: " + error);
@@ -27,7 +31,7 @@ function validate(string, maxLen, regex){
 // nome field
 var nameSelector = $('input[name=nomeNA]');
 nameSelector.keyup(function(event){
-    if(validate(nameSelector.val(), LUNGHEZZA_MASSIMA_NOME, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
+    if(validate(nameSelector.val(), LUNGHEZZA_MASSIMA_NOME, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé\. \-])+$/)){
         isOk(nameSelector);
         status[0] = true;
     }else{
@@ -40,7 +44,7 @@ nameSelector.keyup(function(event){
 // descrizione field
 var descriptionSelector = $('input[name=descrizioneNA]');
 descriptionSelector.keyup(function(event){
-    if(validate(descriptionSelector.val(), LUNGHEZZA_MASSIMA_DESCRIZIONE, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.0-9])/)){
+    if(validate(descriptionSelector.val(), LUNGHEZZA_MASSIMA_DESCRIZIONE, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé\. \-0-9])+$/)){
         isOk(descriptionSelector);
         status[1] = true;
     }else{
@@ -54,7 +58,7 @@ descriptionSelector.keyup(function(event){
 // prezzo field
 var priceSelector = $('input[name=prezzoNA]');
 priceSelector.keyup(function(event){
-    if(validate(priceSelector.val(), LUNGHEZZA_MASSIMA_PREZZO, /([^0-9.,])/)){
+    if(validate(priceSelector.val(), LUNGHEZZA_MASSIMA_PREZZO, /^([0-9\.\,])+$/)){
         isOk(priceSelector);
         status[2] = true;
     }else{
@@ -67,7 +71,7 @@ priceSelector.keyup(function(event){
 // path field
 var pathSelector = $('input[name=pathImmaginaNA]');
 pathSelector.keyup(function(event){
-    if(pathSelector.val().length <= LUNGHEZZA_MASSIMA_NOME_IMMAGINE){
+    if(validate(priceSelector.val(), LUNGHEZZA_MASSIMA_NOME_IMMAGINE, /^([a-zA-z/\.\\0-9])+$/)){
         isOk(pathSelector);
         status[3] = true;
     }else{

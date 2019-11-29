@@ -14,12 +14,16 @@ function validate(string, maxLen, regex){
         if(regex === null){
             return (string.length > 0);
         }
+
+        regex = new RegExp(regex);
         string = string.trim();
+
         if(string.length > 0 && string.length <= maxLen){
-            if(!regex.test(string)){
+            if(regex.test(string)){
                 return true;
             }
         }
+
         return false;
     }catch(error){
         console.log("Error: " + error);
@@ -30,7 +34,7 @@ function validate(string, maxLen, regex){
 // nome field
 var nameSelector = $('input[name=nomeNU]');
 nameSelector.keyup(function(event){
-    if(validate(nameSelector.val(), LUNGHEZZA_MASSIMA_NOME, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
+    if(validate(nameSelector.val(), LUNGHEZZA_MASSIMA_NOME, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé\. \-])+$/)){
         isOk(nameSelector);
         status[0] = true;
     }else{
@@ -43,7 +47,7 @@ nameSelector.keyup(function(event){
 // cognome field
 var surnameSelector = $('input[name=cognomeNU]');
 surnameSelector.keyup(function(event){
-    if(validate(surnameSelector.val(), LUNGHEZZA_MASSIMA_COGNOME, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.])/)){
+    if(validate(surnameSelector.val(), LUNGHEZZA_MASSIMA_COGNOME, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé\. \-])+$/)){
         isOk(surnameSelector);
         status[1] = true;
     }else{
@@ -57,7 +61,7 @@ surnameSelector.keyup(function(event){
 // via field
 var viaSelector = $('input[name=viaNU]');
 viaSelector.keyup(function(event){
-    if(validate(viaSelector.val(), LUNGHEZZA_MASSIMA_VIA, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -.0-9])/)){
+    if(validate(viaSelector.val(), LUNGHEZZA_MASSIMA_VIA, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé\. \-0-9])+$/)){
         isOk(viaSelector);
         status[2] = true;
     }else{
@@ -70,7 +74,7 @@ viaSelector.keyup(function(event){
 // cap field
 var capSelector = $('input[name=capNU]');
 capSelector.keyup(function(event){
-    if(validate(capSelector.val(), LUNGHEZZA_MASSIMA_CAP, /([^0-9])/)){
+    if(validate(capSelector.val(), LUNGHEZZA_MASSIMA_CAP, /^([0-9])+$/)){
         isOk(capSelector);
         status[3] = true;
     }else{
@@ -83,7 +87,7 @@ capSelector.keyup(function(event){
 // paese field
 var paeseSelector = $('input[name=paeseNU]');
 paeseSelector.keyup(function(event){
-    if(validate(paeseSelector.val(), LUNGHEZZA_MASSIMA_PAESE, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé -])/)){
+    if(validate(paeseSelector.val(), LUNGHEZZA_MASSIMA_PAESE, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé \-])+$/)){
         isOk(paeseSelector);
         status[4] = true;
     }else{
@@ -96,7 +100,7 @@ paeseSelector.keyup(function(event){
 // email field
 var emailSelector = $('input[name=emailNU]');
 emailSelector.keyup(function(event){
-    if(validate(emailSelector.val(), LUNGHEZZA_MASSIMA_EMAIL, /([^A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé .-0-9@])/)){
+    if(validate(emailSelector.val(), LUNGHEZZA_MASSIMA_EMAIL, /^([A-Za-zöäüÖÄÜàèìòùÀÈÌÒÙÉé\. \-0-9@])+$/)){
         isOk(emailSelector);
         status[5] = true;
     }else{
