@@ -189,13 +189,15 @@ class GestionePizzeria
     }
 
     public function disabilitaUtente(string $username){
-        $totNum = $this->pdModel->getAdminsCount()[0]['adminsNum'];
-        if($totNum > 1){
-            $this->pdModel->disabilitaUtente($username);
-            header("Location: " . URL . "gestionePizzeria/home");
-        }else{
-            header("Location: " . URL . 'errorController/lastAdminDelete');
+        if(strcmp($this->pdModel->getUser($username)[0]['tipoUtente'], 'amministratore') == 0){
+            $totNum = $this->pdModel->getAdminsCount()[0]['adminsNum'];
+            if($totNum <= 1){
+                header("Location: " . URL . 'errorController/lastAdminDelete');
+                exit;
+            }
         }
+        $this->pdModel->disabilitaUtente($username);
+        header("Location: " . URL . "gestionePizzeria/home");
     }
 
     public function abilitaArticolo(string $id){
