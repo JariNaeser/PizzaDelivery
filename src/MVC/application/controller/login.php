@@ -45,7 +45,21 @@ class Login
                             $_SESSION['user'] = $this->pdModel->getUser($username);
 
                             $this->header->getRightHeader();
-                            require 'application/views/pages/index/benvenuto.php';
+                            //Mostra già la pagina che interessa il tipo di fattorino
+                            switch ($utente['tipoUtente']){
+                                case 'fattorino':
+                                    require 'application/views/pages/consegne/consegne.php';
+                                    break;
+                                case 'impiegato vendita':
+                                    require 'application/views/pages/ordinazioni/ordinazioni.php';
+                                    break;
+                                case 'amministratore':
+                                    require 'application/views/pages/gestionePizzeria/gestionePizzeria.php';
+                                    break;
+                                default:
+                                    require 'application/views/pages/index/benvenuto.php';
+                                    break;
+                            }
                             require 'application/views/_templates/footer.php';
                         }else{
                             $this->loginForm();
