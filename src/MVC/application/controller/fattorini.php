@@ -21,7 +21,7 @@ class Fattorini
     }
 
     public function home(){
-        $_SESSION['fattorini'] = $this->pdModel->getFattorini();
+        $_SESSION['fattorini'] = $this->pdModel->getFattoriniAbilitati();
 
         // Carico Views
         $this->header->getRightHeader();

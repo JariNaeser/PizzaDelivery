@@ -92,6 +92,22 @@ class FattoriniModel{
     }
 
     /**
+     * Metodo che ritorna tutti i fattorini.
+     *
+     * @return array Tutti i fattorini.
+     */
+    public function getFattoriniAbilitati(){
+        $fattorini = $this->execQuery("SELECT f.username, f.posizioneLat, f.posizioneLon, f.inServizio 
+                                              FROM Fattorino f JOIN utente u ON u.username = f.username 
+                                              WHERE u.utenteAbilitato = 1;"
+                                    );
+        for($i = 0; $i < count($fattorini); $i++){
+            $fattorini[$i]['consegneOggi'] = $this->getConsegneOggi($fattorini[$i]['username'])[0]['consegneOggi'];
+        }
+        return $fattorini;
+    }
+
+    /**
      * Ritorna un fattorino se il suo username esiste.
      *
      * @param string $username Username del fattorino da cercare.
