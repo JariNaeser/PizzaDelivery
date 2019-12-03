@@ -289,7 +289,7 @@ class GestionePizzeriaModel{
     public function getAdminsCount(){
         //Query
         try{
-            $tmp = $this->connection->prepare("SELECT COUNT(*) AS 'adminsNum' FROM Utente WHERE tipoUtente LIKE 'amministratore';");
+            $tmp = $this->connection->prepare("SELECT COUNT(*) AS 'adminsNum' FROM Utente WHERE tipoUtente LIKE 'amministratore' AND utenteAbilitato = 1;");
             $tmp->execute();
             return $tmp->fetchAll(PDO::FETCH_ASSOC);
         }catch(PDOException $e){
