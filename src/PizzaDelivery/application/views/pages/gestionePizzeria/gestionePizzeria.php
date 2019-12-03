@@ -49,7 +49,7 @@
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <?php echo "<tr><td colspan='3'>Nessun utente trovato nel DB.</td>"; ?>
+                        <?php echo "<tr><td colspan='4'>Nessun utente trovato nel DB.</td>"; ?>
                     <?php endif; ?>
                 </tbody>
             </table>
@@ -106,7 +106,7 @@
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <?php echo "<tr><td colspan='4'>Nessun prodotto trovato nel DB.</td>"; ?>
+                    <?php echo "<tr><td colspan='5'>Nessun prodotto trovato nel DB.</td>"; ?>
                 <?php endif; ?>
                 </tbody>
             </table>
