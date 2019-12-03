@@ -48,16 +48,16 @@ class Login
                             //Mostra già la pagina che interessa il tipo di fattorino
                             switch ($utente['tipoUtente']){
                                 case 'fattorino':
-                                    require 'application/views/pages/consegne/consegne.php';
+                                    header("Location: " . URL . "consegne/home/10000");
                                     break;
                                 case 'impiegato vendita':
-                                    require 'application/views/pages/ordinazioni/ordinazioni.php';
+                                    header("Location: " . URL . "ordinazioni/home");
                                     break;
                                 case 'amministratore':
-                                    require 'application/views/pages/gestionePizzeria/gestionePizzeria.php';
+                                    header("Location: " . URL . "gestionePizzeria/home");
                                     break;
                                 default:
-                                    require 'application/views/pages/index/benvenuto.php';
+                                    header("Location: " . URL . "home/index");
                                     break;
                             }
                             require 'application/views/_templates/footer.php';
