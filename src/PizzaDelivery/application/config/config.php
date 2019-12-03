@@ -17,5 +17,5 @@ ini_set("display_errors", 1);
 /**
  * Configurazione di : URL del progetto
  */
-define('URL', 'http://localhost:8888/php/Progetti/PizzaDelivery/src/MVC/');
+define('URL', 'http://localhost:8888/php/Progetti/PizzaDelivery/src/PizzaDelivery/');
 

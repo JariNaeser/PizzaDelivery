@@ -6,7 +6,7 @@
  * Time: 13:28
  */
 
-require_once 'database.php';
+require_once 'application/database/database.php';
 require_once 'validator.php';
 
 class ConsegneModel{
