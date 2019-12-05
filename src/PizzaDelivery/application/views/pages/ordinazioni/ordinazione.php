@@ -54,7 +54,7 @@
         <div class="text-center">
             <button class="btn btn-warning btn-lg assegnaAFattorino" id="<?php echo $ordine[0][0]['id']?>">Assegna a fattorino</button>
             <button class="btn btn-danger btn-lg eliminaOrdine" id="<?php echo $ordine[0][0]['id']?>">Elimina</button>
-            <a href="<?php echo URL?>ordinazioni/home" class="btn btn-danger btn-lg">Torna agli ordini</a>
+            <a href="<?php echo URL?>ordinazioni/home" class="btn btn-primary btn-lg">Torna agli ordini</a>
         </div>
         <!-- Modal -->
         <form action="<?php echo URL . "ordinazioni/eliminaOrdinazione";?>" method="POST">

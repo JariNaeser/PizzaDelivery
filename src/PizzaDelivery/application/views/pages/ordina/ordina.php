@@ -26,7 +26,7 @@
                                     <td><?php echo $articolo['descrizione']; ?></td>
                                     <td><?php echo $articolo['prezzo']; ?></td>
                                     <td>
-                                        <a class='text-dark' href='<?php echo URL . "ordina/addToCart/" . $articolo['id']; ?>'>
+                                        <a class='text-dark' onclick="alert('Articolo aggiunto al carrello');" href='<?php echo URL . "ordina/addToCart/" . $articolo['id']; ?>'>
                                             <i class='fas fa-shopping-cart' alt='X'></i>
                                         </a>
                                     </td>
@@ -78,6 +78,7 @@
                 </tbody>
             </table>
         </div>
+        <p class="text-center">&#9432; <i>Per modificare il numero di pizze procedi alla prossima pagina.</i></p>
         <div class="col-md-12 text-center">
             <a href='<?php echo URL . "ordina/confermaordine"?>' class="btn btn-danger btn-lg disabled" id="buttonOrdina">Prosegui all'ordinazione</a>
             <script>

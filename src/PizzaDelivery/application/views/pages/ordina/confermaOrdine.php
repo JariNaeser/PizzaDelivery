@@ -43,7 +43,7 @@
                             <th scope="col">Articolo</th>
                             <th scope="col">Descrizione</th>
                             <th scope="col">Quantità</th>
-                            <th scope="col">Prezzo</th>
+                            <th scope="col">Prezzo singolo</th>
                             <th scope="col">Prezzo finale</th>
                         </tr>
                     </thead>
@@ -82,6 +82,7 @@
                                                 total += prezzoFinale[i];
                                             }
                                         }
+                                        total = total.toFixed(2);
                                         $('#totalPrice').text(total);
                                     }
 
@@ -92,7 +93,7 @@
                                         select = $('#select<?php echo $element[0]['id']; ?>');
                                         var num = select.val();
                                         var price = <?php echo $element[0]['prezzo']; ?>;
-                                        $('#total<?php echo $element[0]['id']; ?>').text(num * price);
+                                        $('#total<?php echo $element[0]['id']; ?>').text((num * price).toFixed(2));
                                         prezzoFinale[(<?php echo $element[0]['id']; ?> - 1)] = (num * price);
                                         countTotal();
                                     }

@@ -54,7 +54,7 @@ class FattoriniModel{
      * @return array Consegne effettuate dal fattorino.
      */
     public function getConsegne(string $username){
-        $consegne = $this->execQuery("SELECT * FROM Consegna WHERE fattorino LIKE '$username' AND CONCAT(YEAR(dataInserimento),'-', MONTH(dataInserimento),'-', DAY(dataInserimento)) LIKE CURRENT_DATE()");
+        $consegne = $this->execQuery("SELECT * FROM Consegna WHERE fattorino LIKE '$username' AND DATE(dataConsegna) LIKE CURRENT_DATE()");
         for($i = 0; $i < count($consegne); $i++){
             //Get via
             $consegne[$i]['via'] = $this->execQuery("SELECT via FROM Ordinazione WHERE id = (SELECT ordinazione FROM Consegna WHERE id = " . $consegne[$i]['id'] . ");");
@@ -126,7 +126,7 @@ class FattoriniModel{
      * @return array Consegne effettuate oggi di un certo fattorino
      */
     public function getConsegneOggi(string $username){
-        return $this->execQuery("SELECT COUNT(*) AS 'consegneOggi' FROM Consegna WHERE fattorino LIKE '$username' AND tipoConsegna LIKE 'terminata' AND CURRENT_DATE() LIKE CONCAT(YEAR(dataInserimento), '-', MONTH(dataInserimento), '-', DAY(dataInserimento));");
+        return $this->execQuery("SELECT COUNT(*) AS 'consegneOggi' FROM Consegna WHERE fattorino LIKE '$username' AND tipoConsegna LIKE 'terminata' AND CURRENT_DATE() LIKE DATE(dataInserimento);");
     }
 
 }

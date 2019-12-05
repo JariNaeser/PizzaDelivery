@@ -34,7 +34,7 @@
         </div>
         <br>
         <br>
-        <h3 class="text-left">Consegne <span style="color: gray;">[<?php echo date("d.m.Y"); ?>]</span></h3>
+        <h3 class="text-left">Consegne effettuate<span style="color: gray;">[<?php echo date("d.m.Y"); ?>]</span></h3>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -43,7 +43,7 @@
                     <th scope="col">Orario Inserimento</th>
                     <th scope="col">Orario Consegna</th>
                     <th scope="col">Via</th>
-                    <th scope="col">Tipologia</th>
+                    <th scope="col">Stato</th>
                     <th scope="col">Incasso</th>
                 </tr>
                 </thead>

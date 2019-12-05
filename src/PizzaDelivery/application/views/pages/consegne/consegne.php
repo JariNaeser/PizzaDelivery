@@ -100,7 +100,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Esci</button>
-                            <button type="submit" class="btn btn-secondary">Assegna</button>
+                            <button type="submit" class="btn btn-primary">Modifica</button>
                         </div>
                     </div>
                 </div>
