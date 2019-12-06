@@ -26,7 +26,7 @@
                                     <td><?php echo $articolo['descrizione']; ?></td>
                                     <td><?php echo $articolo['prezzo']; ?></td>
                                     <td>
-                                        <a class='text-dark' onclick="alert('Articolo aggiunto al carrello');" href='<?php echo URL . "ordina/addToCart/" . $articolo['id']; ?>'>
+                                        <a class='text-dark' onclick="alert('Articolo aggiunto al carrello.')" href='<?php echo URL . "ordina/addToCart/" . $articolo['id']; ?>'>
                                             <i class='fas fa-shopping-cart' alt='X'></i>
                                         </a>
                                     </td>
@@ -62,7 +62,7 @@
                                 <td class="align-middle"><?php echo $element[0]['nome']; ?></td>
                                 <td class="align-middle"><?php echo $element[0]['prezzo']; ?></td>
                                 <td class="align-middle">
-                                    <a class='text-danger' href='<?php echo URL . "ordina/removeFromCart/" . $element[0]['id']; ?>'>
+                                    <a class='text-danger' onclick="alert('Articolo rimosso dal carrello.')" href='<?php echo URL . "ordina/removeFromCart/" . $element[0]['id']; ?>'>
                                         <i class='fas fa-times' alt='X'></i>
                                     </a>
                                 </td>
