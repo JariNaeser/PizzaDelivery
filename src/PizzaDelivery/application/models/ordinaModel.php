@@ -48,7 +48,7 @@ class OrdinaModel{
     }
 
     public function getArticoliOrdinati(){
-        return $this->execQuery("SELECT * FROM articolo ORDER BY nome;");
+        return $this->execQuery("SELECT * FROM articolo ORDER BY nome AND articoloAttivo = 1;");
     }
 
     public function insertOrdinazione(string $nome, string $cognome, int $numeroTelefono, string $via, int $cap, string $paese){
