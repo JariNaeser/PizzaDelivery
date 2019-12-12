@@ -9,36 +9,36 @@
                     <table class="table table-striped">
                         <tbody>
                             <tr class="text-inline">
-                                <td scope="col">Nome</td>
+                                <td scope="col">Nome<span class="text-danger"> *</span></td>
                                 <td><input type="text" class="form-control" value="<?php echo $userToModify['nome']; ?>" name="nomeMU" required></td>
                                 <input type="hidden" name="usernameMU" value="<?php echo $userToModify['username']; ?>">
                             </tr>
                             <tr class="text-inline">
-                                <td scope="col">Cognome</td>
+                                <td scope="col">Cognome<span class="text-danger"> *</span></td>
                                 <td><input type="text" class="form-control" value="<?php echo $userToModify['cognome']; ?>" name="cognomeMU" required></td>
                             </tr>
                             <tr class="text-inline">
-                                <td scope="col">Via</td>
+                                <td scope="col">Via<span class="text-danger"> *</span></td>
                                 <td><input type="text" class="form-control" value="<?php echo $userToModify['via']; ?>" name="viaMU" required></td>
                             </tr>
                             <tr class="text-inline">
-                                <td scope="col">CAP</td>
+                                <td scope="col">CAP<span class="text-danger"> *</span></td>
                                 <td><input type="number" class="form-control" value="<?php echo $userToModify['cap']; ?>" name="capMU" required></td>
                             </tr>
                             <tr class="text-inline">
-                                <td scope="col">Paese</td>
+                                <td scope="col">Paese<span class="text-danger"> *</span></td>
                                 <td><input type="text" class="form-control" value="<?php echo $userToModify['paese']; ?>" name="paeseMU" required></td>
                             </tr>
                             <tr class="text-inline">
-                                <td scope="col">E-Mail</td>
+                                <td scope="col">E-Mail<span class="text-danger"> *</span></td>
                                 <td><input type="email" class="form-control" value="<?php echo $userToModify['email']; ?>" name="emailMU" required></td>
                             </tr>
                             <tr class="text-inline">
-                                <td scope="col">Password</td>
+                                <td scope="col">Password<span class="text-danger"> *</span></td>
                                 <td><input type="password" class="form-control" placeholder="Password non mostrata." name="passwordMU"></td>
                             </tr>
                             <tr class="text-inline">
-                                <td scope="col">Stato</td>
+                                <td scope="col">Stato<span class="text-danger"> *</span></td>
                                 <td>
                                     <?php if($userToModify['utenteAbilitato'] == 1): ?>
                                         <a href="<?php echo URL . "gestionePizzeria/disabilitaUtente/" . $userToModify['username'];?>" class="btn btn-secondary btn-md">Disabilita</a>
@@ -48,7 +48,7 @@
                                 </td>
                             </tr>
                             <tr class="text-inline">
-                                <td scope="col">Tipologia</td>
+                                <td scope="col">Tipologia<span class="text-danger"> *</span></td>
                                 <td>
                                     <select class="form-control" name="tipologiaMU" required>
                                         <?php if(isset($_SESSION['userTypes'])): ?>
