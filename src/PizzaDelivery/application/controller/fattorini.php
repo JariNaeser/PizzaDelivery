@@ -30,16 +30,17 @@ class Fattorini
     }
 
     public function fattorino(string $username){
+        if(isset($_SESSION['user'])) {
+            $_SESSION['fattorino'] = $this->pdModel->getFattorino($username);
+            $_SESSION['userFattorino'] = $this->pdModel->getUser($username);
+            $_SESSION['consegneFattorino'] = $this->pdModel->getConsegne($username);
 
-        $_SESSION['fattorino'] = $this->pdModel->getFattorino($username);
-        $_SESSION['userFattorino'] = $this->pdModel->getUser($username);
-        $_SESSION['consegneFattorino'] = $this->pdModel->getConsegne($username);
 
-
-        // Carico Views
-        $this->header->getRightHeader();
-        require 'application/views/pages/fattorini/fattorino.php';
-        require 'application/views/_templates/footer.php';
+            // Carico Views
+            $this->header->getRightHeader();
+            require 'application/views/pages/fattorini/fattorino.php';
+            require 'application/views/_templates/footer.php';
+        }
     }
 
 }

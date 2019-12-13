@@ -32,40 +32,43 @@ class Ordinazioni
     }
 
     public function ordinazione(int $id){
+        if(isset($_SESSION['user']) && (strcmp($_SESSION['user'][0]['tipoUtente'], 'amministratore') || strcmp($_SESSION['user'][0]['tipoUtente'], 'impiegato vendita'))) {
+            $_SESSION['ordine'] = $this->pdModel->getOrdine($id);
+            $_SESSION['articoli'] = $this->pdModel->getArticoli();
 
-        $_SESSION['ordine'] = $this->pdModel->getOrdine($id);
-        $_SESSION['articoli'] = $this->pdModel->getArticoli();
-
-        // Carico Views
-        $this->header->getRightHeader();
-        require 'application/views/pages/ordinazioni/ordinazione.php';
-        require 'application/views/_templates/footer.php';
+            // Carico Views
+            $this->header->getRightHeader();
+            require 'application/views/pages/ordinazioni/ordinazione.php';
+            require 'application/views/_templates/footer.php';
+        }
     }
 
     public function assegnaAFattorino(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            if(isset($_POST['selezioneFattorino']) && isset($_POST['nrOrdine'])){
-                $fattorino = $_POST['selezioneFattorino'];
-                $nrOrdine = $_POST['nrOrdine'];
+            if(isset($_SESSION['user']) && (strcmp($_SESSION['user'][0]['tipoUtente'], 'amministratore') || strcmp($_SESSION['user'][0]['tipoUtente'], 'impiegato vendita'))) {
+                if (isset($_POST['selezioneFattorino']) && isset($_POST['nrOrdine'])) {
+                    $fattorino = $_POST['selezioneFattorino'];
+                    $nrOrdine = $_POST['nrOrdine'];
 
-                $this->pdModel->insertConsegna(
-                    'da effettuare',
-                    $fattorino,
-                    $nrOrdine
-                );
+                    $this->pdModel->insertConsegna(
+                        'da effettuare',
+                        $fattorino,
+                        $nrOrdine
+                    );
 
-                $this->pdModel->updateOrdinazionePPC(
-                    $nrOrdine
-                );
+                    $this->pdModel->updateOrdinazionePPC(
+                        $nrOrdine
+                    );
 
-                $this->pdModel->setFattorinoOccupato($fattorino);
+                    $this->pdModel->setFattorinoOccupato($fattorino);
 
-                //Redirect alla home
-                header("Location: " . URL . "ordinazioni/home");
-                $this->home();
+                    //Redirect alla home
+                    header("Location: " . URL . "ordinazioni/home");
+                    $this->home();
 
-            }else{
-                header("Location: " . URL . "errorController/assegnaAFattorinoError");
+                } else {
+                    header("Location: " . URL . "errorController/assegnaAFattorinoError");
+                }
             }
         }else{
             header("Location: " . URL . "errorController/assegnaAFattorinoError");
@@ -74,9 +77,11 @@ class Ordinazioni
 
     public function eliminaOrdinazione(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            if(isset($_POST['idOrdinazione'])){
-                echo "Value: " . $_POST['idOrdinazione'];
-                $this->pdModel->eliminaOrdinazione(intval($_POST['idOrdinazione']));
+            if(isset($_SESSION['user']) && (strcmp($_SESSION['user'][0]['tipoUtente'], 'amministratore') || strcmp($_SESSION['user'][0]['tipoUtente'], 'impiegato vendita'))) {
+                if (isset($_POST['idOrdinazione'])) {
+                    echo "Value: " . $_POST['idOrdinazione'];
+                    $this->pdModel->eliminaOrdinazione(intval($_POST['idOrdinazione']));
+                }
             }
         }
         header("Location: " . URL . "ordinazioni/home");
