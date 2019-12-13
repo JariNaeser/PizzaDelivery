@@ -31,7 +31,9 @@
                     </tr>
                     </tbody>
                 </table>
-                <div class="col-md-6" id='map' style="min-height: 200px;"></div>
+                <div class="col-md-6" id='map' style="min-height: 200px;">
+                    
+                </div>
             </div>
             <br>
             <br>

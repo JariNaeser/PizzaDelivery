@@ -123,7 +123,10 @@
         </form>
     </div>
 <?php else: ?>
-    <?php echo "Session cart not found"; ?>
+    <div class="text-center centerVerticallyDiv">
+        <h3><span class="text-danger">ERRORE:</span> Sessione cart non trovata.</h3><br>
+        <a href="<?php echo URL?>home/index" class="btn btn-danger btn-lg">Torna alla home</a>
+    </div>
 <?php endif; ?>
 
 <script src="<?php echo URL; ?>application/scripts/confermaOrdine.js"></script>

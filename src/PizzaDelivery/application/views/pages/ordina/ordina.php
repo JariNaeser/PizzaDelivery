@@ -73,7 +73,10 @@
                         <?php echo "<tr><td colspan='4' class='text-center'>Nessun elemento selezionato.</td></tr>"; ?>
                     <?php endif; ?>
                 <?php else: ?>
-                    <?php echo "Session cart not found."; ?>
+                    <div class="text-center centerVerticallyDiv">
+                        <h3><span class="text-danger">ERRORE:</span> Sessione cart non trovata.</h3><br>
+                        <a href="<?php echo URL?>home/index" class="btn btn-danger btn-lg">Torna alla home</a>
+                    </div>
                 <?php endif; ?>
                 </tbody>
             </table>
@@ -92,5 +95,8 @@
         </div>
     </form>
 <?php else: ?>
-    <?php echo "Session articoli not found."; ?>
+    <div class="text-center centerVerticallyDiv">
+        <h3><span class="text-danger">ERRORE:</span> Sessione articoli non trovata.</h3><br>
+        <a href="<?php echo URL?>home/index" class="btn btn-danger btn-lg">Torna alla home</a>
+    </div>
 <?php endif; ?>
