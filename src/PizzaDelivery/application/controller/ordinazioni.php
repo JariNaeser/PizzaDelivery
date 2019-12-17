@@ -32,7 +32,7 @@ class Ordinazioni
     }
 
     public function ordinazione(int $id){
-        if(isset($_SESSION['user']) && (strcmp($_SESSION['user'][0]['tipoUtente'], 'amministratore') || strcmp($_SESSION['user'][0]['tipoUtente'], 'impiegato vendita'))) {
+        if(isset($_SESSION['user']) && (strcmp($_SESSION['user'][0]['tipoUtente'], 'amministratore') == 0 || strcmp($_SESSION['user'][0]['tipoUtente'], 'impiegato vendita') == 0)) {
             $_SESSION['ordine'] = $this->pdModel->getOrdine($id);
             $_SESSION['articoli'] = $this->pdModel->getArticoli();
 
@@ -45,7 +45,7 @@ class Ordinazioni
 
     public function assegnaAFattorino(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            if(isset($_SESSION['user']) && (strcmp($_SESSION['user'][0]['tipoUtente'], 'amministratore') || strcmp($_SESSION['user'][0]['tipoUtente'], 'impiegato vendita'))) {
+            if(isset($_SESSION['user']) && (strcmp($_SESSION['user'][0]['tipoUtente'], 'amministratore') == 0 || strcmp($_SESSION['user'][0]['tipoUtente'], 'impiegato vendita') == 0)) {
                 if (isset($_POST['selezioneFattorino']) && isset($_POST['nrOrdine'])) {
                     $fattorino = $_POST['selezioneFattorino'];
                     $nrOrdine = $_POST['nrOrdine'];
@@ -77,7 +77,7 @@ class Ordinazioni
 
     public function eliminaOrdinazione(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            if(isset($_SESSION['user']) && (strcmp($_SESSION['user'][0]['tipoUtente'], 'amministratore') || strcmp($_SESSION['user'][0]['tipoUtente'], 'impiegato vendita'))) {
+            if(isset($_SESSION['user']) && (strcmp($_SESSION['user'][0]['tipoUtente'], 'amministratore') == 0 || strcmp($_SESSION['user'][0]['tipoUtente'], 'impiegato vendita') == 0)) {
                 if (isset($_POST['idOrdinazione'])) {
                     echo "Value: " . $_POST['idOrdinazione'];
                     $this->pdModel->eliminaOrdinazione(intval($_POST['idOrdinazione']));

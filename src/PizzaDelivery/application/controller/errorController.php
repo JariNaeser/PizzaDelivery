@@ -44,4 +44,10 @@ class ErrorController
         require 'application/views/_templates/footer.php';
     }
 
+    public function modifyLastAdmin(){
+        require 'application/views/_templates/headers/error.php';
+        require 'application/views/error/modifyLastAdmin.php';
+        require 'application/views/_templates/footer.php';
+    }
+
 }
