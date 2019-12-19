@@ -50,4 +50,10 @@ class ErrorController
         require 'application/views/_templates/footer.php';
     }
 
+    public function deleteYourSelf(){
+        require 'application/views/_templates/headers/error.php';
+        require 'application/views/error/deleteYourSelf.php';
+        require 'application/views/_templates/footer.php';
+    }
+
 }

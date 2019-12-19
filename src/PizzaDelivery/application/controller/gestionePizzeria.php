@@ -80,13 +80,18 @@ class GestionePizzeria
 
     public function eliminaUtente(string $username){
         if(isset($_SESSION['user']) && strcmp($_SESSION['user'][0]['tipoUtente'], 'amministratore') == 0) {
-            $response = $this->pdModel->dropUser($username);
+            //Check if user to delete is you
+            if(strcmp($username, $_SESSION['user'][0]['username']) == 0){
+                header("Location: " . URL . 'errorController/deleteYourSelf');
+            }else{
+                $response = $this->pdModel->dropUser($username);
 
-            if (isset($response) && strcmp($response, "ERRORE") == 0) {
-                header("Location: " . URL . 'errorController/lastAdminDelete');
-            } else {
-                header("Location: " . URL . 'gestionePizzeria/home');
-                $this->home();
+                if (isset($response) && strcmp($response, "ERRORE") == 0) {
+                    header("Location: " . URL . 'errorController/lastAdminDelete');
+                } else {
+                    header("Location: " . URL . 'gestionePizzeria/home');
+                    $this->home();
+                }
             }
         }
     }
